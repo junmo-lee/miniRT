@@ -1,7 +1,7 @@
 .DEFAULT_GOAL := all
 
 NAME 	= miniRT
-DEBUG_NAME = debug.out
+# DEBUG_NAME = debug.out
 
 LIBFT_DIR = libft
 LIBFT 	= $(LIBFT_DIR)/libft.a
@@ -23,8 +23,7 @@ SRCS	:= \
 # SRCS	= $(addprefix src/, $(SRCS))
 
 OBJS	= $(SRCS:.c=.o) 
-
-DEBUG_O = $(filter-out */main.o, $(OBJS)) debug.o
+# DEBUG_O = $(filter-out */main.o, $(OBJS)) debug.o
 
 
 %.o : %.c
@@ -33,22 +32,23 @@ DEBUG_O = $(filter-out */main.o, $(OBJS)) debug.o
 $(LIBFT) :
 	$(MAKE) -C $(LIBFT_DIR) all
 
-all: $(NAME)
+all : $(NAME)
+# debug : $(DEBUG_NAME)
 
 $(NAME) : $(LIBFT) $(OBJS)
 	$(CC) $(CFLAGS) $(INC) $(OBJS) $(LDFLAGS) $(LDLIBS) -o $(NAME)
 
-$(DEBUG_NAME): $(LIBFT) $(DEBUG_O)
-	$(CC) $(CFLAGS) $(INC) $(DEBUG_O) $(LDFLAGS) $(LDLIBS) -o $(DEBUG_NAME)
+# $(DEBUG_NAME): $(LIBFT) $(DEBUG_O)
+# 	$(CC) $(CFLAGS) $(INC) $(DEBUG_O) $(LDFLAGS) $(LDLIBS) -o $(DEBUG_NAME)
 
 clean :
 	rm -rf $(OBJS)
-	rm -rf $(DEBUG_O)
+	# rm -rf $(DEBUG_O)
 	$(MAKE) -C $(LIBFT_DIR) clean
 
 fclean :
 	rm -rf $(OBJS) $(NAME)
-	rm -rf $(DEBUG_O) $(DEBUG_NAME)
+	# rm -rf $(DEBUG_O) $(DEBUG_NAME)
 	$(MAKE) -C $(LIBFT_DIR) fclean
 
 re :
