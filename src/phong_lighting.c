@@ -28,6 +28,8 @@ t_color3        point_light_get(t_scene *scene, t_light *light)
 {
 	t_color3    diffuse;
 	t_vec3      light_dir;
+	double      light_len;
+    t_ray       light_ray;
 	double      kd; // diffuse의 강도
 	t_color3    specular;
 	t_vec3      view_dir;
@@ -37,7 +39,13 @@ t_color3        point_light_get(t_scene *scene, t_light *light)
 	double      ks;
 	double      brightness;
 
-	light_dir = vunit(vminus(light->origin, scene->rec.p)); //교점에서 출발하여 광원을 향하는 벡터(정규화 됨)
+	// light_dir = vunit(vminus(light->origin, scene->rec.p)); //교점에서 출발하여 광원을 향하는 벡터(정규화 됨)
+	light_dir = vminus(light->origin, scene->rec.p);
+    light_len = vlength(light_dir);
+    light_ray = ray(vplus(scene->rec.p, vmult(scene->rec.normal, EPSILON)), light_dir);
+    if (in_shadow(scene->world, light_ray, light_len))
+        return (color3(0,0,0));
+    light_dir = vunit(light_dir);
 	// cosΘ는 Θ 값이 90도 일 때 0이고 Θ가 둔각이 되면 음수가 되므로 0.0보다 작은 경우는 0.0으로 대체한다.
 	kd = fmax(vdot(scene->rec.normal, light_dir), 0.0);// (교점에서 출발하여 광원을 향하는 벡터)와 (교점에서의 법선벡터)의 내적값.
 	diffuse = vmult(light->light_color, kd);
@@ -49,4 +57,15 @@ t_color3        point_light_get(t_scene *scene, t_light *light)
 	specular = vmult(vmult(light->light_color, ks), spec);
     brightness = light->bright_ratio * LUMEN; // 기준 광속/광량을 정의한 매크로
     return (vmult(vplus(diffuse, specular), brightness));
+}
+
+t_bool          in_shadow(t_object *objs, t_ray light_ray, double light_len)
+{
+    t_hit_record rec;
+
+    rec.tmin = 0;
+    rec.tmax = light_len;
+    if (hit(objs, &light_ray, &rec))
+        return (TRUE);
+    return (FALSE);
 }
