@@ -6,6 +6,9 @@
 		"fractal.h": "c",
 		"stdlib.h": "c",
 		"mlx.h": "c",
-		"fractal_bonus.h": "c"
+		"fractal_bonus.h": "c",
+		"scene.h": "c",
+		"structures.h": "c",
+		"trace.h": "c"
 	}
 }
