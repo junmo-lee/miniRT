@@ -1,0 +1,11 @@
+{
+	"files.associations": {
+		"math.h": "c",
+		"utils.h": "c",
+		"libft.h": "c",
+		"fractal.h": "c",
+		"stdlib.h": "c",
+		"mlx.h": "c",
+		"fractal_bonus.h": "c"
+	}
+}
