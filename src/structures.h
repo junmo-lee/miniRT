@@ -26,6 +26,7 @@ typedef int             t_object_type;
 # define LIGHT_POINT 1
 
 # define EPSILON 1e-6 // 0.000001
+# define LUMEN 3
 
 struct s_vec3
 {

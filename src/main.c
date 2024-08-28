@@ -17,7 +17,9 @@ t_scene *scene_init(void)
     scene->camera = camera(&scene->canvas, point3(0, 0, 0));
     world = object(SP, sphere(point3(-2, 0, -5), 2), color3(0.5, 0, 0)); // world 에 구1 추가
     oadd(&world, object(SP, sphere(point3(2, 0, -5), 2), color3(0, 0.5, 0))); // world 에 구2 추가
-    oadd(&world, object(SP, sphere(point3(0, -1000, 0), 990), color3(1, 1, 1))); // world 에 구3 추가
+    //oadd(&world, object(SP, sphere(point3(0, -1000, 0), 990), color3(1, 1, 1))); // world 에 구3 추가
+    // Modify junmlee at 8/28, 평면이 없어 구를 늘려 예제와 비슷하게 구현
+    oadd(&world, object(SP, sphere(point3(0, -10000, 0), 9990), color3(1, 1, 1)));
     scene->world = world;
     lights = object(LIGHT_POINT, light_point(point3(0, 5, 0), color3(1, 1, 1), 0.5), color3(0, 0, 0)); // 더미 albedo
     scene->light = lights;
