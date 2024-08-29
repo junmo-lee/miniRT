@@ -13,9 +13,10 @@ CC 		= cc
 CFLAGS 	= -Wall -Wextra -Werror
 INC		= -I $(LIBFT_DIR) -I $(MLX_DIR)
 
-ifdef DEBUG_FLAG
+ifdef DEBUG
 	CFLAGS += -g3 -fsanitize=address
 endif
+# usage : make -j4 re  DEBUG=1 && ./miniRT 1> image.ppm 2> err
 
 SRCS	:= \
 	${wildcard src/*.c}
