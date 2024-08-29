@@ -27,6 +27,6 @@ t_bool      hit_obj(t_object *world, t_ray *ray, t_hit_record *rec)
 
     hit_result = FALSE;
     if (world->type == SP)
-        hit_result = hit_sphere(world, ray, rec); //hit_sphere의 첫번째 인자도 t_sphere *에서 t_object *로 수정해주자.
+        hit_result = hit_sphere(world, ray, rec);
     return (hit_result);
 }
