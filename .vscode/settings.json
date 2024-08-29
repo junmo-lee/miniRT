@@ -9,6 +9,10 @@
 		"fractal_bonus.h": "c",
 		"scene.h": "c",
 		"structures.h": "c",
-		"trace.h": "c"
-	}
+		"trace.h": "c",
+		"stdio.h": "c"
+	},
+	"editor.tabSize": 4,
+	"C_Cpp.vcFormat.indent.braces": true,
+	"editor.insertSpaces": false
 }
