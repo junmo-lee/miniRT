@@ -139,7 +139,7 @@ t_vec3      vcross(t_vec3 vec, t_vec3 vec2)
 	return (new);
 }
 
-// 단위 벡터
+// 단위 벡터, 영벡터일시 에러출력 및 exit
 t_vec3      vunit(t_vec3 vec)
 {
 	double len = vlength(vec);

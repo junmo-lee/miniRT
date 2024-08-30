@@ -5,6 +5,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include "structures.h"
+# include "libft.h" // -I $(LIBFT_DIR)
 
 t_vec3      vec3(double x, double y, double z);
 t_point3    point3(double x, double y, double z);

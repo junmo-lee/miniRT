@@ -32,13 +32,13 @@ typedef int             t_object_type;
 
 // 예제 케이스와 유사한 값으로
 # define R_WIDTH 400
-# define R_HIGHT 300
+# define R_HIGHT 200
 
 // 예제에서는 (1, 0, 0) 이 수평방향(오른쪽) 이 되도록, D = (0, Dy, -1) 꼴이어야 함  
 # define EXAMPLE_DX 0
 # define EXAMPLE_DY 0 // Dy
 # define EXAMPLE_DZ -1
-# define EXAMPLE_FOV 100
+# define EXAMPLE_FOV 120
 
 
 struct s_vec3

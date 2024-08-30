@@ -5,43 +5,54 @@ const t_vec3	UP_VECTOR = {0, 1, 0};
 t_camera    camera(t_canvas *canvas, t_point3 orig, t_point3 camera_direction)
 {
 	t_camera    cam;
-	t_vec3      FcrossUP;
-	// double      focal_len;
-	// double      viewport_height;
+	t_vec3      DcrossUP;
+	t_vec3		XcrossD;
+	double      focal_len;
 
-	// viewport_height = 2.0;
-	// focal_len = 1.0;
+	ft_memset(&cam, 0, sizeof(cam));
+	focal_len = 1.0; // 1.0 이라고 가정
 	cam.orig = orig;
-	cam.camera_direction = camera_direction;
-	cam.viewport_h = canvas->height;
-	// cam.viewport_w = viewport_height * canvas->aspect_ratio;
-	cam.viewport_w = canvas->width;
-	// cam.focal_len = focal_len;
-	cam.focal_len = (double)canvas->width / (2 * tan(canvas->fov / 2));
-	fprintf(stderr, "forcal_len : %.4lf\n", cam.focal_len);
-	cam.vertical = vmult(UP_VECTOR, cam.viewport_h); // up vector 에 height를 곱해놓음 회전시에 바꾸면 될듯?
+	cam.camera_direction = vunit(camera_direction); // input에서 단위벡터를 검사해야함!
+	fprintf(stderr, "D : ");
+	vprint(vunit(cam.camera_direction));
+	cam.viewport_h = 2 * tan(canvas->fov / 2) * focal_len;
+	cam.viewport_w = cam.viewport_h / canvas->aspect_ratio; // canvas->aspect_ratio = h / w
+	cam.focal_len = focal_len;
 	// cam.horizontal = vec3(cam.viewport_w, 0, 0);
 	// horizontal = F(ront Vector, D) X Up(0, 1, 0)
 	// camera_direction 과 Up vector 의 각이 
 	//  0(0, 1, 0), PI(0, -1, 0) 일떄 sin 이 0이 되면서 수평방향이 영벡터가 됨(짐벌 락)
 	//  0(0, 1, 0) : (1, 0, 0), PI(0, -1, 0) : (-1, 0, 0) 으로 수동 지정
-	FcrossUP = vcross(cam.camera_direction, UP_VECTOR);
-	if (vlength(FcrossUP) == 0)
+	DcrossUP = vcross(cam.camera_direction, UP_VECTOR);
+	// vprint(DcrossUP);
+	if (vlength(DcrossUP) == 0)
 	{
 		if (check_eql_double(vangle(cam.camera_direction, UP_VECTOR), 0))
-			FcrossUP = vec3(1, 0, 0);
+			DcrossUP = vec3(1, 0, 0);
 		else
-			FcrossUP = vec3(-1, 0, 0);
+			DcrossUP = vec3(-1, 0, 0);
 	}
-	cam.horizontal = vmult(vunit(FcrossUP), cam.viewport_w);
-	vprint(cam.horizontal);
-	// 왼쪽 아래 코너점 좌표, origin - horizontal / 2 - vertical / 2 - vec3(0,0,focal_length)
+	fprintf(stderr, "Dx : ");
+	vprint(vunit(DcrossUP)); // Dx 방향
+	cam.horizontal = vmult(vunit(DcrossUP), cam.viewport_w);
+
+	// cam.vertical = vmult(UP_VECTOR, cam.viewport_h);
+	// vertical = R X F(ront Vector, D)
+	XcrossD = vcross(cam.horizontal, cam.camera_direction);
+	// 서로 수직인 벡터 R과 F의 외적은 유일하게 존재
+	fprintf(stderr, "Dy : ");
+	vprint(vunit(XcrossD));
+	cam.vertical = vmult(vunit(XcrossD), cam.viewport_h);
+	// vprint(cam.vertical);
+	// 왼쪽 아래 코너점 좌표, origin - horizontal / 2 - vertical / 2 - D * focal_length
 	cam.left_bottom = vminus(
 						vminus(
 							vminus(
 								cam.orig, 
 								vdivide(cam.horizontal, 2)),
 			  				vdivide(cam.vertical, 2)), 
-						vec3(0, 0, cam.focal_len));
+						vmult(cam.camera_direction, -focal_len));
+	fprintf(stderr, "left_bottom : ");
+	vprint((t_vec3)cam.left_bottom);
 	return (cam);
 }

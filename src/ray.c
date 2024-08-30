@@ -25,7 +25,12 @@ t_ray       ray_primary(t_camera *cam, double u, double v)
 
     ray.orig = cam->orig;
     // left_bottom + u * horizontal + v * vertical - origin 의 단위 벡터.
-    ray.dir = vunit(vminus(vplus(vplus(cam->left_bottom, vmult(cam->horizontal, u)), vmult(cam->vertical, v)), cam->orig));
+    ray.dir = vunit(vminus(
+                            vplus(
+                                vplus(cam->left_bottom, 
+                                    vmult(cam->horizontal, u)), 
+                                    vmult(cam->vertical, v)), 
+                            cam->orig));
     return (ray);
 }
 
@@ -46,7 +51,8 @@ t_color3    ray_color(t_scene *scene)
     //광선이 구에 적중하면(광선과 구가 교점이 있고, 교점이 카메라 앞쪽이라면!)
     scene->rec = record_init();
     if (hit(scene->world, &scene->ray, &scene->rec))
-        return (phong_lighting(scene)); //phong_lighting 함수는 8.4에서 설명한다. 이제 법선 벡터를 매핑해서 얻은 색이 아닌, 앞으로 작성할 phong_lighting 함수의 결과값을 반환한다!
+        return (vmult(vplus(scene->rec.normal, color3(1, 1, 1)), 0.5));
+        // return (phong_lighting(scene)); //phong_lighting 함수는 8.4에서 설명한다. 이제 법선 벡터를 매핑해서 얻은 색이 아닌, 앞으로 작성할 phong_lighting 함수의 결과값을 반환한다!
     else
     {
         //ray의 방향벡터의 y 값을 기준으로 그라데이션을 주기 위한 계수.

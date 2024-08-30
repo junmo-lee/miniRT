@@ -4,7 +4,7 @@
 #include "scene.h"
 
 const t_point3	EXAMPLE_ORIGIN = {0, 0, 0};
-const t_vec3	EXAMPLE_DIRECTION = {0, 0, -1};
+const t_vec3	EXAMPLE_DIRECTION = {EXAMPLE_DX, EXAMPLE_DY, EXAMPLE_DZ};
 
 t_scene *scene_init(void)
 {
@@ -22,8 +22,8 @@ t_scene *scene_init(void)
 	oadd(&world, object(SP, sphere(point3(2, 0, -5), 2), color3(0, 0.5, 0))); // world 에 구2 추가
 	//oadd(&world, object(SP, sphere(point3(0, -1000, 0), 990), color3(1, 1, 1))); // world 에 구3 추가
 	// Modify junmlee at 8/28, 평면이 없어 구를 늘려 예제와 비슷하게 구현
-	oadd(&world, object(SP, sphere(point3(0, -10000, 0), 9990), color3(1, 1, 1)));
-	oadd(&world, object(SP, sphere(point3(0, -1000, 0), 995), color3(1, 1, 1))); // world 에 구3 추가
+	// oadd(&world, object(SP, sphere(point3(0, -10000, 0), 9990), color3(1, 1, 1)));
+	// oadd(&world, object(SP, sphere(point3(0, -1000, 0), 995), color3(1, 1, 1))); // world 에 구3 추가
 	scene->world = world;
 	lights = object(LIGHT_POINT, light_point(point3(0, 20, 0), color3(1, 1, 1), 0.5), color3(0, 0, 0)); // 더미 albedo
 	// lights = object(LIGHT_POINT, light_point(point3(0, 5, 0), color3(1, 1, 1), 0.5), color3(0, 0, 0)); // 더미 albedo
