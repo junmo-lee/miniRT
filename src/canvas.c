@@ -8,5 +8,6 @@ t_canvas    canvas(int  width, int height, int fov)
     canvas.height = height;
     canvas.aspect_ratio = (double)width / (double)height;
     canvas.fov = to_radians(fov);
+    fprintf(stderr, "fov(rad) : %lf\n", canvas.fov);
     return (canvas);
 }

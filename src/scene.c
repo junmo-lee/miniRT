@@ -18,6 +18,8 @@ t_camera    camera(t_canvas *canvas, t_point3 orig, t_point3 camera_direction)
 	cam.viewport_h = 2 * tan(canvas->fov / 2) * focal_len;
 	cam.viewport_w = cam.viewport_h * canvas->aspect_ratio; // canvas->aspect_ratio = w / h
 	cam.focal_len = focal_len;
+	fprintf(stderr, "viewport_h : %.4lf, viewport_w : %.4lf\n", cam.viewport_h, cam.viewport_w);
+	fprintf(stderr, "focal_len : %.4lf\n", cam.focal_len);
 	// cam.horizontal = vec3(cam.viewport_w, 0, 0);
 	// horizontal = F(ront Vector, D) X Up(0, 1, 0)
 	// camera_direction 과 Up vector 의 각이 
