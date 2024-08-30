@@ -6,7 +6,7 @@
 const t_point3	EXAMPLE_ORIGIN = {0, 0, 0};
 const t_vec3	EXAMPLE_DIRECTION = {EXAMPLE_DX, EXAMPLE_DY, EXAMPLE_DZ};
 
-t_scene *scene_init(void)
+t_scene *scene_init(t_MT19937 *state)
 {
 	t_scene     *scene;
 	t_object    *world;
@@ -32,8 +32,7 @@ t_scene *scene_init(void)
 	scene->ambient = vmult(color3(1,1,1), ka);
 
 	// rand init
-	if (gen_rand_map(scene->rand_map))
-		return (NULL);
+	init_genrand(state, RAND_SEED);
 	return (scene);
 }
 
@@ -45,9 +44,10 @@ int     main(void)
 	double      v;
 	t_color3    pixel_color;
 	t_scene     *scene;
+	t_MT19937	state;
 	int			sample;
 
-	scene = scene_init();
+	scene = scene_init(&state);
 	// 랜더링
 	// P3 는 색상값이 아스키코드라는 뜻, 그리고 다음 줄은 캔버스의 가로, 세로 픽셀 수, 마지막은 사용할 색상값
 	printf("P3\n%d %d\n255\n", scene->canvas.width, scene->canvas.height);
@@ -61,8 +61,8 @@ int     main(void)
 			pixel_color = color3(0, 0, 0);
 			while (sample < SAMPLES_PER_PIXEL)
 			{
-				u = ((double)i + map_rand(scene->rand_map) - 0.5) / (scene->canvas.width - 1);
-				v = ((double)j + map_rand(scene->rand_map) - 0.5) / (scene->canvas.height - 1);
+				u = ((double)i + genrand_real3(&state) - 0.5) / (scene->canvas.width - 1);
+				v = ((double)j + genrand_real3(&state) - 0.5) / (scene->canvas.height - 1);
 				scene->ray = ray_primary(&scene->camera, u, v);
 				pixel_color = vplus(pixel_color, ray_color(scene));
 				sample++;

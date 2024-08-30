@@ -39,9 +39,7 @@ double		to_degrees(double radians);
 double		to_radians(double degrees);
 t_bool		check_eql_double(double val, double target);
 
-# define RAND_DIR "/dev/random"
-
-int		gen_rand_map(unsigned int *rand_map);
-double	map_rand(unsigned int *rand_map);
-
+void	init_genrand(t_MT19937 *state, unsigned long s);
+unsigned long	genrand_int32(t_MT19937 *state);
+double	genrand_real3(t_MT19937 *state);
 #endif

@@ -42,6 +42,14 @@ typedef int             t_object_type;
 
 # define SAMPLES_PER_PIXEL 4
 
+#define N 624
+#define M 397
+#define MATRIX_A 0x9908b0dfUL   /* constant vector a */
+#define UPPER_MASK 0x80000000UL /* most significant w-r bits */
+#define LOWER_MASK 0x7fffffffUL /* least significant r bits */
+
+#define RAND_SEED 1234UL
+
 struct s_vec3
 {
 	double x;
@@ -110,7 +118,6 @@ struct s_hit_record
 	t_color3    albedo;
 };
 
-# define MAP_SIZE 4096
 struct  s_scene
 {
     t_canvas        canvas;
@@ -120,7 +127,12 @@ struct  s_scene
     t_color3        ambient;
     t_ray           ray;
     t_hit_record    rec;
-	unsigned int	rand_map[MAP_SIZE + 1]; // 난수생성용
 };
+
+typedef struct s_MT19937
+{
+	unsigned long	mt[N];
+	int				mti;
+}	t_MT19937;
 
 #endif

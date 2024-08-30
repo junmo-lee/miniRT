@@ -8,3 +8,4 @@ mlx/minilibx_opengl_20191021
 *.py
 whiteborad*
 err
+.vscode/settings.json
