@@ -34,17 +34,16 @@ t_camera    camera(t_canvas *canvas, t_point3 orig, t_point3 camera_direction)
 		else
 			DcrossUP = vec3(-1, 0, 0);
 	}
-	fprintf(stderr, "Dx : ");
-	vprint(vunit(DcrossUP)); // Dx 방향
-	cam.horizontal = vmult(vunit(DcrossUP), cam.viewport_w);
+	cam.dx = vunit(DcrossUP); 
+	fprintf(stderr, "Dx : "); vprint(cam.dx); // Dx 방향
+	cam.horizontal = vmult(cam.dx, cam.viewport_w);
 
-	// cam.vertical = vmult(UP_VECTOR, cam.viewport_h);
 	// vertical = R X F(ront Vector, D)
 	XcrossD = vcross(cam.horizontal, cam.camera_direction);
 	// 서로 수직인 벡터 R과 F의 외적은 유일하게 존재
-	fprintf(stderr, "Dy : ");
-	vprint(vunit(XcrossD));
-	cam.vertical = vmult(vunit(XcrossD), cam.viewport_h);
+	cam.dy = vunit(XcrossD);
+	fprintf(stderr, "Dy : "); vprint(cam.dy);
+	cam.vertical = vmult(cam.dy, cam.viewport_h);
 	// vprint(cam.vertical);
 	// 왼쪽 아래 코너점 좌표, origin - horizontal / 2 - vertical / 2 - D * focal_length
 	cam.left_bottom = vminus(
@@ -54,7 +53,6 @@ t_camera    camera(t_canvas *canvas, t_point3 orig, t_point3 camera_direction)
 								vdivide(cam.horizontal, 2)),
 			  				vdivide(cam.vertical, 2)), 
 						vmult(cam.camera_direction, -focal_len));
-	fprintf(stderr, "left_bottom : ");
-	vprint((t_vec3)cam.left_bottom);
+	fprintf(stderr, "left_bottom : "); vprint((t_vec3)cam.left_bottom);
 	return (cam);
 }

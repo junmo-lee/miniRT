@@ -10,7 +10,8 @@
 		"scene.h": "c",
 		"structures.h": "c",
 		"trace.h": "c",
-		"stdio.h": "c"
+		"stdio.h": "c",
+		"ratio": "c"
 	},
 	"editor.tabSize": 4,
 	"C_Cpp.vcFormat.indent.braces": true,

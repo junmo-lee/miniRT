@@ -4,6 +4,7 @@
 # include <math.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include <fcntl.h>
 # include "structures.h"
 # include "libft.h" // -I $(LIBFT_DIR)
 
@@ -38,4 +39,7 @@ double		to_degrees(double radians);
 double		to_radians(double degrees);
 t_bool		check_eql_double(double val, double target);
 
+void	init_genrand(t_MT19937 *state, unsigned long s);
+unsigned long	genrand_int32(t_MT19937 *state);
+double	genrand_real3(t_MT19937 *state);
 #endif

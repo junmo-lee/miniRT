@@ -40,6 +40,15 @@ typedef int             t_object_type;
 # define EXAMPLE_DZ -1
 # define EXAMPLE_FOV 90
 
+# define SAMPLES_PER_PIXEL 4
+
+#define N 624
+#define M 397
+#define MATRIX_A 0x9908b0dfUL   /* constant vector a */
+#define UPPER_MASK 0x80000000UL /* most significant w-r bits */
+#define LOWER_MASK 0x7fffffffUL /* least significant r bits */
+
+#define RAND_SEED 1234UL
 
 struct s_vec3
 {
@@ -58,8 +67,10 @@ struct  s_camera
 {
 	t_point3    orig;  // 카메라 원점(위치)
 	t_vec3		camera_direction; // 카메라 방향(벡터)
-	double      viewport_h; // 뷰포트 세로길이
 	double      viewport_w; // 뷰포트 가로길이
+	double      viewport_h; // 뷰포트 세로길이
+	t_vec3		dx; // 수평(x) 단위벡터 horizontal / viewport_w
+	t_vec3		dy; // 수직(y) 단위벡터 vertical / viewport_h
 	t_vec3      horizontal; // 수평길이 벡터
 	t_vec3      vertical; // 수직길이 벡터
 	double      focal_len; // focal length
@@ -113,9 +124,15 @@ struct  s_scene
     t_camera        camera;
     t_object        *world;
     t_object        *light;
-    t_color3        ambient; // 8.4에서 설명할 요소
+    t_color3        ambient;
     t_ray           ray;
     t_hit_record    rec;
 };
+
+typedef struct s_MT19937
+{
+	unsigned long	mt[N];
+	int				mti;
+}	t_MT19937;
 
 #endif
