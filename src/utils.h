@@ -4,6 +4,7 @@
 # include <math.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include <fcntl.h>
 # include "structures.h"
 # include "libft.h" // -I $(LIBFT_DIR)
 
@@ -37,5 +38,10 @@ t_object    *olast(t_object *list);
 double		to_degrees(double radians);
 double		to_radians(double degrees);
 t_bool		check_eql_double(double val, double target);
+
+# define RAND_DIR "/dev/random"
+
+int		gen_rand_map(unsigned int *rand_map);
+double	map_rand(unsigned int *rand_map);
 
 #endif

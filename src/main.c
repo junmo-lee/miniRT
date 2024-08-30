@@ -30,6 +30,10 @@ t_scene *scene_init(void)
 	scene->light = lights;
 	ka = 0.1;
 	scene->ambient = vmult(color3(1,1,1), ka);
+
+	// rand init
+	if (gen_rand_map(scene->rand_map))
+		return (NULL);
 	return (scene);
 }
 
@@ -41,6 +45,7 @@ int     main(void)
 	double      v;
 	t_color3    pixel_color;
 	t_scene     *scene;
+	int			sample;
 
 	scene = scene_init();
 	// 랜더링
@@ -52,13 +57,17 @@ int     main(void)
 		i = 0;
 		while (i < scene->canvas.width)
 		{
-			u = (double)i / (scene->canvas.width - 1);
-			v = (double)j / (scene->canvas.height - 1);
-			//ray from camera origin to pixel
-			scene->ray = ray_primary(&scene->camera, u, v);
-			pixel_color = ray_color(scene);
-			// ray_color함수의 인자도 ray, world를 모두 담고 있는 scene으로 바꿨다.
-			write_color(pixel_color);
+			sample = 0;
+			pixel_color = color3(0, 0, 0);
+			while (sample < SAMPLES_PER_PIXEL)
+			{
+				u = ((double)i + map_rand(scene->rand_map) - 0.5) / (scene->canvas.width - 1);
+				v = ((double)j + map_rand(scene->rand_map) - 0.5) / (scene->canvas.height - 1);
+				scene->ray = ray_primary(&scene->camera, u, v);
+				pixel_color = vplus(pixel_color, ray_color(scene));
+				sample++;
+			}
+			write_color(vmult(pixel_color, 1.0 / SAMPLES_PER_PIXEL));
 			++i;
 		}
 		--j;
