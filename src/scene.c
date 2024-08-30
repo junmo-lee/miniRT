@@ -16,7 +16,7 @@ t_camera    camera(t_canvas *canvas, t_point3 orig, t_point3 camera_direction)
 	fprintf(stderr, "D : ");
 	vprint(vunit(cam.camera_direction));
 	cam.viewport_h = 2 * tan(canvas->fov / 2) * focal_len;
-	cam.viewport_w = cam.viewport_h / canvas->aspect_ratio; // canvas->aspect_ratio = h / w
+	cam.viewport_w = cam.viewport_h * canvas->aspect_ratio; // canvas->aspect_ratio = w / h
 	cam.focal_len = focal_len;
 	// cam.horizontal = vec3(cam.viewport_w, 0, 0);
 	// horizontal = F(ront Vector, D) X Up(0, 1, 0)
