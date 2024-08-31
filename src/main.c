@@ -3,7 +3,7 @@
 #include "trace.h"
 #include "scene.h"
 
-const t_point3	EXAMPLE_ORIGIN = {0, 3, 0};
+const t_point3	EXAMPLE_ORIGIN = {0, 0, 0};
 const t_vec3	EXAMPLE_DIRECTION = {EXAMPLE_DX, EXAMPLE_DY, EXAMPLE_DZ};
 
 t_scene *scene_init(t_MT19937 *state)
@@ -18,20 +18,18 @@ t_scene *scene_init(t_MT19937 *state)
 		return (NULL);
 	scene->canvas = canvas(R_WIDTH, R_HIGHT, EXAMPLE_H_FOV);
 	scene->camera = camera(&scene->canvas, EXAMPLE_ORIGIN, EXAMPLE_DIRECTION);
-	world = object(SP, sphere(point3(-2, 0, -5), 2), color3(0.5, 0, 0)); // world 에 구1 추가
-	oadd(&world, object(SP, sphere(point3(2, 0, -5), 2), color3(0, 0.5, 0))); // world 에 구2 추가
+	world = object(SP, sphere(point3(-2, 0, -5), 2), color3(0.5, 0, 0));
+	oadd(&world, object(SP, sphere(point3(2, 0, -5), 2), color3(0, 0.5, 0)));
 
+	// xyz 좌표 확인용
 	oadd(&world, object(SP, sphere(point3(-2, 0, 0), 1), color3(1, 0, 0)));
 	oadd(&world, object(SP, sphere(point3(0, -2, 0), 1), color3(0, 1, 0)));
 	oadd(&world, object(SP, sphere(point3(0, 0, -2), 1), color3(0, 0, 1)));
-	//oadd(&world, object(SP, sphere(point3(0, -1000, 0), 990), color3(1, 1, 1))); // world 에 구3 추가
-	// Modify junmlee at 8/28, 평면이 없어 구를 늘려 예제와 비슷하게 구현
-	// oadd(&world, object(SP, sphere(point3(0, -10000, 0), 9990), color3(1, 1, 1)));
-	// oadd(&world, object(PL, plain(point3(0, -3, 0), vec3(0, 1, 0)), color3(0, 0, 0.5)));
-	// oadd(&world, object(SP, sphere(point3(0, -1000, 0), 995), color3(1, 1, 1))); // world 에 구3 추가
+
+	oadd(&world, object(PL, plain(point3(0, 0, -10), vec3(0, 0, 1)), color3(1, 1, 1)));
+	oadd(&world, object(PL, plain(point3(0, -3, 0), vec3(0, 1, 0)), color3(1, 1, 1)));
 	scene->world = world;
-	lights = object(LIGHT_POINT, light_point(point3(0, 20, 0), color3(1, 1, 1), 0.5), color3(0, 0, 0)); // 더미 albedo
-	// lights = object(LIGHT_POINT, light_point(point3(0, 5, 0), color3(1, 1, 1), 0.5), color3(0, 0, 0)); // 더미 albedo
+	lights = object(LIGHT_POINT, light_point(point3(0, 20, 0), color3(1, 1, 1), 0.5), color3(0, 0, 0));
 	scene->light = lights;
 	ka = 0.1;
 	scene->ambient = vmult(color3(1,1,1), ka);
@@ -53,8 +51,7 @@ int     main(void)
 	int			sample;
 
 	scene = scene_init(&state);
-	// 랜더링
-	// P3 는 색상값이 아스키코드라는 뜻, 그리고 다음 줄은 캔버스의 가로, 세로 픽셀 수, 마지막은 사용할 색상값
+
 	printf("P3\n%d %d\n255\n", scene->canvas.width, scene->canvas.height);
 	j = scene->canvas.height - 1;
 	while (j >= 0)
