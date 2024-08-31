@@ -12,6 +12,7 @@ typedef struct s_canvas t_canvas;
 
 typedef struct s_object t_object;
 typedef struct s_sphere t_sphere;
+typedef struct s_plain	t_plain;
 typedef struct s_light  t_light;
 typedef int             t_bool;
 
@@ -25,23 +26,24 @@ typedef struct  s_object    t_object;
 typedef int             t_object_type;
 # define SP 0
 # define LIGHT_POINT 1
+# define PL 2
 
 # define EPSILON 1e-6 // 0.000001
 # define LUMEN 3
 // # define PI 3.14159265358979323846
 
-// 예제 케이스와 유사한 값으로
-# define R_WIDTH 600
-# define R_HIGHT 300
+# define R_WIDTH 300
+# define R_HIGHT 600
 
 // 예제에서는 (1, 0, 0) 이 수평방향(오른쪽) 이 되도록, D = (0, Dy, -1) 꼴이어야 함  
 # define EXAMPLE_DX 0
 # define EXAMPLE_DY 0 // Dy
 # define EXAMPLE_DZ -1
-# define EXAMPLE_FOV 90
+# define EXAMPLE_H_FOV 90
 
 # define SAMPLES_PER_PIXEL 4
 
+// for mt19937
 #define N 624
 #define M 397
 #define MATRIX_A 0x9908b0dfUL   /* constant vector a */
@@ -81,8 +83,9 @@ struct  s_canvas
 {
 	int     width; //canvas width
 	int     height; //canvas height;
-	double  aspect_ratio; //종횡비
-	double	fov; // to radian
+	double  aspect_ratio; //종횡비 (w / h)
+	double	h_fov; // horizontal fov, radian
+	double	v_fov; // vertical fov, radian
 };
 
 struct	s_object
@@ -98,6 +101,12 @@ struct  s_sphere
 	t_point3    center;
 	double      radius;
 	double      radius2;
+};
+
+struct  s_plain
+{
+	t_vec3		n; // 법선벡터(정규화된)
+	t_point3    P; // 평면 위의 한 점
 };
 
 struct      s_light

@@ -1,13 +1,13 @@
 #include "scene.h"
 
-t_canvas    canvas(int  width, int height, int fov)
+t_canvas    canvas(int  width, int height, double h_fov)
 {
     t_canvas canvas;
 
     canvas.width = width;
     canvas.height = height;
     canvas.aspect_ratio = (double)width / (double)height;
-    canvas.fov = to_radians(fov);
-    fprintf(stderr, "fov(rad) : %lf\n", canvas.fov);
+    canvas.h_fov = to_radians(h_fov);
+    fprintf(stderr, "h_fov(rad) : %lf\n", canvas.h_fov);
     return (canvas);
 }

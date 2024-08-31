@@ -15,8 +15,8 @@ t_camera    camera(t_canvas *canvas, t_point3 orig, t_point3 camera_direction)
 	cam.camera_direction = vunit(camera_direction); // input에서 단위벡터를 검사해야함!
 	fprintf(stderr, "D : ");
 	vprint(vunit(cam.camera_direction));
-	cam.viewport_h = 2 * tan(canvas->fov / 2) * focal_len;
-	cam.viewport_w = cam.viewport_h * canvas->aspect_ratio; // canvas->aspect_ratio = w / h
+	cam.viewport_w = 2.0 * tan(canvas->h_fov / 2) * focal_len;
+	cam.viewport_h = cam.viewport_w / canvas->aspect_ratio;
 	cam.focal_len = focal_len;
 	fprintf(stderr, "viewport_h : %.4lf, viewport_w : %.4lf\n", cam.viewport_h, cam.viewport_w);
 	fprintf(stderr, "focal_len : %.4lf\n", cam.focal_len);

@@ -6,7 +6,7 @@
 /*   By: junmlee <junmlee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 20:28:03 by junmlee           #+#    #+#             */
-/*   Updated: 2024/08/30 21:17:18 by junmlee          ###   ########.fr       */
+/*   Updated: 2024/08/31 15:08:02 by junmlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@
 
 #include "structures.h"
 
+/* initializes mt[N] with a seed */
 void	init_genrand(t_MT19937 *state, unsigned long s)
 {
 	state->mt[0] = s & 0xffffffffUL;
@@ -98,13 +99,11 @@ void	twist(t_MT19937 *state)
 	state->mti = 0;
 }
 
+/* generates a random number on [0,0xffffffff]-interval */
 unsigned long	genrand_int32(t_MT19937 *state)
 {
 	unsigned long			y;
-	static unsigned long	mag01[2];
 
-	mag01[0] = 0x0UL;
-	mag01[1] = MATRIX_A;
 	if (state->mti >= N)
 		twist(state);
 	y = state->mt[state->mti++];
