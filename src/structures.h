@@ -13,6 +13,7 @@ typedef struct s_canvas t_canvas;
 typedef struct s_object t_object;
 typedef struct s_sphere t_sphere;
 typedef struct s_plain	t_plain;
+typedef struct s_cylinder	t_cylinder;
 typedef struct s_light  t_light;
 typedef int             t_bool;
 
@@ -27,12 +28,13 @@ typedef int             t_object_type;
 # define SP 0
 # define LIGHT_POINT 1
 # define PL 2
+# define CY 3
 
 # define EPSILON 1e-6 // 0.000001
 # define LUMEN 3
 // # define PI 3.14159265358979323846
 
-# define R_WIDTH 300
+# define R_WIDTH 600
 # define R_HIGHT 600
 
 // 예제에서는 (1, 0, 0) 이 수평방향(오른쪽) 이 되도록, D = (0, Dy, -1) 꼴이어야 함  
@@ -103,11 +105,34 @@ struct  s_sphere
 	double      radius2;
 };
 
+/*
+pl  0.0,0.0,-10.0  0.0,1.0,0.0  0,0,225
+- x,y,z 좌표 : **0.0, 0.0, -10.0**
+- 정규화된 삼차원 방향 벡터. 각 x, y, z 축 마다 [-1, 1] 의 범위를 가짐 : **0.0, 0.0, 1.0**
+- R,G,B 색 범위 [0, 255] : **0, 0, 255**
+*/
 struct  s_plain
 {
-	t_vec3		n; // 법선벡터(정규화된)
 	t_point3    P; // 평면 위의 한 점
+	t_vec3		n; // 정규화된 삼차원 방향 벡터. 각 x, y, z 축 마다 [-1, 1] 의 범위를 가짐
 };
+
+/*
+cy  50.0,0.0,20.6  0.0,0.0,1.0  10,0,255  14.2  21.42
+- x,y,z 좌표 : **50.0, 0.0, 20.6**
+- 정규화된 삼차원 방향 벡터. 각 x, y, z 축 마다 [-1, 1] 의 범위를 가짐 : **0.0, 0.0, 1.0**
+- 원기둥의 직경 : **14.2**
+- 원기둥의 높이 : **21.42**
+- R,G,B 색 범위 [0, 255] : **10, 0, 255***/
+struct s_cylinder
+{
+	t_point3	center; // 중심 x,y,z 좌표
+	t_vec3		n; // 정규화된 삼차원 방향 벡터 각 x, y, z 축 마다 [-1, 1] 의 범위를 가짐
+	t_vec3		h; // height * n;
+	double		radius; // 원기둥의 직경
+	double		height; // 원기둥의 높이
+};
+
 
 struct      s_light
 {

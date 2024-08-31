@@ -38,6 +38,20 @@ t_plain		*plain(t_point3 P, t_vec3 n)
     return (pl);
 }
 
+t_cylinder		*cylinder(t_point3 center, t_vec3 n, double radius, double height)
+{
+    t_cylinder *cy;
+
+    if(!(cy = (t_cylinder *)malloc(sizeof(t_cylinder))))
+        return (NULL);
+	cy->center = center;
+	cy->n = vunit(n); // 처음에 정규화되었는지 확인해야 함, 일단 정규화하는걸로
+	cy->radius = radius;
+	cy->height = height;
+	cy->h = vmult(cy->n, height);
+    return (cy);
+}
+
 t_light     *light_point(t_point3 light_origin, t_color3 light_color, double bright_ratio)
 {
 	t_light *light;

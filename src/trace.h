@@ -16,6 +16,8 @@ t_bool      hit_obj(t_object *obj, t_ray *ray, t_hit_record *rec);
 t_bool      hit_sphere(t_object *world, t_ray *ray, t_hit_record *rec);
 void        set_face_normal(t_ray *r, t_hit_record *rec);
 t_bool      hit_plain(t_object *pl_obj, t_ray *ray, t_hit_record *rec);
+t_bool      hit_cylinder(t_object *cy_obj, t_ray *ray, t_hit_record *rec);
+t_cylinder	*cylinder(t_point3 center, t_vec3 n, double radius, double height);
 
 t_color3        phong_lighting(t_scene *scene);
 t_color3    point_light_get(t_scene *scene, t_light *light);
