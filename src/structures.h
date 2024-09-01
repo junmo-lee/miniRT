@@ -14,6 +14,7 @@ typedef struct s_object t_object;
 typedef struct s_sphere t_sphere;
 typedef struct s_plain	t_plain;
 typedef struct s_cylinder	t_cylinder;
+typedef	struct s_cone	t_cone;
 typedef struct s_light  t_light;
 typedef int             t_bool;
 
@@ -29,6 +30,9 @@ typedef int             t_object_type;
 # define LIGHT_POINT 1
 # define PL 2
 # define CY 3
+// bonus
+# define CO 4
+
 
 # define EPSILON 1e-6 // 0.000001
 # define LUMEN 3
@@ -124,6 +128,18 @@ struct s_cylinder
 	double		height; // 원기둥의 높이
 	t_vec3		PC; // rootP - C
 	double		PC_dot_Hhat; // check for height, PC - PC_dot_Hhat = ray->normal
+};
+
+// bonus part
+struct s_cone
+{
+	t_point3	center; // 중심 x,y,z 좌표
+	t_vec3		n; // 정규화된 삼차원 방향 벡터 각 x, y, z 축 마다 [-1, 1] 의 범위를 가짐
+	t_vec3		h; // height * n;
+	t_point3	H; // center + h;
+	double		radius; // 원뿔 밑면 반지름
+	double		height; // 원뿔 높이
+	double		m; // r^2 / 2-norm(h), 빗면의 기울기
 };
 
 

@@ -38,11 +38,11 @@ t_plain		*plain(t_point3 P, t_vec3 n)
     return (pl);
 }
 
-t_cylinder		*cylinder(t_point3 center, t_vec3 n, double radius, double height)
+t_cone		*cylinder(t_point3 center, t_vec3 n, double radius, double height)
 {
-    t_cylinder *cy;
+    t_cone *cy;
 
-    if(!(cy = (t_cylinder *)malloc(sizeof(t_cylinder))))
+    if(!(cy = (t_cone *)malloc(sizeof(t_cone))))
         return (NULL);
 	cy->center = center;
 	cy->n = vunit(n); // 처음에 정규화되었는지 확인해야 함, 일단 정규화하는걸로

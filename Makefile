@@ -19,7 +19,8 @@ endif
 # usage : make -j4 re  DEBUG=1 && ./miniRT 1> image.ppm 2> err
 
 SRCS	:= \
-	${wildcard src/*.c}
+	${wildcard src/*.c} \
+	${wildcard bonus/*.c}
 
 # SRCS	= $(addprefix src/, $(SRCS))
 
