@@ -26,16 +26,19 @@ t_bool      hit_cylinder(t_object *cy_obj, t_ray *ray, t_hit_record *rec)
 	t_point3	rootP;
 	double	sqrtD;
 
+	t_vec3	PC;
+	double	PC_dot_Hhat;
+
 	cy = cy_obj->element;
 	W = vminus(ray->orig, cy->center);
 	V_dot_Hhat = vdot(ray->dir, cy->n);
 	W_dot_Hhat = vdot(W, cy->n);
 
 	a = vdot(ray->dir, ray->dir) - V_dot_Hhat * V_dot_Hhat;
-	b = 2.0 * (vdot(ray->orig, W) - V_dot_Hhat * W_dot_Hhat);
+	b = 2.0 * (vdot(ray->dir, W) - V_dot_Hhat * W_dot_Hhat);
 	c = vdot(W, W) - W_dot_Hhat * W_dot_Hhat - cy->radius * cy->radius;
 
-	D = b * b - 4 * a * c;
+	D = b * b - (4.0 * a * c);
 	// todo : D/2 판별식으로 변환하기
 
 	if (D < 0)
@@ -44,25 +47,23 @@ t_bool      hit_cylinder(t_object *cy_obj, t_ray *ray, t_hit_record *rec)
 
 	root = (-b - sqrtD) / (2.0 * a);
 	rootP = ray_at(ray, root);
-	if (root < rec->tmin || rec->tmax < root || in_cylinder_h(rootP, cy))
+	PC = vminus(rootP, cy->center);
+	PC_dot_Hhat = vdot(PC, cy->n);
+	if (root < rec->tmin || rec->tmax < root
+		|| PC_dot_Hhat < EPSILON || cy->height < PC_dot_Hhat)
 	{
 		root = (-b + sqrtD) / (2.0 * a);
-		if (root < rec->tmin || rec->tmax < root || in_cylinder_h(rootP, cy))
+		rootP = ray_at(ray, root);
+		PC = vminus(rootP, cy->center);
+		PC_dot_Hhat = vdot(PC, cy->n);
+		if (root < rec->tmin || rec->tmax < root
+			|| PC_dot_Hhat < EPSILON || cy->height < PC_dot_Hhat)
 			return (FALSE);
 	}
 	rec->t = root;
 	rec->p = rootP;
-	rec->normal = cy->n;
-	// rec->normal = vunit(
-	// 	vminus(rec->p, vplus(cy->center, 
-	// 		vmult(cy->n, 
-	// 			vdot(
-	// 				vminus(rec->p, cy->center),
-	// 				cy->n
-	// 			))))
-	// );
-		// vec3_minus(rec->p, vec3_plus(cy->center,
-		// 			vec3_mult_scalar(cy->normal, vec3_dot(
-		// 					vec3_minus(rec->p, cy->center), cy->normal))))
+	rec->normal = vdivide(vminus(PC, vmult(cy->n,PC_dot_Hhat)), cy->radius);
+	set_face_normal(ray, rec);
+	rec->albedo = cy_obj->albedo;
 	return (TRUE);
 }

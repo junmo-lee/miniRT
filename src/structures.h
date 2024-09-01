@@ -34,16 +34,7 @@ typedef int             t_object_type;
 # define LUMEN 3
 // # define PI 3.14159265358979323846
 
-# define R_WIDTH 600
-# define R_HIGHT 600
-
-// 예제에서는 (1, 0, 0) 이 수평방향(오른쪽) 이 되도록, D = (0, Dy, -1) 꼴이어야 함  
-# define EXAMPLE_DX 0
-# define EXAMPLE_DY 0 // Dy
-# define EXAMPLE_DZ -1
-# define EXAMPLE_H_FOV 90
-
-# define SAMPLES_PER_PIXEL 4
+# define SAMPLES_PER_PIXEL 1
 
 // for mt19937
 #define N 624
@@ -131,6 +122,8 @@ struct s_cylinder
 	t_vec3		h; // height * n;
 	double		radius; // 원기둥의 직경
 	double		height; // 원기둥의 높이
+	t_vec3		PC; // rootP - C
+	double		PC_dot_Hhat; // check for height, PC - PC_dot_Hhat = ray->normal
 };
 
 
