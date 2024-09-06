@@ -1,6 +1,6 @@
-#include "../src/structures.h"
-#include "../src/scene.h"
-#include "../src/utils.h"
+#include "structures.h"
+#include "scene.h"
+#include "utils.h"
 
 // mandatory 부분 붙여넣기
 

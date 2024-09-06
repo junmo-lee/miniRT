@@ -9,11 +9,11 @@ void	*init_t_parse(t_parse *parse_struct)
 	return (parse_struct);
 }
 
-t_ambient	*create_ambient_struct(t_parse *parsed_struct)
+t_ambient_p	*create_ambient_struct(t_parse *parsed_struct)
 {
-	t_ambient	*ambient_struct;
+	t_ambient_p	*ambient_struct;
 
-	ambient_struct = (t_ambient *)malloc(sizeof(t_ambient));
+	ambient_struct = (t_ambient_p *)malloc(sizeof(t_ambient_p));
 	if (!ambient_struct)
 		parse_exit(parsed_struct);
 	ambient_struct->colors.x = 0;
@@ -23,11 +23,11 @@ t_ambient	*create_ambient_struct(t_parse *parsed_struct)
 	return (ambient_struct);
 }
 
-t_camera	*create_camera_struct(t_parse *parsed_strcut)
+t_camera_p	*create_camera_struct(t_parse *parsed_strcut)
 {
-	t_camera	*camera_struct;
+	t_camera_p	*camera_struct;
 
-	camera_struct = (t_camera *)malloc(sizeof(t_camera));
+	camera_struct = (t_camera_p *)malloc(sizeof(t_camera_p));
 	if (!camera_struct)
 		parse_exit(parsed_strcut);
 	camera_struct->coordinates.x = 0;
@@ -40,11 +40,11 @@ t_camera	*create_camera_struct(t_parse *parsed_strcut)
 	return (camera_struct);
 }
 
-t_light	*create_light_struct(t_parse *parsed_struct)
+t_light_p	*create_light_struct(t_parse *parsed_struct)
 {
-	t_light	*light_struct;
+	t_light_p	*light_struct;
 
-	light_struct = (t_light *)malloc(sizeof(t_light));
+	light_struct = (t_light_p *)malloc(sizeof(t_light_p));
 	if (!light_struct)
 		parse_exit(parsed_struct);
 	light_struct->coordinates.x = 0;
@@ -57,11 +57,11 @@ t_light	*create_light_struct(t_parse *parsed_struct)
 	return (light_struct);
 }
 
-t_object	*create_object_struct(t_parse *parsed_struct)
+t_object_p	*create_object_struct(t_parse *parsed_struct)
 {
-	t_object	*object_struct;
+	t_object_p	*object_struct;
 
-	object_struct = (t_object *)malloc(sizeof(t_object));
+	object_struct = (t_object_p *)malloc(sizeof(t_object_p));
 	if (!object_struct)
 		parse_exit(parsed_struct);
 	object_struct->identifier = DEFAULT;
@@ -73,11 +73,11 @@ t_object	*create_object_struct(t_parse *parsed_struct)
 	return (object_struct);
 }
 
-t_plane		*create_plane_struct(t_parse *parsed_struct)
+t_plane_p		*create_plane_struct(t_parse *parsed_struct)
 {
-	t_plane		*plane_object;
+	t_plane_p		*plane_object;
 
-	plane_object = (t_plane *)malloc(sizeof(t_plane));
+	plane_object = (t_plane_p *)malloc(sizeof(t_plane_p));
 	if (!plane_object)
 		parse_exit(parsed_struct);
 	plane_object->coordinates.x = 0;
@@ -92,11 +92,11 @@ t_plane		*create_plane_struct(t_parse *parsed_struct)
 	return (plane_object);
 }
 
-t_sphere	*create_sphere_struct(t_parse *parsed_struct)
+t_sphere_p	*create_sphere_struct(t_parse *parsed_struct)
 {
-	t_sphere	*sphere_object;
+	t_sphere_p	*sphere_object;
 
-	sphere_object = (t_sphere *)malloc(sizeof(t_sphere));
+	sphere_object = (t_sphere_p *)malloc(sizeof(t_sphere_p));
 	if (!sphere_object)
 		parse_exit(parsed_struct);
 	sphere_object->coordinates.x = 0;
@@ -109,11 +109,11 @@ t_sphere	*create_sphere_struct(t_parse *parsed_struct)
 	return (sphere_object);
 }
 
-t_cylinder	*create_cylinder_struct(t_parse *parsed_struct)
+t_cylinder_p	*create_cylinder_struct(t_parse *parsed_struct)
 {
-	t_cylinder	*cylinder_struct;
+	t_cylinder_p	*cylinder_struct;
 
-	cylinder_struct = (t_cylinder *)malloc(sizeof(t_cylinder));
+	cylinder_struct = (t_cylinder_p *)malloc(sizeof(t_cylinder_p));
 	if (!cylinder_struct)
 		parse_exit(parsed_struct);
 	cylinder_struct->coordinates.x = 0;

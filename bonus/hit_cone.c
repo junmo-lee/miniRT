@@ -1,6 +1,6 @@
-#include "../src/structures.h"
-#include "../src/utils.h"
-#include "../src/trace.h"
+#include "structures.h"
+#include "utils.h"
+#include "trace.h"
 
 t_bool      hit_cone(t_object *co_obj, t_ray *ray, t_hit_record *rec)
 {

@@ -12,10 +12,10 @@ void	print_strings(char **strings)
 	}
 }
 
-void	free_object_list(t_object *object_struct)
+void	free_object_list(t_object_p *object_struct)
 {
-	t_object	*current_node;
-	t_object	*tem_node;
+	t_object_p	*current_node;
+	t_object_p	*tem_node;
 
 	current_node = object_struct;
 	while (current_node != NULL)
@@ -65,9 +65,9 @@ void	splited_free(char **strings)
 	free(strings);
 }
 
-void	append_object_struct(t_parse *parsed_struct, t_object *object_struct)
+void	append_object_struct(t_parse *parsed_struct, t_object_p *object_struct)
 {
-	t_object *current_node;
+	t_object_p *current_node;
 
 	if (parsed_struct == NULL || object_struct == NULL)
 		parse_exit(parsed_struct);

@@ -35,6 +35,9 @@ typedef int             t_object_type;
 // bonus
 # define CO 4
 
+// 호환을 위해
+# define DEFAULT 100
+# define CR 4
 
 # define EPSILON 1e-6 // 0.000001
 # define LUMEN 3
@@ -173,16 +176,6 @@ struct s_cone
 	t_point3	H; // center + h;
 	double		m; // r^2 / 2-norm(h)
 };
-
-typedef	struct s_object
-{
-	int	identifier;
-	t_sphere	*sphere;
-	t_plain		*plane;
-	t_cylinder	*cylinder;
-	t_cone		*cone;
-	struct s_object	*next;
-}	t_object;
 
 typedef struct s_parse
 {

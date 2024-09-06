@@ -1,4 +1,4 @@
-#include "parse.h"
+#include "include/parse.h"
 
 void	color_range_check(t_parse *parsed_struct, char **splited_colors)
 {
@@ -12,7 +12,7 @@ void	color_range_check(t_parse *parsed_struct, char **splited_colors)
 		parse_exit(parsed_struct);
 }
 
-void	put_colors(t_parse *parsed_struct, t_ambient **ambient_struct, char **splited_colors)
+void	put_colors(t_parse *parsed_struct, t_ambient_p **ambient_struct, char **splited_colors)
 {
 	if (splited_colors == NULL)
 		parse_exit(parsed_struct);
@@ -21,7 +21,7 @@ void	put_colors(t_parse *parsed_struct, t_ambient **ambient_struct, char **split
 	(*ambient_struct)->colors.z = ft_atof(splited_colors[2]);
 }
 
-void	put_coordinate_camera_struct(t_parse *parsed_struct, t_camera **camera_struct, char **splited_xyz)
+void	put_coordinate_camera_struct(t_parse *parsed_struct, t_camera_p **camera_struct, char **splited_xyz)
 {
 	if (splited_xyz == NULL)
 		parse_exit(parsed_struct);
@@ -30,7 +30,7 @@ void	put_coordinate_camera_struct(t_parse *parsed_struct, t_camera **camera_stru
 	(*camera_struct)->coordinates.z = ft_atof(splited_xyz[2]);
 }
 
-void	put_vector_camera_struct(t_parse *parsed_struct, t_camera **camera_struct, char **splited_xyz)
+void	put_vector_camera_struct(t_parse *parsed_struct, t_camera_p **camera_struct, char **splited_xyz)
 {
 	if (splited_xyz == NULL)
 		parse_exit(parsed_struct);
@@ -66,7 +66,7 @@ void	coordinate_check(t_parse *parsed_struct, char *str, int num)
 
 void	parse_ambient(t_parse *parsed_struct, char **strings)
 {
-	t_ambient	*ambient_struct;
+	t_ambient_p	*ambient_struct;
 	char		**splited_colors;
 
 	if (parsed_struct == NULL || parsed_struct->ambient_pointer != NULL) //ambient_struct가 있으면 추가하면 안 됨 에러.
@@ -85,7 +85,7 @@ void	parse_ambient(t_parse *parsed_struct, char **strings)
 
 void	parse_camera(t_parse *parsed_struct, char **strings)
 {
-	t_camera	*camera_struct;
+	t_camera_p	*camera_struct;
 	char		**splited_xyz;
 
 	if (parsed_struct == NULL || parsed_struct->camera_pointer != NULL)
@@ -105,7 +105,7 @@ void	parse_camera(t_parse *parsed_struct, char **strings)
 	parsed_struct->camera_pointer = camera_struct;
 }
 
-void	put_coordinate_light_struct(t_parse *parsed_struct, t_light **light_struct, char **splited_xyz)
+void	put_coordinate_light_struct(t_parse *parsed_struct, t_light_p **light_struct, char **splited_xyz)
 {
 	if (splited_xyz == NULL)
 		parse_exit(parsed_struct);
@@ -114,7 +114,7 @@ void	put_coordinate_light_struct(t_parse *parsed_struct, t_light **light_struct,
 	(*light_struct)->coordinates.z = ft_atof(splited_xyz[2]);
 }
 
-void	put_colors_light_struct(t_parse *parsed_struct, t_light **light_struct, char **splited_xyz)
+void	put_colors_light_struct(t_parse *parsed_struct, t_light_p **light_struct, char **splited_xyz)
 {
 	if (splited_xyz == NULL)
 		parse_exit(parsed_struct);
@@ -125,7 +125,7 @@ void	put_colors_light_struct(t_parse *parsed_struct, t_light **light_struct, cha
 
 void	parse_light(t_parse *parsed_struct, char **strings)
 {
-	t_light *light_struct;
+	t_light_p *light_struct;
 	char 	**splited_xyz;
 
 	if (parsed_struct == NULL || parsed_struct->light_pointer != NULL)
@@ -145,7 +145,7 @@ void	parse_light(t_parse *parsed_struct, char **strings)
 	parsed_struct->light_pointer = light_struct;
 }
 
-void	put_coordinate_plane_struct(t_parse *parsed_struct, t_plane **plane_struct, char **splited_xyz)
+void	put_coordinate_plane_struct(t_parse *parsed_struct, t_plane_p **plane_struct, char **splited_xyz)
 {
 	if (splited_xyz == NULL)
 		parse_exit(parsed_struct);
@@ -154,7 +154,7 @@ void	put_coordinate_plane_struct(t_parse *parsed_struct, t_plane **plane_struct,
 	(*plane_struct)->coordinates.z = ft_atof(splited_xyz[2]);
 }
 
-void	put_normal_vector_plane(t_parse *parsed_struct, t_plane **plane_struct, char **splited_xyz)
+void	put_normal_vector_plane(t_parse *parsed_struct, t_plane_p **plane_struct, char **splited_xyz)
 {
 	if (splited_xyz == NULL)
 		parse_exit(parsed_struct);
@@ -163,7 +163,7 @@ void	put_normal_vector_plane(t_parse *parsed_struct, t_plane **plane_struct, cha
 	(*plane_struct)->normal_vector.z = ft_atof(splited_xyz[2]);
 }
 
-void	put_colors_plane_struct(t_parse *parsed_struct, t_plane **plane_struct, char **splited_xyz)
+void	put_colors_plane_struct(t_parse *parsed_struct, t_plane_p **plane_struct, char **splited_xyz)
 {
 	if (splited_xyz == NULL)
 		parse_exit(parsed_struct);
@@ -174,8 +174,8 @@ void	put_colors_plane_struct(t_parse *parsed_struct, t_plane **plane_struct, cha
 
 void	parse_plane(t_parse *parsed_struct, char **strings)
 {
-	t_plane		*plane_struct;
-	t_object	*object_struct;
+	t_plane_p		*plane_struct;
+	t_object_p	*object_struct;
 	char		**splited_xyz;
 
 	if (parsed_struct == NULL)
@@ -200,7 +200,7 @@ void	parse_plane(t_parse *parsed_struct, char **strings)
 	append_object_struct(parsed_struct, object_struct);
 }
 
-void	put_coordinate_sphere_struct(t_parse *parsed_struct, t_sphere **sphere_struct, char **splited_xyz)
+void	put_coordinate_sphere_struct(t_parse *parsed_struct, t_sphere_p **sphere_struct, char **splited_xyz)
 {
 	if (splited_xyz == NULL)
 		parse_exit(parsed_struct);
@@ -209,7 +209,7 @@ void	put_coordinate_sphere_struct(t_parse *parsed_struct, t_sphere **sphere_stru
 	(*sphere_struct)->coordinates.z = ft_atof(splited_xyz[2]);
 }
 
-void	put_colors_sphere_struct(t_parse *parsed_struct, t_sphere **sphere_struct, char **splited_xyz)
+void	put_colors_sphere_struct(t_parse *parsed_struct, t_sphere_p **sphere_struct, char **splited_xyz)
 {
 	if (splited_xyz == NULL)
 		parse_exit(parsed_struct);
@@ -220,8 +220,8 @@ void	put_colors_sphere_struct(t_parse *parsed_struct, t_sphere **sphere_struct, 
 
 void	parse_sphere(t_parse *parsed_struct, char **strings)
 {
-	t_sphere	*sphere_struct;
-	t_object	*object_struct;
+	t_sphere_p	*sphere_struct;
+	t_object_p	*object_struct;
 	char		**splited_xyz;
 
 	if (parsed_struct == NULL)
@@ -244,7 +244,7 @@ void	parse_sphere(t_parse *parsed_struct, char **strings)
 	append_object_struct(parsed_struct, object_struct);
 }
 
-void	put_coordinate_cylinder_struct(t_parse *parsed_struct, t_cylinder **cylinder_struct, char **splited_xyz)
+void	put_coordinate_cylinder_struct(t_parse *parsed_struct, t_cylinder_p **cylinder_struct, char **splited_xyz)
 {
 	if (splited_xyz == NULL)
 		parse_exit(parsed_struct);
@@ -253,7 +253,7 @@ void	put_coordinate_cylinder_struct(t_parse *parsed_struct, t_cylinder **cylinde
 	(*cylinder_struct)->coordinates.z = ft_atof(splited_xyz[2]);
 }
 
-void	put_normal_cylinder_struct(t_parse *parsed_struct, t_cylinder **cylinder_struct, char **splited_xyz)
+void	put_normal_cylinder_struct(t_parse *parsed_struct, t_cylinder_p **cylinder_struct, char **splited_xyz)
 {
 	if (splited_xyz == NULL)
 		parse_exit(parsed_struct);
@@ -262,7 +262,7 @@ void	put_normal_cylinder_struct(t_parse *parsed_struct, t_cylinder **cylinder_st
 	(*cylinder_struct)->normal_vector.z = ft_atof(splited_xyz[2]);
 }
 
-void	put_colors_cylinder_struct(t_parse *parsed_struct, t_cylinder **cylinder_struct, char **splited_xyz)
+void	put_colors_cylinder_struct(t_parse *parsed_struct, t_cylinder_p **cylinder_struct, char **splited_xyz)
 {
 	if (splited_xyz == NULL)
 		parse_exit(parsed_struct);
@@ -273,8 +273,8 @@ void	put_colors_cylinder_struct(t_parse *parsed_struct, t_cylinder **cylinder_st
 
 void	parse_cylinder(t_parse *parsed_struct, char **strings)
 {
-	t_cylinder	*cylinder_struct;
-	t_object	*object_struct;
+	t_cylinder_p	*cylinder_struct;
+	t_object_p	*object_struct;
 	char		**splited_xyz;
 
 	if (parsed_struct == NULL)
