@@ -42,6 +42,8 @@ typedef int             t_object_type;
 
 # define RGB_T 0
 
+# define WIN_NAME "miniRT"
+
 # define SAMPLES_PER_PIXEL 4
 
 // for mt19937

@@ -2,16 +2,6 @@
 #include "../src/utils.h"
 #include "../src/trace.h"
 
-// void	get_cone_normal(t_cone *co, t_hit_record *rec)
-// {
-// 	const t_point3	rootP = rec->p;
-// 	const double	diffx = rootP.x - co->center.x;
-// 	const double	diffz = rootP.z - co->center.z;
-// 	const double	r = sqrt(diffx * diffx + diffz * diffz);
-
-// 	rec->normal = vunit(vec3(diffx, r * (co->radius / co->height), diffz));
-// }
-
 t_bool      hit_cone(t_object *co_obj, t_ray *ray, t_hit_record *rec)
 {
 	t_cone	*co;

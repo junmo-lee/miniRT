@@ -76,9 +76,20 @@ t_scene *scene_init(void)
 
 	scene->world = world;
 	lights = object(LIGHT_POINT, 
-					light_point(point3(0, 5, 0), color3(1, 1, 1), EXAMPLE_BRIGHT_RATIO), 
+					light_point(point3(0, 5, 0), color3(0, 1, 0), EXAMPLE_BRIGHT_RATIO), 
 					color3(0, 0, 0)
 				);
+	oadd(&lights, object(LIGHT_POINT, 
+					light_point(point3(0, 5, 0), color3(1, 0, 0), EXAMPLE_BRIGHT_RATIO), 
+					color3(0, 0, 0)
+				)
+	);
+	oadd(&lights, object(LIGHT_POINT, 
+					light_point(point3(0, 5, 0), color3(0, 0, 1), EXAMPLE_BRIGHT_RATIO), 
+					color3(0, 0, 0)
+				)
+	);
+
 	scene->light = lights;
 	ka = 0.1;
 	scene->ambient = vmult(color3(1,1,1), ka);
@@ -91,7 +102,7 @@ int	args_config(t_vmlx	*vmlx)
 	vmlx->mlx = mlx_init();
 	if (vmlx->mlx == NULL)
 		exit(1);
-	vmlx->win = mlx_new_window(vmlx->mlx, R_WIDTH, R_HIGHT, "miniRT");
+	vmlx->win = mlx_new_window(vmlx->mlx, R_WIDTH, R_HIGHT, WIN_NAME);
 	vmlx->img = mlx_new_image(vmlx->mlx, R_WIDTH, R_HIGHT);
 	vmlx->addr = mlx_get_data_addr(vmlx->img, \
 		&(vmlx->bits_per_pixel), &(vmlx->line_length), &(vmlx->endian));
