@@ -13,13 +13,13 @@ t_camera    camera(t_canvas *canvas, t_point3 orig, t_point3 camera_direction)
 	focal_len = 1.0; // 1.0 이라고 가정
 	cam.orig = orig;
 	cam.camera_direction = vunit(camera_direction); // input에서 단위벡터를 검사해야함!
-	fprintf(stderr, "D : ");
+	printf("D : ");
 	vprint(vunit(cam.camera_direction));
 	cam.viewport_w = 2.0 * tan(canvas->h_fov / 2) * focal_len;
 	cam.viewport_h = cam.viewport_w / canvas->aspect_ratio;
 	cam.focal_len = focal_len;
-	fprintf(stderr, "viewport_h : %.4lf, viewport_w : %.4lf\n", cam.viewport_h, cam.viewport_w);
-	fprintf(stderr, "focal_len : %.4lf\n", cam.focal_len);
+	printf("viewport_h : %.4lf, viewport_w : %.4lf\n", cam.viewport_h, cam.viewport_w);
+	printf("focal_len : %.4lf\n", cam.focal_len);
 	// cam.horizontal = vec3(cam.viewport_w, 0, 0);
 	// horizontal = F(ront Vector, D) X Up(0, 1, 0)
 	// camera_direction 과 Up vector 의 각이 
@@ -35,14 +35,14 @@ t_camera    camera(t_canvas *canvas, t_point3 orig, t_point3 camera_direction)
 			DcrossUP = vec3(-1, 0, 0);
 	}
 	cam.dx = vunit(DcrossUP); 
-	fprintf(stderr, "Dx : "); vprint(cam.dx); // Dx 방향
+	printf("Dx : "); vprint(cam.dx); // Dx 방향
 	cam.horizontal = vmult(cam.dx, cam.viewport_w);
 
 	// vertical = R X F(ront Vector, D)
 	XcrossD = vcross(cam.horizontal, cam.camera_direction);
 	// 서로 수직인 벡터 R과 F의 외적은 유일하게 존재
 	cam.dy = vunit(XcrossD);
-	fprintf(stderr, "Dy : "); vprint(cam.dy);
+	printf("Dy : "); vprint(cam.dy);
 	cam.vertical = vmult(cam.dy, cam.viewport_h);
 	// vprint(cam.vertical);
 	// 왼쪽 아래 코너점 좌표, origin - horizontal / 2 - vertical / 2 - D * focal_length
@@ -53,6 +53,6 @@ t_camera    camera(t_canvas *canvas, t_point3 orig, t_point3 camera_direction)
 								vdivide(cam.horizontal, 2)),
 			  				vdivide(cam.vertical, 2)), 
 						vmult(cam.camera_direction, -focal_len));
-	fprintf(stderr, "left_bottom : "); vprint((t_vec3)cam.left_bottom);
+	printf("left_bottom : "); vprint((t_vec3)cam.left_bottom);
 	return (cam);
 }

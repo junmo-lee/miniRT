@@ -58,3 +58,59 @@ t_scene *scene_init(void)
 
 	return (scene);
 }
+
+
+t_scene *parse_to_scene(t_parse* parsed)
+{
+	t_scene     *scene;
+	t_object    *world;
+	t_object    *lights;
+	double      ka;
+
+	// malloc 할당 실패 시, 실습에서는 return NULL로 해두었지만, 적절한 에러 처리가 필요하다.
+	if(!(scene = (t_scene *)malloc(sizeof(t_scene))))
+		return (NULL);
+
+	t_camera_p *c_ptr = parsed->camera_pointer;
+	scene->canvas = canvas(R_WIDTH, R_HIGHT, c_ptr->fov);
+	scene->camera = camera(&scene->canvas, c_ptr->coordinates, vunit(c_ptr->normal_vector));
+	// world = object(SP, sphere(point3(-2, 0, -5), 2), color3(0.5, 0, 0));
+	// oadd(&world, object(SP, sphere(point3(2, 0, -5), 2), color3(0, 0.5, 0)));
+
+	// xyz 좌표 확인용
+	// oadd(&world, object(SP, sphere(point3(-2, 0, 0), 1), color3(1, 0, 0)));
+	// oadd(&world, object(SP, sphere(point3(0, -2, 0), 1), color3(0, 1, 0)));
+	// oadd(&world, object(SP, sphere(point3(0, 0, -2), 1), color3(0, 0, 1)));
+
+	// oadd(&world, object(PL, plain(point3(0, -3, 0), vec3(0, 1, 0)), color3(1, 1, 1)));
+	world = object(PL, plain(point3(0, -3, 0), vec3(0, 1, 0)), color3(1, 1, 1));
+	// oadd(&world, object(CY, cylinder(point3(3, 0, 0), vec3(0, 1, 0), 1, 2), color3(1.0, 0, 0)));
+	// oadd(&world, object(CY, cylinder(point3(0, 3, 0), vec3(0, 1, 0), 1, 2), color3(0, 1.0, 0)));
+	// oadd(&world, object(CY, cylinder(point3(0, 0, -3), vec3(0, 1, 0), 1, 2), color3(0, 0, 1.0)));
+
+	// oadd(&world, object(CO, cone(point3(-3, 2, 0), vec3(0, -1, 0), 3, 3), color3(1.0, 0, 0)));
+	// oadd(&world, object(CO, cone(point3(0, 2, -5), vec3(0, -1, 0), 1, 2), color3(0, 1.0, 0)));
+	oadd(&world, object(CO, cone(point3(0, 2, -3), vec3(0, -1, 0), 1, 2), color3(0, 0, 1.0)));
+
+	scene->world = world;
+	lights = object(LIGHT_POINT, 
+					light_point(point3(0, 5, 0), color3(0, 1, 0), EXAMPLE_BRIGHT_RATIO), 
+					color3(0, 0, 0)
+				);
+	oadd(&lights, object(LIGHT_POINT, 
+					light_point(point3(0, 5, 0), color3(1, 0, 0), EXAMPLE_BRIGHT_RATIO), 
+					color3(0, 0, 0)
+				)
+	);
+	oadd(&lights, object(LIGHT_POINT, 
+					light_point(point3(0, 5, 0), color3(0, 0, 1), EXAMPLE_BRIGHT_RATIO), 
+					color3(0, 0, 0)
+				)
+	);
+
+	scene->light = lights;
+	ka = 0.1;
+	scene->ambient = vmult(color3(1,1,1), ka);
+
+	return (scene);
+}

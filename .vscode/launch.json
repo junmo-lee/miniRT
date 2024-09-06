@@ -10,7 +10,8 @@
 			"name": "Debug",
 			"program": "${workspaceFolder}/miniRT",
 			"cwd": "${workspaceFolder}",
-			"preLaunchTask": "Build Debug"
+			"preLaunchTask": "Build Debug",
+			"args": ["scene/example_space.rt"]
 		}
 	]
 }

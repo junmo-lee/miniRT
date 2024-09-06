@@ -19,4 +19,11 @@ t_light     *light_point(t_point3 light_origin, t_color3 light_color, double bri
 
 t_scene 	*scene_init(void);
 
+int	error_exit(t_vmlx *vmlx);
+int	normal_exit(t_vmlx *vmlx);
+int	key_press(int keycode, t_vmlx *vmlx);
+int	make_window(t_vmlx	*vmlx);
+
+t_scene *parse_to_scene(t_parse* parsed);
+
 #endif

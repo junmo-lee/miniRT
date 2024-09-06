@@ -2,7 +2,7 @@
 
 void	vprint(t_vec3 vec)
 {
-	fprintf(stderr, "%.4lf %.4lf %.4lf\n", vec.x, vec.y, vec.z);
+	printf("%.4lf %.4lf %.4lf\n", vec.x, vec.y, vec.z);
 }
 
 
