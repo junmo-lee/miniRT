@@ -1,5 +1,7 @@
 #include "trace.h"
 
+#define EXAMPLE_KSN 64 // 64
+#define EXAMPLE_KS 0.5 // 0.5
 t_vec3			reflect(t_vec3 v, t_vec3 n)
 {
 	//v - 2 * dot(v, n) * n;
@@ -51,7 +53,7 @@ t_color3        point_light_get(t_scene *scene, t_light *light)
 	diffuse = vmult(light->light_color, kd);
 	view_dir = vunit(vmult(scene->ray.dir, -1));
 	reflect_dir = reflect(vmult(light_dir, -1), scene->rec.normal);
-	ksn = 64; // shininess value
+	ksn = EXAMPLE_KSN; // shininess value
 	ks = 0.5; // specular strength
 	spec = pow(fmax(vdot(view_dir, reflect_dir), 0.0), ksn);
 	specular = vmult(vmult(light->light_color, ks), spec);

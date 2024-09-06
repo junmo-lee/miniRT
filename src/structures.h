@@ -38,7 +38,7 @@ typedef int             t_object_type;
 # define LUMEN 3
 // # define PI 3.14159265358979323846
 
-# define SAMPLES_PER_PIXEL 1
+# define SAMPLES_PER_PIXEL 4
 
 // for mt19937
 #define N 624
@@ -81,8 +81,8 @@ struct  s_canvas
 	int     width; //canvas width
 	int     height; //canvas height;
 	double  aspect_ratio; //종횡비 (w / h)
-	double	h_fov; // horizontal fov, radian
-	double	v_fov; // vertical fov, radian
+	double	h_fov; // horizontal fov(radian), input 값(고정)
+	double	v_fov; // vertical fov(radian), 
 };
 
 struct	s_object
@@ -139,7 +139,7 @@ struct s_cone
 	t_point3	H; // center + h;
 	double		radius; // 원뿔 밑면 반지름
 	double		height; // 원뿔 높이
-	double		m; // r^2 / 2-norm(h), 빗면의 기울기
+	double		m; // r^2 / 2-norm(h)
 };
 
 

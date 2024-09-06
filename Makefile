@@ -45,13 +45,13 @@ $(NAME) : $(LIBFT) $(OBJS)
 
 clean :
 	rm -rf $(OBJS)
-	# rm -rf $(DEBUG_O)
-	$(MAKE) -C $(LIBFT_DIR) clean
+# rm -rf $(DEBUG_O)
+# $(MAKE) -C $(LIBFT_DIR) clean
 
 fclean :
 	rm -rf $(OBJS) $(NAME)
-	# rm -rf $(DEBUG_O) $(DEBUG_NAME)
-	$(MAKE) -C $(LIBFT_DIR) fclean
+# rm -rf $(DEBUG_O) $(DEBUG_NAME)
+# $(MAKE) -C $(LIBFT_DIR) fclean
 
 re :
 	$(MAKE) fclean

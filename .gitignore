@@ -6,6 +6,7 @@ mlx/minilibx_opengl_20191021
 *.o
 *.a
 *.py
+*.out
 whiteborad*
 err
 .vscode/settings.json
