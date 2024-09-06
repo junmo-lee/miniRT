@@ -6,12 +6,13 @@ DEBUG_NAME = debug.out
 LIBFT_DIR = libft
 LIBFT 	= $(LIBFT_DIR)/libft.a
 MLX_DIR	= mlx
+INC_DIR = include
 LDFLAGS	= -L$(LIBFT_DIR) -L$(MLX_DIR)
 LDLIBS	= -lm -lft -lmlx -framework OpenGL -framework AppKit
 
 CC 		= cc
 CFLAGS 	= -Wall -Wextra -Werror
-INC		= -I $(LIBFT_DIR) -I $(MLX_DIR)
+INC		= -I $(LIBFT_DIR) -I $(MLX_DIR) -I $(INC_DIR)
 
 ifdef DEBUG
 	CFLAGS += -g3 -fsanitize=address

@@ -1,7 +1,7 @@
-#include "src/structures.h"
-#include "src/trace.h"
-#include "src/scene.h"
-#include "src/draw.h"
+#include "include/structures.h"
+#include "include/trace.h"
+#include "include/scene.h"
+#include "include/draw.h"
 
 int main(void)
 {

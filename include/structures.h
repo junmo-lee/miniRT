@@ -82,6 +82,12 @@ struct s_vec3
 	double z;
 };
 
+typedef struct s_ambient
+{
+	double	ratio;
+	t_vec3	colors;
+} t_ambient;
+
 struct  s_ray
 {
 	t_point3    orig;
@@ -167,6 +173,24 @@ struct s_cone
 	t_point3	H; // center + h;
 	double		m; // r^2 / 2-norm(h)
 };
+
+typedef	struct s_object
+{
+	int	identifier;
+	t_sphere	*sphere;
+	t_plain		*plane;
+	t_cylinder	*cylinder;
+	t_cone		*cone;
+	struct s_object	*next;
+}	t_object;
+
+typedef struct s_parse
+{
+	t_ambient	*ambient_pointer;
+	t_camera	*camera_pointer;
+	t_light		*light_pointer;
+	t_object	*object_pointer;
+} t_parse;
 
 
 struct      s_light
