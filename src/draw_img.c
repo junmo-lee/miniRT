@@ -37,45 +37,25 @@ void	my_mlx_pixel_put(t_vmlx *data, int x, int y, unsigned int color)
 	*(unsigned int *)dst = color;
 }
 
-void	my_pixel_put(t_vmlx *vmlx, int i, int j, t_scene *scene)
+void	draw_pixel(t_vmlx *vmlx, int i, int j, t_MT19937 *state)
 {
+	t_scene 	*scene = vmlx->scene;
+	int			sample;
 	double      u;
 	double      v;
-	int	sample = 0;
-	t_color3 pixel_color = color3(0, 0, 0);
-			while (sample < SAMPLES_PER_PIXEL)
-			{
-				u = ((double)i) / (scene->canvas.width - 1);
-				v = ((double)j) / (scene->canvas.height - 1);
-				scene->ray = ray_primary(&scene->camera, u, v);
-				pixel_color = vplus(pixel_color, ray_color(scene));
-				sample++;
-			}
-			write_color(vmult(pixel_color, 1.0 / SAMPLES_PER_PIXEL));
-			my_mlx_pixel_put(vmlx, i, scene->canvas.height - j - 1, color_to_int(vmult(pixel_color, 1.0 / SAMPLES_PER_PIXEL)));
-	// char	*dst;
-
-	// dst = mlx->addr + (y * mlx->line_length + x * (mlx->bits_per_pixel / 8));
-	// *(unsigned int *)dst = get_pixel_color(mlx->scene, x, y, state);
-}
-
-unsigned int	get_pixel_color(t_scene *scene, int i, int j, t_MT19937 *state)
-{
-	double		u;
-	double		v;
 	t_color3    pixel_color;
-	int 		sample;
-	
+
 	sample = 0;
+	pixel_color = color3(0, 0, 0);
 	while (sample < SAMPLES_PER_PIXEL)
 	{
-		u = ((double)i + genrand_real3(state) - 0.5) / (scene->canvas.width - 1);
-		v = ((double)j + genrand_real3(state) - 0.5) / (scene->canvas.height - 1);
+		u = ((double)i + genrand_real3(state) + 0.5) / (scene->canvas.width - 1);
+		v = ((double)j + genrand_real3(state) + 0.5) / (scene->canvas.height - 1);
 		scene->ray = ray_primary(&scene->camera, u, v);
 		pixel_color = vplus(pixel_color, ray_color(scene));
 		sample++;
 	}
-	return (color_to_int(vdivide(pixel_color, SAMPLES_PER_PIXEL)));
+	my_mlx_pixel_put(vmlx, i, scene->canvas.height - j - 1, color_to_int(vmult(pixel_color, 1.0 / SAMPLES_PER_PIXEL)));
 }
 
 int	draw_img(t_vmlx *vmlx)
@@ -85,11 +65,6 @@ int	draw_img(t_vmlx *vmlx)
 	t_scene 	*scene;
 	t_MT19937	state;
 
-	double      u;
-	double      v;
-	int			sample;
-	t_color3    pixel_color;
-
 	scene = vmlx->scene;
 	init_genrand(&state, RAND_SEED);
 	j = scene->canvas.height - 1;
@@ -98,17 +73,7 @@ int	draw_img(t_vmlx *vmlx)
 		i = 0;
 		while (i < scene->canvas.width)
 		{
-			sample = 0;
-			pixel_color = color3(0, 0, 0);
-			while (sample < SAMPLES_PER_PIXEL)
-			{
-				u = ((double)i) / (scene->canvas.width - 1);
-				v = ((double)j) / (scene->canvas.height - 1);
-				scene->ray = ray_primary(&scene->camera, u, v);
-				pixel_color = vplus(pixel_color, ray_color(scene));
-				sample++;
-			}
-			my_mlx_pixel_put(vmlx, i, scene->canvas.height - j - 1, color_to_int(vmult(pixel_color, 1.0 / SAMPLES_PER_PIXEL)));
+			draw_pixel(vmlx, i, j, &state);
 			i++;
 		}
 		j--;
