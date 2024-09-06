@@ -1,12 +1,12 @@
 .DEFAULT_GOAL := all
 
 NAME 	= miniRT
-# DEBUG_NAME = debug.out
+DEBUG_NAME = debug.out
 
 LIBFT_DIR = libft
 LIBFT 	= $(LIBFT_DIR)/libft.a
 MLX_DIR	= mlx
-LDFLAGS	= -L$(LIBFT_DIR)  -L$(MLX_DIR)
+LDFLAGS	= -L$(LIBFT_DIR) -L$(MLX_DIR)
 LDLIBS	= -lm -lft -lmlx -framework OpenGL -framework AppKit
 
 CC 		= cc
@@ -16,7 +16,6 @@ INC		= -I $(LIBFT_DIR) -I $(MLX_DIR)
 ifdef DEBUG
 	CFLAGS += -g3 -fsanitize=address
 endif
-# usage : make -j4 re  DEBUG=1 && ./miniRT 1> image.ppm 2> err
 
 SRCS	:= \
 	${wildcard src/*.c} \
@@ -25,8 +24,7 @@ SRCS	:= \
 # SRCS	= $(addprefix src/, $(SRCS))
 
 OBJS	= $(SRCS:.c=.o) 
-# DEBUG_O = $(filter-out */main.o, $(OBJS)) debug.o
-
+DEBUG_O = $(filter-out %main.o, $(OBJS)) debug.o
 
 %.o : %.c
 	$(CC) $(CFLAGS) $(INC) -c $< -o $@
@@ -35,13 +33,13 @@ $(LIBFT) :
 	$(MAKE) -C $(LIBFT_DIR) all
 
 all : $(NAME)
-# debug : $(DEBUG_NAME)
+debug : $(DEBUG_NAME)
 
 $(NAME) : $(LIBFT) $(OBJS)
 	$(CC) $(CFLAGS) $(INC) $(OBJS) $(LDFLAGS) $(LDLIBS) -o $(NAME)
 
-# $(DEBUG_NAME): $(LIBFT) $(DEBUG_O)
-# 	$(CC) $(CFLAGS) $(INC) $(DEBUG_O) $(LDFLAGS) $(LDLIBS) -o $(DEBUG_NAME)
+$(DEBUG_NAME): $(LIBFT) $(DEBUG_O)
+	$(CC) $(CFLAGS) $(INC) $(DEBUG_O) $(LDFLAGS) $(LDLIBS) -o $(DEBUG_NAME)
 
 clean :
 	rm -rf $(OBJS)
