@@ -20,7 +20,9 @@ endif
 
 SRCS	:= \
 	${wildcard src/*.c} \
-	${wildcard bonus/*.c}
+	${wildcard bonus/*.c} \
+	${wildcard GNL/*.c} \
+	${wildcard parse/*.c}
 
 # SRCS	= $(addprefix src/, $(SRCS))
 

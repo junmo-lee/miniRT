@@ -1,6 +1,25 @@
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
 
+// example def
+#define EXAMPLE_OX 2
+#define EXAMPLE_OY 0
+#define EXAMPLE_OZ 0
+
+#define EXAMPLE_BRIGHT_RATIO 0.8
+
+// 예제에서는 (1, 0, 0) 이 수평방향(오른쪽) 이 되도록, D = (0, Dy, -1) 꼴이어야 함  
+# define EXAMPLE_DX 0
+# define EXAMPLE_DY 0 // Dy
+# define EXAMPLE_DZ -1
+# define EXAMPLE_H_FOV 120
+
+# define WIN_NAME "miniRT"
+# define R_WIDTH 600
+# define R_HIGHT 600
+
+# define SAMPLES_PER_PIXEL 4
+
 typedef struct s_vec3 t_vec3;
 typedef struct s_vec3 t_point3;
 typedef struct s_vec3 t_color3;
@@ -26,28 +45,21 @@ typedef	struct	s_vmlx	t_vmlx;
 # define FALSE 0
 # define TRUE 1
 
-// enum 으로 바꾸어도 될듯
-typedef int             t_object_type;
-# define SP 0
-# define LIGHT_POINT 1
-# define PL 2
-# define CY 3
-// bonus
-# define CO 4
-
-// 호환을 위해
-# define DEFAULT 100
-# define CR 4
+typedef enum e_object_type
+{
+	NONE = 0,
+	SP,
+	PL,
+	CY,
+	CO,
+	LIGHT_POINT
+}	t_object_type;
 
 # define EPSILON 1e-6 // 0.000001
 # define LUMEN 3
 // # define PI 3.14159265358979323846
 
 # define RGB_T 0
-
-# define WIN_NAME "miniRT"
-
-# define SAMPLES_PER_PIXEL 4
 
 // for mt19937
 #define N 624
@@ -84,6 +96,81 @@ struct s_vec3
 	double y;
 	double z;
 };
+
+
+// !! ---- parse 구조체 시작 ---- !!
+typedef struct s_ambient_p
+{
+	double	ratio;
+	t_vec3	colors;
+} t_ambient_p;
+
+typedef struct s_camera_p
+{
+	t_vec3	coordinates;
+	t_vec3	normal_vector;
+	int		fov;
+} t_camera_p;
+
+typedef struct s_light_p
+{
+	t_vec3	coordinates;
+	double	brightness;
+	t_vec3	colors;
+} t_light_p;
+
+typedef struct s_sphere_p
+{
+	t_vec3	coordinates;
+	double	diameter;
+	t_vec3	colors;
+} t_sphere_p;
+
+typedef struct s_plane_p
+{
+	t_vec3	coordinates;
+	t_vec3	normal_vector;
+	t_vec3	colors;
+} t_plane_p;
+
+typedef struct s_cylinder_p
+{
+	t_vec3	coordinates;
+	t_vec3	normal_vector;
+	double	diameter;
+	double	height;
+	t_vec3	colors;
+} t_cylinder_p;
+
+typedef struct s_cone_p
+{
+	t_vec3	coordinates;
+	t_vec3	normal_vector;
+	double	diameter;
+	double	height;
+	t_vec3	colors;
+} t_cone_p;
+
+
+typedef	struct s_object_p
+{
+	int	identifier;
+	t_sphere_p	*sphere;
+	t_plane_p		*plane;
+	t_cylinder_p	*cylinder;
+	t_cone_p		*cone;
+	struct s_object_p	*next;
+}	t_object_p;
+
+typedef struct s_parse
+{
+	t_ambient_p	*ambient_pointer;
+	t_camera_p	*camera_pointer;
+	t_light_p		*light_pointer;
+	t_object_p	*object_pointer;
+} t_parse;
+
+// !! ---- parse 구조체 끝 ---- !!
 
 typedef struct s_ambient
 {
@@ -176,14 +263,6 @@ struct s_cone
 	t_point3	H; // center + h;
 	double		m; // r^2 / 2-norm(h)
 };
-
-typedef struct s_parse
-{
-	t_ambient	*ambient_pointer;
-	t_camera	*camera_pointer;
-	t_light		*light_pointer;
-	t_object	*object_pointer;
-} t_parse;
 
 
 struct      s_light

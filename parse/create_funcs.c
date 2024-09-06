@@ -64,7 +64,7 @@ t_object_p	*create_object_struct(t_parse *parsed_struct)
 	object_struct = (t_object_p *)malloc(sizeof(t_object_p));
 	if (!object_struct)
 		parse_exit(parsed_struct);
-	object_struct->identifier = DEFAULT;
+	object_struct->identifier = NONE;
 	object_struct->cylinder = NULL;
 	object_struct->plane = NULL;
 	object_struct->sphere = NULL;

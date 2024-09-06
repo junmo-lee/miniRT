@@ -1,4 +1,4 @@
-#include "include/parse.h"
+#include "parse.h"
 
 void	color_range_check(t_parse *parsed_struct, char **splited_colors)
 {

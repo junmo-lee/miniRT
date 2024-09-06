@@ -66,20 +66,3 @@ void	parse(t_parse *parsed_struct, char *file_location)
 		// strings를 free 시켜줘야함
 	}
 }
-
-int	main(int argc, char **argv)
-{
-	t_parse parsed_struct; // malloc을 최소화 하려함
-
-    if (argc != 2)
-    {
-        printf("argument error\n");
-        return (0);
-    }
-    else
-	{
-		init_t_parse(&parsed_struct);
-		parse(&parsed_struct, argv[1]);
-	}
-    return (0);
-}
