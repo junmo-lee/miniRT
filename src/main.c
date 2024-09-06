@@ -1,12 +1,12 @@
 #include "structures.h"
-#include "print.h"
 #include "trace.h"
 #include "scene.h"
+#include "draw.h"
 
 # define R_WIDTH 600
 # define R_HIGHT 600
 
-#define EXAMPLE_OX 0
+#define EXAMPLE_OX 2
 #define EXAMPLE_OY 0
 #define EXAMPLE_OZ 0
 
@@ -21,7 +21,30 @@
 const t_point3	EXAMPLE_ORIGIN = {EXAMPLE_OX, EXAMPLE_OY, EXAMPLE_OZ};
 const t_vec3	EXAMPLE_DIRECTION = {EXAMPLE_DX, EXAMPLE_DY, EXAMPLE_DZ};
 
-t_scene *scene_init(t_MT19937 *state)
+int	error_exit(t_vmlx *vmlx)
+{
+	mlx_destroy_window(vmlx->mlx, vmlx->win);
+	exit(EXIT_FAILURE);
+	return (EXIT_FAILURE);
+}
+int	normal_exit(t_vmlx *vmlx)
+{
+	mlx_destroy_window(vmlx->mlx, vmlx->win);
+	exit(EXIT_SUCCESS);
+	return (EXIT_SUCCESS);
+}
+
+int	key_press(int keycode, t_vmlx *vmlx)
+{
+	if (keycode == KCODE_ESC)
+		normal_exit(vmlx);
+	else
+		return (0);
+	mlx_put_image_to_window(vmlx->mlx, vmlx->win, vmlx->img, 0, 0);
+	return (0);
+}
+
+t_scene *scene_init(void)
 {
 	t_scene     *scene;
 	t_object    *world;
@@ -60,45 +83,34 @@ t_scene *scene_init(t_MT19937 *state)
 	ka = 0.1;
 	scene->ambient = vmult(color3(1,1,1), ka);
 
-	// rand init
-	init_genrand(state, RAND_SEED);
 	return (scene);
+}
+
+int	args_config(t_vmlx	*vmlx)
+{
+	vmlx->mlx = mlx_init();
+	if (vmlx->mlx == NULL)
+		exit(1);
+	vmlx->win = mlx_new_window(vmlx->mlx, R_WIDTH, R_HIGHT, "miniRT");
+	vmlx->img = mlx_new_image(vmlx->mlx, R_WIDTH, R_HIGHT);
+	vmlx->addr = mlx_get_data_addr(vmlx->img, \
+		&(vmlx->bits_per_pixel), &(vmlx->line_length), &(vmlx->endian));
+	if (vmlx->win == NULL || vmlx->img == NULL || vmlx->addr == NULL)
+		error_exit(vmlx);
+	return (EXIT_SUCCESS);
 }
 
 int     main(void)
 {
-	int         i;
-	int         j;
-	double      u;
-	double      v;
-	t_color3    pixel_color;
-	t_scene     *scene;
-	t_MT19937	state;
-	int			sample;
+	t_vmlx		vmlx;
+	vmlx.scene = scene_init();
+	args_config(&vmlx);
 
-	scene = scene_init(&state);
-
-	printf("P3\n%d %d\n255\n", scene->canvas.width, scene->canvas.height);
-	j = scene->canvas.height - 1;
-	while (j >= 0)
-	{
-		i = 0;
-		while (i < scene->canvas.width)
-		{
-			sample = 0;
-			pixel_color = color3(0, 0, 0);
-			while (sample < SAMPLES_PER_PIXEL)
-			{
-				u = ((double)i + genrand_real3(&state) - 0.5) / (scene->canvas.width - 1);
-				v = ((double)j + genrand_real3(&state) - 0.5) / (scene->canvas.height - 1);
-				scene->ray = ray_primary(&scene->camera, u, v);
-				pixel_color = vplus(pixel_color, ray_color(scene));
-				sample++;
-			}
-			write_color(vmult(pixel_color, 1.0 / SAMPLES_PER_PIXEL));
-			++i;
-		}
-		--j;
-	}
+	draw_img(&vmlx);
+	mlx_put_image_to_window(vmlx.mlx, vmlx.win, vmlx.img, 0, 0);
+	mlx_hook(vmlx.win, ON_DESTROY, 0, normal_exit, &vmlx);
+	mlx_hook(vmlx.win, ON_KEYUP, 0, key_press, &vmlx);
+	mlx_loop(vmlx.mlx);
+	mlx_destroy_window(vmlx.mlx, vmlx.win);
 	return (0);
 }

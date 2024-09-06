@@ -3,6 +3,7 @@
 
 # include "structures.h"
 # include "utils.h"
+# include "mlx.h"
 
 t_canvas    canvas(int  width, int height, double h_fov);
 t_camera    camera(t_canvas *canvas, t_point3 orig, t_point3 camera_direction);

@@ -21,6 +21,8 @@ typedef int             t_bool;
 typedef struct s_hit_record t_hit_record;
 typedef struct  s_object    t_object;
 
+typedef	struct	s_vmlx	t_vmlx;
+
 # define FALSE 0
 # define TRUE 1
 
@@ -38,6 +40,8 @@ typedef int             t_object_type;
 # define LUMEN 3
 // # define PI 3.14159265358979323846
 
+# define RGB_T 0
+
 # define SAMPLES_PER_PIXEL 4
 
 // for mt19937
@@ -48,6 +52,26 @@ typedef int             t_object_type;
 #define LOWER_MASK 0x7fffffffUL /* least significant r bits */
 
 #define RAND_SEED 1234UL
+
+typedef enum e_event
+{
+	ON_KEYDOWN = 2,
+	ON_KEYUP = 3,
+	ON_MOUSEDOWN = 4,
+	ON_MOUSEUP = 5,
+	ON_MOUSEMOVE = 6,
+	ON_EXPOSE = 12,
+	ON_DESTROY = 17
+}	t_event;
+
+typedef enum e_keycode
+{
+	KCODE_ESC = 53,
+	KCODE_LEFT_ARROW = 123,
+	KCODE_RIGHT_ARROW = 124,
+	KCODE_DOWN_ARROW = 125,
+	KCODE_UP_ARROW = 126
+}	t_keycode;
 
 struct s_vec3
 {
@@ -123,9 +147,9 @@ struct s_cylinder
 {
 	t_point3	center; // 중심 x,y,z 좌표
 	t_vec3		n; // 정규화된 삼차원 방향 벡터 각 x, y, z 축 마다 [-1, 1] 의 범위를 가짐
-	t_vec3		h; // height * n;
 	double		radius; // 원기둥의 직경
 	double		height; // 원기둥의 높이
+	t_vec3		h; // height * n;
 	t_vec3		PC; // rootP - C
 	double		PC_dot_Hhat; // check for height, PC - PC_dot_Hhat = ray->normal
 };
@@ -135,10 +159,10 @@ struct s_cone
 {
 	t_point3	center; // 중심 x,y,z 좌표
 	t_vec3		n; // 정규화된 삼차원 방향 벡터 각 x, y, z 축 마다 [-1, 1] 의 범위를 가짐
-	t_vec3		h; // height * n;
-	t_point3	H; // center + h;
 	double		radius; // 원뿔 밑면 반지름
 	double		height; // 원뿔 높이
+	t_vec3		h; // height * n;
+	t_point3	H; // center + h;
 	double		m; // r^2 / 2-norm(h)
 };
 
@@ -170,6 +194,18 @@ struct  s_scene
     t_color3        ambient;
     t_ray           ray;
     t_hit_record    rec;
+};
+
+struct	s_vmlx
+{
+	void	*mlx;
+	void	*win;
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	t_scene	*scene;
 };
 
 typedef struct s_MT19937
