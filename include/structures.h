@@ -55,6 +55,13 @@ typedef enum e_object_type
 	LIGHT_POINT
 }	t_object_type;
 
+typedef enum e_token_type
+{
+	COORDINATE = 1,
+	NORMAL_VECTOR,
+	COLOR
+}	t_token_type;
+
 # define EPSILON 1e-6 // 0.000001
 # define LUMEN 3
 // # define PI 3.14159265358979323846

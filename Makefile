@@ -22,7 +22,8 @@ SRCS	:= \
 	${wildcard src/*.c} \
 	${wildcard bonus/*.c} \
 	${wildcard GNL/*.c} \
-	${wildcard parse/*.c}
+	${wildcard parse/*.c} \
+	${wildcard parse/objects/*.c}
 
 # SRCS	= $(addprefix src/, $(SRCS))
 
@@ -51,7 +52,7 @@ clean :
 
 fclean :
 	rm -rf $(OBJS) $(NAME)
-# rm -rf $(DEBUG_O) $(DEBUG_NAME)
+	rm -rf $(DEBUG_O) $(DEBUG_NAME)
 # $(MAKE) -C $(LIBFT_DIR) fclean
 
 re :

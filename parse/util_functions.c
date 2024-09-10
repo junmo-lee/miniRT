@@ -1,16 +1,4 @@
-#include "parse.h"
-
-void	print_strings(char **strings)
-{
-	int	index;
-
-	index = 0;
-	while (strings[index] != NULL)
-	{
-		printf("%s ", strings[index]);
-		index ++;
-	}
-}
+#include "../include/parse.h"
 
 void	free_object_list(t_object_p *object_struct)
 {
@@ -28,6 +16,9 @@ void	free_object_list(t_object_p *object_struct)
 			free(tem_node->plane);
 		else if (tem_node->cylinder != NULL)
 			free(tem_node->cylinder);
+		else if (tem_node->cone != NULL)
+			free(tem_node->cone);
+		free(tem_node);
 	}
 }
 
@@ -45,14 +36,7 @@ void	clean_parsed_struct(t_parse *parsed_struct)
 		free_object_list(parsed_struct->object_pointer);
 }
 
-void	parse_exit(t_parse *parsed_struct)
-{
-	clean_parsed_struct(parsed_struct);
-	printf("parse_exit\n");
-	exit(1);
-}
-
-void	splited_free(char **strings)
+void	free_tokens(char **strings)
 {
 	int	index;
 
@@ -60,14 +44,32 @@ void	splited_free(char **strings)
 	while (strings[index] != NULL)
 	{
 		free(strings[index]);
+		strings[index] = NULL;
 		index ++;
 	}
 	free(strings);
+	strings = NULL;
+}
+
+t_object_p	*create_object_struct(t_parse *parsed_struct)
+{
+	t_object_p	*object_struct;
+
+	object_struct = (t_object_p *)malloc(sizeof(t_object_p));
+	if (!object_struct)
+		parse_exit(parsed_struct);
+	object_struct->identifier = NONE;
+	object_struct->cylinder = NULL;
+	object_struct->plane = NULL;
+	object_struct->sphere = NULL;
+	object_struct->cone = NULL;
+	object_struct->next = NULL;
+	return (object_struct);
 }
 
 void	append_object_struct(t_parse *parsed_struct, t_object_p *object_struct)
 {
-	t_object_p *current_node;
+	t_object_p	*current_node;
 
 	if (parsed_struct == NULL || object_struct == NULL)
 		parse_exit(parsed_struct);

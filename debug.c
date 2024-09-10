@@ -4,11 +4,16 @@
 #include "draw.h"
 #include "parse.h"
 
+// void	leaks_check(void)
+// {
+// 	system("leaks debug.out");
+// }
 
 int	main(int argc, char **argv)
 {
 	t_parse parsed_struct; // malloc을 최소화 하려함
 
+	// atexit(leaks_check);
 	if (argc != 2)
 	{
 		printf("argument error\n");
@@ -16,7 +21,6 @@ int	main(int argc, char **argv)
 	}
 	else
 	{
-		init_t_parse(&parsed_struct);
 		parse(&parsed_struct, argv[1]);
 	}
 
