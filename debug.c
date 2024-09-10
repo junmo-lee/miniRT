@@ -24,15 +24,6 @@ int	main(int argc, char **argv)
 		parse(&parsed_struct, argv[1]);
 	}
 
-	// check parse
-	t_ambient_p *a_ptr = parsed_struct.ambient_pointer;
-	printf("ambient ratio : %.4lf\n", a_ptr->ratio);
-
-	t_camera_p *c_ptr = parsed_struct.camera_pointer;
-	printf("camera c : "); vprint(c_ptr->coordinates);
-	printf("camera n : "); vprint(c_ptr->normal_vector);
-	printf("camera fov : %d\n", c_ptr->fov);
-
 	// in src/main.c
 	t_vmlx		vmlx;
 
@@ -46,7 +37,6 @@ int	main(int argc, char **argv)
 	mlx_hook(vmlx.win, ON_KEYUP, 0, key_press, &vmlx);
 	mlx_loop(vmlx.mlx);
 	mlx_destroy_window(vmlx.mlx, vmlx.win);
-	return (0);
 	return (0);
 }
 

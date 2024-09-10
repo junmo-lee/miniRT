@@ -26,6 +26,8 @@ t_bool	hit_obj(t_object *world, t_ray *ray, t_hit_record *rec)
 	t_bool	hit_result;
 
 	hit_result = FALSE;
+	if (world->type == NONE)
+		return (FALSE);
 	if (world->type == SP)
 		hit_result = hit_sphere(world, ray, rec);
 	if (world->type == PL)

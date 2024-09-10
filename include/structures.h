@@ -67,6 +67,7 @@ typedef enum e_token_type
 // # define PI 3.14159265358979323846
 
 # define RGB_T 0
+# define RGB_MAX 255.99
 
 // for mt19937
 #define N 624
