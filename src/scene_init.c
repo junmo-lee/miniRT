@@ -65,15 +65,15 @@ t_scene *parse_to_scene(t_parse* parsed)
 	t_scene     *scene;
 	t_object    *world;
 	t_object    *lights;
-	double      ka;
 
 	// malloc 할당 실패 시, 실습에서는 return NULL로 해두었지만, 적절한 에러 처리가 필요하다.
 	if(!(scene = (t_scene *)malloc(sizeof(t_scene))))
 		return (NULL);
 
-	// check parse
 	t_ambient_p *a_ptr = parsed->ambient_pointer;
+	printf("ambient color : ");vprint(a_ptr->colors);
 	printf("ambient ratio : %.4lf\n", a_ptr->ratio);
+	scene->ambient = vmult(vdivide(a_ptr->colors, RGB_MAX), a_ptr->ratio);
 
 	t_camera_p *c_ptr = parsed->camera_pointer;
 	printf("camera c : "); vprint(c_ptr->coordinates);
@@ -87,9 +87,10 @@ t_scene *parse_to_scene(t_parse* parsed)
 	printf("light c : "); vprint(l_ptr->colors);
 	printf("light b : %.4lf\n", l_ptr->brightness);
 
-	ft_memset(&world, 0, sizeof(world));
-	world = object(NONE, NULL, color3(0, 0, 0));
+	lights = object(LIGHT_POINT, light_point(l_ptr->coordinates, vdivide(l_ptr->colors, RGB_MAX), l_ptr->brightness), color3(0, 0, 0));
+	scene->light = lights;
 
+	world = object(NONE, NULL, color3(0, 0, 0));
 	t_object_p *o_ptr = parsed->object_pointer;
 	while (o_ptr != NULL)
 	{
@@ -134,14 +135,6 @@ t_scene *parse_to_scene(t_parse* parsed)
 		o_ptr = o_ptr->next;
 	}
 	scene->world = world;
-	lights = object(LIGHT_POINT, 
-					light_point(point3(0, 5, 0), color3(1, 1, 1), EXAMPLE_BRIGHT_RATIO), 
-					color3(0, 0, 0)
-				);
-
-	scene->light = lights;
-	ka = 0.1;
-	scene->ambient = vmult(color3(1,1,1), ka);
 
 	return (scene);
 }
