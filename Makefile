@@ -19,7 +19,7 @@ ifdef DEBUG
 endif
 
 SRCS	:= \
-	${wildcard src/*.c} \
+	$(shell find src -name '*.c') \
 	${wildcard bonus/*.c} \
 	${wildcard GNL/*.c} \
 	${wildcard parse/*.c} \
