@@ -19,7 +19,8 @@ int			check_all_numeric(char **strings);
 // range_check_funcs.c
 void		check_color_range(t_parse *parsed_struct, char **splited_colors);
 void		check_light_ratio_range(t_parse *parsed_struct, double num);
-void		check_normal_vector_range(t_parse *parsed_struct, char **splited_colors);
+void		check_normal_vector_range(t_parse *parsed_struct, \
+char **splited_colors);
 void		check_fov_range(t_parse *parsed_struct, double num);
 
 // object_dir
@@ -32,17 +33,20 @@ void		parse_cylinder(t_parse *parsed_struct, char **strings);
 void		parse_cone(t_parse *parsed_struct, char **strings);
 
 //parse_functions.c
-void		assign_xyz(t_parse *parsed_struct, t_vec3 *coordinate, char **splited_colors);
-void		assign_xyz_from_token(t_parse *parsed_struct, t_vec3 *coordinate, char *str, int type);
+void		assign_xyz(t_parse *parsed_struct, \
+t_vec3 *coordinate, char **splited_colors);
+void		assign_xyz_from_token(t_parse *parsed_struct, \
+t_vec3 *coordinate, char *str, int type);
 void		parse_exit(t_parse *parsed_struct);
 
 // util_functions.c
 void		free_tokens(char **strings);
-void		append_object_struct(t_parse *parsed_struct, t_object_p *object_struct);
+void		append_object_struct(t_parse *parsed_struct, \
+t_object_p *object_struct);
 void		clean_parsed_struct(t_parse *parsed_struct);
 t_object_p	*create_object_struct(t_parse *parsed_struct);
 
 // ft_atof.c
 double		ft_atof(const char *str);
 
-# endif
+#endif

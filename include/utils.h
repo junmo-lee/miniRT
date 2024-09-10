@@ -37,5 +37,5 @@ t_bool			check_eql_double(double val, double target);
 
 void			init_genrand(t_MT19937 *state, unsigned long s);
 unsigned long	genrand_int32(t_MT19937 *state);
-double			genrand_real3(t_MT19937 *state);
+double			grand_r3(t_MT19937 *state);
 #endif

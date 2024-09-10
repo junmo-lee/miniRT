@@ -16,8 +16,8 @@ t_bool		hit_cylinder(t_object *cy_obj, t_ray *ray, t_hit_record *rec)
 	t_point3	rootP;
 	double	sqrtD;
 
-	t_vec3	PC;
-	double	PC_dot_Hhat;
+	t_vec3	pc;
+	double	pc_doc_hhat;
 
 	co = cy_obj->element;
 	W = vminus(ray->orig, co->center);
@@ -37,22 +37,22 @@ t_bool		hit_cylinder(t_object *cy_obj, t_ray *ray, t_hit_record *rec)
 
 	root = (-b - sqrtD) / (2.0 * a);
 	rootP = ray_at(ray, root);
-	PC = vminus(rootP, co->center);
-	PC_dot_Hhat = vdot(PC, co->n);
+	pc = vminus(rootP, co->center);
+	pc_doc_hhat = vdot(pc, co->n);
 	if (root < rec->tmin || rec->tmax < root
-		|| PC_dot_Hhat < EPSILON || co->height < PC_dot_Hhat)
+		|| pc_doc_hhat < EPSILON || co->height < pc_doc_hhat)
 	{
 		root = (-b + sqrtD) / (2.0 * a);
 		rootP = ray_at(ray, root);
-		PC = vminus(rootP, co->center);
-		PC_dot_Hhat = vdot(PC, co->n);
+		pc = vminus(rootP, co->center);
+		pc_doc_hhat = vdot(pc, co->n);
 		if (root < rec->tmin || rec->tmax < root
-			|| PC_dot_Hhat < EPSILON || co->height < PC_dot_Hhat)
+			|| pc_doc_hhat < EPSILON || co->height < pc_doc_hhat)
 			return (FALSE);
 	}
 	rec->t = root;
 	rec->p = rootP;
-	rec->normal = vdivide(vminus(PC, vscalar(co->n,PC_dot_Hhat)), co->radius);
+	rec->normal = vdivide(vminus(pc, vscalar(co->n,pc_doc_hhat)), co->radius);
 	set_face_normal(ray, rec);
 	rec->albedo = cy_obj->albedo;
 	return (TRUE);

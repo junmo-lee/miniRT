@@ -7,27 +7,23 @@
 
 # define SAMPLES_PER_PIXEL 4
 
-typedef struct s_vec3 t_vec3;
-typedef struct s_vec3 t_point3;
-typedef struct s_vec3 t_color3;
-typedef struct s_ray t_ray;
-
-typedef struct s_scene t_scene;
-typedef struct s_camera t_camera;
-typedef struct s_canvas t_canvas;
-
-typedef struct s_object t_object;
-typedef struct s_sphere t_sphere;
-typedef struct s_plain	t_plain;
+typedef struct s_vec3		t_vec3;
+typedef struct s_vec3		t_point3;
+typedef struct s_vec3		t_color3;
+typedef struct s_ray		t_ray;
+typedef struct s_scene		t_scene;
+typedef struct s_camera		t_camera;
+typedef struct s_canvas		t_canvas;
+typedef struct s_object		t_object;
+typedef struct s_sphere		t_sphere;
+typedef struct s_plain		t_plain;
 typedef struct s_cylinder	t_cylinder;
-typedef	struct s_cone	t_cone;
-typedef struct s_light  t_light;
-typedef int             t_bool;
-
-typedef struct s_hit_record t_hit_record;
-typedef struct  s_object    t_object;
-
-typedef	struct	s_vmlx	t_vmlx;
+typedef struct s_cone		t_cone;
+typedef struct s_light		t_light;
+typedef struct s_hit_record	t_hit_record;
+typedef struct s_object		t_object;
+typedef int					t_bool;
+typedef struct s_vmlx		t_vmlx;
 
 # define FALSE 0
 # define TRUE 1
@@ -51,13 +47,13 @@ typedef enum e_token_type
 
 # define EPSILON 1e-6 // 0.000001
 # define LUMEN 3
-# define EXAMPLE_KSN 64 // 64
-# define EXAMPLE_KS 0.5 // 0.5
+# define DEFALUT_KSN 64 // shininess value, 물체의 반짝거리는 정도
+# define KS 0.5 // [0,1] specular 강도, specular = spec ^ ksn
 
 # define RGB_T 0
 # define RGB_MAX 255.99
 
-// for mt19937
+// mt19937
 # define N 624
 # define M 397
 # define MATRIX_A 0x9908b0dfUL   /* constant vector a */
@@ -86,47 +82,46 @@ typedef enum e_keycode
 	KCODE_UP_ARROW = 126
 }	t_keycode;
 
-struct s_vec3
+typedef struct s_vec3
 {
-	double x;
-	double y;
-	double z;
-};
+	double	x;
+	double	y;
+	double	z;
+}	t_vec3;
 
-// !! ---- parse 구조체 시작 ---- !!
 typedef struct s_ambient_p
 {
 	double	ratio;
 	t_vec3	colors;
-} t_ambient_p;
+}	t_ambient_p;
 
 typedef struct s_camera_p
 {
 	t_vec3	coordinates;
 	t_vec3	normal_vector;
 	int		fov;
-} t_camera_p;
+}	t_camera_p;
 
 typedef struct s_light_p
 {
 	t_vec3	coordinates;
 	double	brightness;
 	t_vec3	colors;
-} t_light_p;
+}	t_light_p;
 
 typedef struct s_sphere_p
 {
 	t_vec3	coordinates;
 	double	diameter;
 	t_vec3	colors;
-} t_sphere_p;
+}	t_sphere_p;
 
 typedef struct s_plane_p
 {
 	t_vec3	coordinates;
 	t_vec3	normal_vector;
 	t_vec3	colors;
-} t_plane_p;
+}	t_plane_p;
 
 typedef struct s_cylinder_p
 {
@@ -135,7 +130,7 @@ typedef struct s_cylinder_p
 	double	diameter;
 	double	height;
 	t_vec3	colors;
-} t_cylinder_p;
+}	t_cylinder_p;
 
 typedef struct s_cone_p
 {
@@ -144,43 +139,39 @@ typedef struct s_cone_p
 	double	diameter;
 	double	height;
 	t_vec3	colors;
-} t_cone_p;
+}	t_cone_p;
 
-
-typedef	struct s_object_p
+typedef struct s_object_p
 {
-	int	identifier;
-	t_sphere_p	*sphere;
+	int				identifier;
+	t_sphere_p		*sphere;
 	t_plane_p		*plane;
 	t_cylinder_p	*cylinder;
 	t_cone_p		*cone;
-	struct s_object_p	*next;
+	t_object_p		*next;
 }	t_object_p;
 
 typedef struct s_parse
 {
-	t_ambient_p	*ambient_pointer;
-	t_camera_p	*camera_pointer;
+	t_ambient_p		*ambient_pointer;
+	t_camera_p		*camera_pointer;
 	t_light_p		*light_pointer;
-	t_object_p	*object_pointer;
-} t_parse;
-
-// !! ---- parse 구조체 끝 ---- !!
+	t_object_p		*object_pointer;
+}	t_parse;
 
 typedef struct s_ambient
 {
 	double	ratio;
 	t_vec3	colors;
-} t_ambient;
+}	t_ambient;
 
-struct  s_ray
+typedef struct s_ray
 {
-	t_point3    orig;
-	t_vec3      dir;
-};
+	t_point3	orig;
+	t_vec3		dir;
+}	t_ray;
 
-struct  s_camera
-{
+/*
 	t_point3    orig;  // 카메라 원점(위치)
 	t_vec3		camera_direction; // 카메라 방향(벡터)
 	double      viewport_w; // 뷰포트 가로길이
@@ -191,43 +182,57 @@ struct  s_camera
 	t_vec3      vertical; // 수직길이 벡터
 	double      focal_len; // focal length
 	t_point3    left_bottom; // 왼쪽 아래 코너점
-};
-
-struct  s_canvas
+*/
+typedef struct s_camera
 {
-	int     width; //canvas width
-	int     height; //canvas height;
-	double  aspect_ratio; //종횡비 (w / h)
-	double	h_fov; // horizontal fov(radian), input 값(고정)
-	double	v_fov; // vertical fov(radian), 
-};
-
-struct	s_object
-{
-    t_object_type   type;
-    void            *element;
-	t_color3        albedo;
-    void            *next;
-};
-
-struct  s_sphere
-{
-	t_point3    center;
-	double      radius;
-	double      radius2;
-};
+	t_point3	orig;
+	t_vec3		camera_direction;
+	double		viewport_w;
+	double		viewport_h;
+	t_vec3		dx;
+	t_vec3		dy;
+	t_vec3		horizontal;
+	t_vec3		vertical;
+	double		focal_len;
+	t_point3	left_bottom;
+}	t_camera;
 
 /*
-pl  0.0,0.0,-10.0  0.0,1.0,0.0  0,0,225
-- x,y,z 좌표 : **0.0, 0.0, -10.0**
-- 정규화된 삼차원 방향 벡터. 각 x, y, z 축 마다 [-1, 1] 의 범위를 가짐 : **0.0, 0.0, 1.0**
-- R,G,B 색 범위 [0, 255] : **0, 0, 255**
+	int     width; canvas width
+	int     height; canvas height;
+	double  aspect_ratio; 종횡비 (w / h)
+	double	h_fov; horizontal fov(radian), input 값(고정)
+	double	v_fov; vertical fov(radian), 
 */
-struct  s_plain
+typedef struct s_canvas
 {
-	t_point3    P; // 평면 위의 한 점
-	t_vec3		n; // 정규화된 삼차원 방향 벡터. 각 x, y, z 축 마다 [-1, 1] 의 범위를 가짐
-};
+	int		width;
+	int		height;
+	double	aspect_ratio;
+	double	h_fov;
+	double	v_fov;
+}	t_canvas;
+
+typedef struct s_object
+{
+	t_object_type	type;
+	void			*element;
+	t_color3		albedo;
+	void			*next;
+}	t_object;
+
+typedef struct s_sphere
+{
+	t_point3	center;
+	double		radius;
+	double		radius2;
+}	t_sphere;
+
+typedef struct s_plain
+{
+	t_point3	p;
+	t_vec3		n;
+}	t_plain;
 
 /*
 cy  50.0,0.0,20.6  0.0,0.0,1.0  10,0,255  14.2  21.42
@@ -236,60 +241,60 @@ cy  50.0,0.0,20.6  0.0,0.0,1.0  10,0,255  14.2  21.42
 - 원기둥의 직경 : **14.2**
 - 원기둥의 높이 : **21.42**
 - R,G,B 색 범위 [0, 255] : **10, 0, 255***/
-struct s_cylinder
+typedef struct s_cylinder
 {
-	t_point3	center; // 중심 x,y,z 좌표
-	t_vec3		n; // 정규화된 삼차원 방향 벡터 각 x, y, z 축 마다 [-1, 1] 의 범위를 가짐
-	double		radius; // 원기둥의 직경
-	double		height; // 원기둥의 높이
-	t_vec3		h; // height * n;
-	t_vec3		PC; // rootP - C
-	double		PC_dot_Hhat; // check for height, PC - PC_dot_Hhat = ray->normal
-};
+	t_point3	center;
+	t_vec3		n;
+	double		radius;
+	double		height;
+	t_vec3		h;
+	t_vec3		pc;
+	double		pc_doc_hhat;
+}	t_cylinder;
 
 // bonus part
-struct s_cone
+typedef struct s_cone
 {
-	t_point3	center; // 중심 x,y,z 좌표
-	t_vec3		n; // 정규화된 삼차원 방향 벡터 각 x, y, z 축 마다 [-1, 1] 의 범위를 가짐
-	double		radius; // 원뿔 밑면 반지름
-	double		height; // 원뿔 높이
-	t_vec3		h; // height * n;
-	t_point3	H; // center + h;
-	double		m; // r^2 / 2-norm(h)
-};
+	t_point3	center;
+	t_vec3		n;
+	double		radius;
+	double		height;
+	t_vec3		h;
+	t_point3	pointh;
+	double		m;
+}	t_cone;
 
 
-struct      s_light
+typedef struct s_light
 {
-    t_point3    origin;
-    t_color3    light_color;
-    double      bright_ratio;
-};
+	t_point3	origin;
+	t_color3	light_color;
+	double		bright_ratio;
+}	t_light;
 
-struct s_hit_record
+typedef struct s_hit_record
 {
-    t_point3    p;
-    t_vec3      normal;
-    double      tmin;
-    double      tmax;
-    double      t;
-    t_bool      front_face;
-	t_color3    albedo;
-};
+	t_point3	p;
+	t_vec3		normal;
+	double		tmin;
+	double		tmax;
+	double		t;
+	t_bool		front_face;
+	t_color3	albedo;
+}	t_hit_record;
 
-struct  s_scene
+typedef struct s_scene
 {
-    t_canvas        canvas;
-    t_camera        camera;
-    t_object        *world;
-    t_object        *light;
-    t_color3        ambient;
-    t_ray           ray;
-    t_hit_record    rec;
-};
+	t_canvas		canvas;
+	t_camera		camera;
+	t_object		*world;
+	t_object		*light;
+	t_color3		ambient;
+	t_ray			ray;
+	t_hit_record	rec;
+}	t_scene;
 
-struct	s_vmlx
+typedef struct s_vmlx
 {
 	void	*mlx;
 	void	*win;
@@ -299,7 +304,7 @@ struct	s_vmlx
 	int		line_length;
 	int		endian;
 	t_scene	*scene;
-};
+}	t_vmlx;
 
 typedef struct s_MT19937
 {

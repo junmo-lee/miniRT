@@ -5,8 +5,9 @@
 # include "structures.h"
 
 unsigned int	color_to_int(t_color3 pixel_color);
-void			my_mlx_pixel_put(t_vmlx *data, int x, int y, unsigned int color);
 int				draw_img(t_vmlx *mlx);
 void			write_color(t_color3 pixel_color);
+void			my_mlx_pixel_put(t_vmlx *data, \
+int x, int y, unsigned int color);
 
 #endif

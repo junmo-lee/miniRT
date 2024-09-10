@@ -8,7 +8,7 @@
 t_canvas    canvas(int  width, int height, double h_fov);
 t_camera    camera(t_canvas *canvas, t_point3 orig, t_point3 camera_direction);
 t_sphere    *sphere(t_point3 center, double radius);
-t_plain		*plain(t_point3 P, t_vec3 n);
+t_plain		*plain(t_point3 p, t_vec3 n);
 t_cone		*cylinder(t_point3 center, t_vec3 n, double radius, double height);
 
 // bonus

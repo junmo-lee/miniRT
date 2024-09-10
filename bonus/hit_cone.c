@@ -20,7 +20,7 @@ t_bool      hit_cone(t_object *co_obj, t_ray *ray, t_hit_record *rec)
 	double	PH_dot_Hhat;
 
 	co = co_obj->element;
-	W = vminus(ray->orig, co->H);
+	W = vminus(ray->orig, co->pointh);
 	V_dot_Hhat = vdot(ray->dir, co->n);
 	W_dot_Hhat = vdot(W, co->n);
 
@@ -36,14 +36,14 @@ t_bool      hit_cone(t_object *co_obj, t_ray *ray, t_hit_record *rec)
 
 	root = (-b - sqrtD) / (2.0 * a);
 	rootP = ray_at(ray, root);
-	PH = vminus(rootP, co->H);
+	PH = vminus(rootP, co->pointh);
 	PH_dot_Hhat = vdot(PH, co->n);
 	if (root < rec->tmin || rec->tmax < root
 		|| PH_dot_Hhat < EPSILON || co->height < PH_dot_Hhat)
 	{
 		root = (-b + sqrtD) / (2.0 * a);
 		rootP = ray_at(ray, root);
-		PH = vminus(rootP, co->H);
+		PH = vminus(rootP, co->pointh);
 		PH_dot_Hhat = vdot(PH, co->n);
 		if (root < rec->tmin || rec->tmax < root
 			|| PH_dot_Hhat < EPSILON || co->height < PH_dot_Hhat)

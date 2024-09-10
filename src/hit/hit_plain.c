@@ -13,7 +13,7 @@ t_bool	hit_plain(t_object *pl_obj, t_ray *ray, t_hit_record *rec)
 	root_denominator = vdot(pl->n, ray->dir);
 	if (check_eql_double(root_denominator, 0))
 		return (FALSE);
-	root_numerator = vdot(pl->n, vminus(pl->P, ray->orig));
+	root_numerator = vdot(pl->n, vminus(pl->p, ray->orig));
 	root = root_numerator / root_denominator;
 	if (root < rec->tmin || rec->tmax < root)
 		return (FALSE);

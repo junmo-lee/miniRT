@@ -29,14 +29,14 @@ t_sphere	*sphere(t_point3 center, double radius)
 	return (sp);
 }
 
-t_plain	*plain(t_point3 P, t_vec3 n)
+t_plain	*plain(t_point3 p, t_vec3 n)
 {
 	t_plain	*pl;
 
 	pl = (t_plain *)malloc(sizeof(t_plain));
 	if (pl == NULL)
 		return (NULL);
-	pl->P = P;
+	pl->p = p;
 	pl->n = vunit(n);
 	return (pl);
 }
@@ -66,6 +66,6 @@ t_color3 light_color, double bright_ratio)
 		return (NULL);
 	light->origin = light_origin;
 	light->light_color = light_color;
-	light->bright_ratio = bright_ratio;
+	light->bright_ratio = bright_ratio * LUMEN;
 	return (light);
 }

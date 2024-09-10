@@ -6,7 +6,7 @@
 /*   By: junmlee <junmlee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 20:28:03 by junmlee           #+#    #+#             */
-/*   Updated: 2024/08/31 15:08:02 by junmlee          ###   ########.fr       */
+/*   Updated: 2024/09/11 02:41:35 by junmlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ unsigned long	genrand_int32(t_MT19937 *state)
 }
 
 /* generates a random number on (0,1)-real-interval */
-double	genrand_real3(t_MT19937 *state)
+double	grand_r3(t_MT19937 *state)
 {
 	return ((((double)genrand_int32(state)) + 0.5) * (1.0 / 4294967296.0));
 }

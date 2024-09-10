@@ -15,48 +15,35 @@ t_color3	phong_lighting(t_scene *scene)
 		lights = lights->next;
 	}
 	light_color = vplus(light_color, scene->ambient);
-	//모든 광원에 의한 빛의 양을 구한 후, 오브젝트의 반사율과 곱해준다. 그 값이 (1, 1, 1)을 넘으면 (1, 1, 1)을 반환한다.
 	return (vmin(vmulti(light_color, scene->rec.albedo), color3(1, 1, 1)));
 }
 
-t_color3        point_light_get(t_scene *scene, t_light *light)
+t_color3	point_light_get(t_scene *scene, t_light *light)
 {
-	t_color3    diffuse;
-	t_vec3      light_dir;
-	double      light_len;
-	t_ray       light_ray;
-	double      kd; // diffuse의 강도
-	t_color3    specular;
-	t_vec3      view_dir;
-	t_vec3      reflect_dir;
-	double      spec;
-	double      ksn;
-	double      ks;
-	double      brightness;
+	t_color3	diffuse;
+	t_vec3		light_dir;
+	t_ray		light_ray;
+	t_color3	specular;
+	t_vec3		view_dir;
 
-	// light_dir = vunit(vminus(light->origin, scene->rec.p)); //교점에서 출발하여 광원을 향하는 벡터(정규화 됨)
 	light_dir = vminus(light->origin, scene->rec.p);
-	light_len = vlength(light_dir);
-	light_ray = ray(vplus(scene->rec.p, vscalar(scene->rec.normal, EPSILON)), light_dir);
-	if (in_shadow(scene->world, light_ray, light_len))
-		return (color3(0,0,0));
+	light_ray = ray(vplus(scene->rec.p, \
+		vscalar(scene->rec.normal, EPSILON)), light_dir);
+	if (in_shadow(scene->world, light_ray, vlength(light_dir)))
+		return (color3(0, 0, 0));
 	light_dir = vunit(light_dir);
-	// cosΘ는 Θ 값이 90도 일 때 0이고 Θ가 둔각이 되면 음수가 되므로 0.0보다 작은 경우는 0.0으로 대체한다.
-	kd = fmax(vdot(scene->rec.normal, light_dir), 0.0);// (교점에서 출발하여 광원을 향하는 벡터)와 (교점에서의 법선벡터)의 내적값.
-	diffuse = vscalar(light->light_color, kd);
+	diffuse = vscalar(light->light_color, \
+		fmax(vdot(scene->rec.normal, light_dir), 0.0));
 	view_dir = vunit(vscalar(scene->ray.dir, -1));
-	reflect_dir = reflect(vscalar(light_dir, -1), scene->rec.normal);
-	ksn = EXAMPLE_KSN; // shininess value
-	ks = 0.5; // specular strength
-	spec = pow(fmax(vdot(view_dir, reflect_dir), 0.0), ksn);
-	specular = vscalar(vscalar(light->light_color, ks), spec);
-	brightness = light->bright_ratio * LUMEN; // 기준 광속/광량을 정의한 매크로
-	return (vscalar(vplus(diffuse, specular), brightness));
+	specular = vscalar(vscalar(light->light_color, KS), \
+		pow(fmax(vdot(view_dir, reflect(vscalar(light_dir, -1), \
+			scene->rec.normal)), 0.0), DEFALUT_KSN));
+	return (vscalar(vplus(diffuse, specular), light->bright_ratio));
 }
 
-t_bool          in_shadow(t_object *objs, t_ray light_ray, double light_len)
+t_bool	in_shadow(t_object *objs, t_ray light_ray, double light_len)
 {
-	t_hit_record rec;
+	t_hit_record	rec;
 
 	rec.tmin = 0;
 	rec.tmax = light_len;

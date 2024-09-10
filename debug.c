@@ -4,6 +4,8 @@
 #include "draw.h"
 #include "parse.h"
 
+# include <time.h>
+
 // void	leaks_check(void)
 // {
 // 	system("leaks debug.out");
@@ -27,11 +29,13 @@ int	main(int argc, char **argv)
 	// in src/main.c
 	t_vmlx		vmlx;
 
-	// vmlx.scene = scene_init();
+	clock_t	start = clock();
 	vmlx.scene = parse_to_scene(&parsed_struct);
 	make_window(&vmlx);
 
 	draw_img(&vmlx);
+	clock_t	end = clock();
+	printf("[time : %f]\n", (float)(end - start)/CLOCKS_PER_SEC);
 	mlx_put_image_to_window(vmlx.mlx, vmlx.win, vmlx.img, 0, 0);
 	mlx_hook(vmlx.win, ON_DESTROY, 0, normal_exit, &vmlx);
 	mlx_hook(vmlx.win, ON_KEYUP, 0, key_press, &vmlx);
