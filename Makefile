@@ -25,10 +25,9 @@ SRCS	:= \
 	${wildcard parse/*.c} \
 	${wildcard parse/objects/*.c}
 
-# SRCS	= $(addprefix src/, $(SRCS))
-
 OBJS	= $(SRCS:.c=.o) 
-DEBUG_O = $(filter-out %main.o, $(OBJS)) debug.o
+DEBUG_O = $(filter-out src/main.o, $(OBJS)) debug.o
+# debug.o
 
 %.o : %.c
 	$(CC) $(CFLAGS) $(INC) -c $< -o $@
@@ -55,8 +54,11 @@ fclean :
 	rm -rf $(DEBUG_O) $(DEBUG_NAME)
 # $(MAKE) -C $(LIBFT_DIR) fclean
 
+print :
+	$(info target : $(DEBUG_O))
+
 re :
 	$(MAKE) fclean
 	$(MAKE) all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re debug
