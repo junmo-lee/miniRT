@@ -143,12 +143,12 @@ typedef struct s_cone_p
 
 typedef struct s_object_p
 {
-	int				identifier;
-	t_sphere_p		*sphere;
-	t_plane_p		*plane;
-	t_cylinder_p	*cylinder;
-	t_cone_p		*cone;
-	t_object_p		*next;
+	int					identifier;
+	t_sphere_p			*sphere;
+	t_plane_p			*plane;
+	t_cylinder_p		*cylinder;
+	t_cone_p			*cone;
+	struct s_object_p	*next;
 }	t_object_p;
 
 typedef struct s_parse
@@ -282,6 +282,18 @@ typedef struct s_hit_record
 	t_bool		front_face;
 	t_color3	albedo;
 }	t_hit_record;
+
+typedef struct s_eql
+{
+	double		a;
+	double		half_b;
+	double		c;
+	double		discriminant;
+	double		sqrtd;
+	double		root1;
+	double		root2;
+}	t_eql;
+
 
 typedef struct s_scene
 {
