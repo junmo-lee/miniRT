@@ -6,7 +6,7 @@
 
 int	main(int argc, char **argv)
 {
-	t_parse	parsed_struct; // malloc을 최소화 하려함
+	t_parse	parsed_struct;
 	t_vmlx	vmlx;
 
 	if (argc != 2)
@@ -16,7 +16,6 @@ int	main(int argc, char **argv)
 	}
 	else
 		parse(&parsed_struct, argv[1]);
-
 	vmlx.scene = parse_to_scene(&parsed_struct);
 	make_window(&vmlx);
 	draw_img(&vmlx);

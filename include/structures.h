@@ -1,19 +1,6 @@
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
 
-// example def
-#define EXAMPLE_OX 2
-#define EXAMPLE_OY 0
-#define EXAMPLE_OZ 0
-
-#define EXAMPLE_BRIGHT_RATIO 0.8
-
-// 예제에서는 (1, 0, 0) 이 수평방향(오른쪽) 이 되도록, D = (0, Dy, -1) 꼴이어야 함  
-# define EXAMPLE_DX 0
-# define EXAMPLE_DY 0 // Dy
-# define EXAMPLE_DZ -1
-# define EXAMPLE_H_FOV 120
-
 # define WIN_NAME "miniRT"
 # define R_WIDTH 600
 # define R_HIGHT 600
@@ -64,19 +51,20 @@ typedef enum e_token_type
 
 # define EPSILON 1e-6 // 0.000001
 # define LUMEN 3
-// # define PI 3.14159265358979323846
+# define EXAMPLE_KSN 64 // 64
+# define EXAMPLE_KS 0.5 // 0.5
 
 # define RGB_T 0
 # define RGB_MAX 255.99
 
 // for mt19937
-#define N 624
-#define M 397
-#define MATRIX_A 0x9908b0dfUL   /* constant vector a */
-#define UPPER_MASK 0x80000000UL /* most significant w-r bits */
-#define LOWER_MASK 0x7fffffffUL /* least significant r bits */
+# define N 624
+# define M 397
+# define MATRIX_A 0x9908b0dfUL   /* constant vector a */
+# define UPPER_MASK 0x80000000UL /* most significant w-r bits */
+# define LOWER_MASK 0x7fffffffUL /* least significant r bits */
 
-#define RAND_SEED 1234UL
+# define RAND_SEED 1234UL
 
 typedef enum e_event
 {
@@ -104,7 +92,6 @@ struct s_vec3
 	double y;
 	double z;
 };
-
 
 // !! ---- parse 구조체 시작 ---- !!
 typedef struct s_ambient_p

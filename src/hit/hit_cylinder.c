@@ -52,7 +52,7 @@ t_bool		hit_cylinder(t_object *cy_obj, t_ray *ray, t_hit_record *rec)
 	}
 	rec->t = root;
 	rec->p = rootP;
-	rec->normal = vdivide(vminus(PC, vmult(co->n,PC_dot_Hhat)), co->radius);
+	rec->normal = vdivide(vminus(PC, vscalar(co->n,PC_dot_Hhat)), co->radius);
 	set_face_normal(ray, rec);
 	rec->albedo = cy_obj->albedo;
 	return (TRUE);

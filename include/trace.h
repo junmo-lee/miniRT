@@ -22,4 +22,7 @@ t_bool      hit_cone(t_object *co_obj, t_ray *ray, t_hit_record *rec);
 t_color3        phong_lighting(t_scene *scene);
 t_color3    point_light_get(t_scene *scene, t_light *light);
 t_bool      in_shadow(t_object *objs, t_ray light_ray, double light_len);
+
+t_vec3	reflect(t_vec3 v, t_vec3 n);
+t_vec3	vmin(t_vec3 vec1, t_vec3 vec2);
 #endif

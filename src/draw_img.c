@@ -55,7 +55,7 @@ void	draw_pixel(t_vmlx *vmlx, int i, int j, t_MT19937 *state)
 		pixel_color = vplus(pixel_color, ray_color(scene));
 		sample++;
 	}
-	my_mlx_pixel_put(vmlx, i, scene->canvas.height - j - 1, color_to_int(vmult(pixel_color, 1.0 / SAMPLES_PER_PIXEL)));
+	my_mlx_pixel_put(vmlx, i, scene->canvas.height - j - 1, color_to_int(vscalar(pixel_color, 1.0 / SAMPLES_PER_PIXEL)));
 }
 
 int	draw_img(t_vmlx *vmlx)

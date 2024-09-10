@@ -15,22 +15,17 @@ t_point3	ray_at(t_ray *ray, double t)
 {
 	t_point3	at;
 
-	at = vplus(ray->orig, vmult(ray->dir, t));
+	at = vplus(ray->orig, vscalar(ray->dir, t));
 	return (at);
 }
 
 t_ray	ray_primary(t_camera *cam, double u, double v)
 {
-	t_ray   ray;
+	t_ray	ray;
 
 	ray.orig = cam->orig;
-	// left_bottom + u * horizontal + v * vertical - origin 의 단위 벡터.
-	ray.dir = vunit(vminus(
-							vplus(
-								vplus(cam->left_bottom, 
-									vmult(cam->horizontal, u)), 
-									vmult(cam->vertical, v)), 
-							cam->orig));
+	ray.dir = vunit(vminus(vplus(vplus(cam->left_bottom, \
+		vscalar(cam->horizontal, u)), vscalar(cam->vertical, v)), cam->orig));
 	return (ray);
 }
 
@@ -49,10 +44,11 @@ t_color3	ray_color(t_scene *scene)
 
 	scene->rec = record_init();
 	if (hit(scene->world, &scene->ray, &scene->rec))
-		return (phong_lighting(scene)); //phong_lighting 함수는 8.4에서 설명한다. 이제 법선 벡터를 매핑해서 얻은 색이 아닌, 앞으로 작성할 phong_lighting 함수의 결과값을 반환한다!
+		return (phong_lighting(scene));
 	else
 	{
 		t = 0.5 * (scene->ray.dir.y + 1.0);
-		return (vplus(vmult(color3(1, 1, 1), 1.0 - t), vmult(color3(0.5, 0.7, 1.0), t)));
+		return (vplus(vscalar(color3(1, 1, 1), 1.0 - t), \
+			vscalar(color3(0.5, 0.7, 1.0), t)));
 	}
 }

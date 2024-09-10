@@ -51,7 +51,7 @@ t_bool      hit_cone(t_object *co_obj, t_ray *ray, t_hit_record *rec)
 	}
 	rec->t = root;
 	rec->p = rootP;
-	rec->normal = vminus(PH, vmult(co->n, PH_dot_Hhat));
+	rec->normal = vminus(PH, vscalar(co->n, PH_dot_Hhat));
 	set_face_normal(ray, rec);
 	rec->albedo = co_obj->albedo;
 	return (TRUE);

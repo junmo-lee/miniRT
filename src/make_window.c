@@ -9,6 +9,7 @@ int	error_exit(t_vmlx *vmlx)
 	exit(EXIT_FAILURE);
 	return (EXIT_FAILURE);
 }
+
 int	normal_exit(t_vmlx *vmlx)
 {
 	mlx_destroy_window(vmlx->mlx, vmlx->win);

@@ -16,9 +16,9 @@ t_bool      hit_sphere(t_object *sp_obj, t_ray *ray, t_hit_record *rec)
 
 	sp = sp_obj->element;
 	oc = vminus(ray->orig, sp->center);
-	a = vlength2(ray->dir);
+	a = vdot(ray->dir, ray->dir);
 	half_b = vdot(oc, ray->dir);
-	c = vlength2(oc) - sp->radius2;
+	c = vdot(oc, oc) - sp->radius2;
 	discriminant = half_b * half_b - a * c;
 
 	if (discriminant < 0)
