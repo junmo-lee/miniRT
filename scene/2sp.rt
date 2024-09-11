@@ -17,10 +17,12 @@
 sp       2,0,-5            2               0,128,0
 
 # cylinder |  coordinate |  normal vector  |  diameter  |  height  | colors
-    # cy       50.0,0.0,20.6       0,0,1.0        14.2       21.42      10,0,255
+    # cy       0,0,-5            0,-1.0,0           4         21.42     10,0,255
 
 # cone |  coordinate  |  normal vector  |  diameter  |  height  | colors
-    # co    50.0,0.0,20.6   0,0,1.0           14.2         21.42     10,0,255
+co  0,4,-4             -1,1,0.5           1          2       0,0,255
+# co    0,0,-5            0,1.0,0           4         21.42     10,0,255
+    # co    0,0,-5            0,-1.0,0           4         21.42     10,0,255
 
 # dummy
 #  B 0.2 255,255,255

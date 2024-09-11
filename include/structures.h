@@ -5,7 +5,7 @@
 # define R_WIDTH 600
 # define R_HIGHT 600
 
-# define SAMPLES_PER_PIXEL 4
+# define SAMPLES_PER_PIXEL 1
 
 typedef struct s_vec3		t_vec3;
 typedef struct s_vec3		t_point3;
@@ -262,8 +262,9 @@ typedef struct s_cone
 	t_vec3		h;
 	t_point3	pointh;
 	double		m;
+	t_vec3		ph;
+	double		ph_doc_hhat;
 }	t_cone;
-
 
 typedef struct s_light
 {
@@ -293,7 +294,6 @@ typedef struct s_eql
 	double		root1;
 	double		root2;
 }	t_eql;
-
 
 typedef struct s_scene
 {
