@@ -2,7 +2,7 @@
 #include "utils.h"
 #include "trace.h"
 
-t_bool	has_cylinder_root(t_eql *eql, t_ray *ray, t_cylinder	*cy)
+t_bool	has_cylinder_root(t_eql *eql, t_ray *ray, t_cylinder *cy)
 {
 	const t_vec3	w = vminus(ray->orig, cy->center);
 	const double	v_dot_hhat = vdot(ray->dir, cy->n);
@@ -16,7 +16,7 @@ t_bool	has_cylinder_root(t_eql *eql, t_ray *ray, t_cylinder	*cy)
 		return (FALSE);
 	eql->sqrtd = sqrt(eql->discriminant);
 	eql->root1 = (-eql->half_b - eql->sqrtd) / eql->a;
-	eql->root2 = (-eql->half_b - eql->sqrtd) / eql->a;
+	eql->root2 = (-eql->half_b + eql->sqrtd) / eql->a;
 	return (TRUE);
 }
 
@@ -27,6 +27,8 @@ t_bool	check_cylinder_height(t_cylinder *cy, \
 	rec->p = ray_at(ray, root);
 	cy->pc = vminus(rec->p, cy->center);
 	cy->pc_doc_hhat = vdot(cy->pc, cy->n);
+	rec->normal = vdivide(vminus(cy->pc, \
+		vscalar(cy->n, cy->pc_doc_hhat)), cy->radius);
 	return (cy->pc_doc_hhat < EPSILON || cy->height < cy->pc_doc_hhat);
 }
 
@@ -46,8 +48,6 @@ t_bool	hit_cylinder(t_object *cy_obj, t_ray *ray, t_hit_record *rec)
 			|| check_cylinder_height(cy, ray, eql.root2, rec))
 			return (FALSE);
 	}
-	rec->normal = vdivide(vminus(cy->pc, \
-		vscalar(cy->n, cy->pc_doc_hhat)), cy->radius);
 	set_face_normal(ray, rec);
 	rec->albedo = cy_obj->albedo;
 	return (TRUE);
