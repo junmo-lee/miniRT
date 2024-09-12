@@ -31,7 +31,7 @@ void	clean_parsed_struct(t_parse *parsed_struct)
 	if (parsed_struct->camera_pointer != NULL)
 		free(parsed_struct->camera_pointer);
 	if (parsed_struct->light_pointer != NULL)
-		free(parsed_struct->light_pointer);
+		free_light_list(parsed_struct->light_pointer);
 	if (parsed_struct->object_pointer != NULL)
 		free_object_list(parsed_struct->object_pointer);
 }

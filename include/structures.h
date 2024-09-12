@@ -121,9 +121,10 @@ typedef struct s_camera_p
 
 typedef struct s_light_p
 {
-	t_vec3	coordinates;
-	double	brightness;
-	t_vec3	colors;
+	t_vec3				coordinates;
+	double				brightness;
+	t_vec3				colors;
+	struct	s_light_p	*next_light;
 } t_light_p;
 
 typedef struct s_sphere_p
@@ -131,6 +132,8 @@ typedef struct s_sphere_p
 	t_vec3	coordinates;
 	double	diameter;
 	t_vec3	colors;
+	double	ksn;
+	int		cd;
 } t_sphere_p;
 
 typedef struct s_plane_p
@@ -138,6 +141,8 @@ typedef struct s_plane_p
 	t_vec3	coordinates;
 	t_vec3	normal_vector;
 	t_vec3	colors;
+	double	ksn;
+	int		cd;
 } t_plane_p;
 
 typedef struct s_cylinder_p
@@ -147,6 +152,8 @@ typedef struct s_cylinder_p
 	double	diameter;
 	double	height;
 	t_vec3	colors;
+	double	ksn;
+	int		cd;
 } t_cylinder_p;
 
 typedef struct s_cone_p
@@ -156,6 +163,8 @@ typedef struct s_cone_p
 	double	diameter;
 	double	height;
 	t_vec3	colors;
+	double	ksn;
+	int		cd;
 } t_cone_p;
 
 
@@ -173,7 +182,7 @@ typedef struct s_parse
 {
 	t_ambient_p	*ambient_pointer;
 	t_camera_p	*camera_pointer;
-	t_light_p		*light_pointer;
+	t_light_p	*light_pointer;
 	t_object_p	*object_pointer;
 } t_parse;
 

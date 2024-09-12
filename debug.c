@@ -4,16 +4,58 @@
 #include "draw.h"
 #include "parse.h"
 
-// void	leaks_check(void)
-// {
-// 	system("leaks debug.out");
-// }
+void	leaks_check(void)
+{
+	system("leaks debug.out");
+}
+
+void	print_coordinate(t_vec3 xyz)
+{
+	printf("coordinate : x = %f, y = %f, z = %f\n", xyz.x, xyz.y, xyz.z);
+}
+
+void	print_color(t_vec3 xyz)
+{
+	printf("colors : x = %f, y = %f, z = %f\n", xyz.x, xyz.y, xyz.z);
+}
+
+void	print_light(t_parse *parsed_struct)
+{
+	t_light_p	*current_node;
+
+	current_node = parsed_struct->light_pointer;
+	printf("\n\n\n\n linked_light test\n");
+	while (current_node != NULL)
+	{
+		printf("brightness : %f\n", current_node->brightness);
+		print_coordinate(current_node->coordinates);
+		print_color(current_node->colors);
+		printf("\n");
+		current_node = current_node->next_light;
+	}
+	printf("\n\n\n\n");
+}
+
+
+void	print_ksn(char *type, double ksn)
+{
+	printf ("\n\n\n");
+	printf("%s : ", type);
+	printf("%f\n\n", ksn);
+}
+
+void	print_cd(char *type, int cd)
+{
+	printf ("\n\n\n");
+	printf("%s : ", type);
+	printf("%d\n\n", cd);
+}
 
 int	main(int argc, char **argv)
 {
 	t_parse parsed_struct; // malloc을 최소화 하려함
 
-	// atexit(leaks_check);
+	atexit(leaks_check);
 	if (argc != 2)
 	{
 		printf("argument error\n");
@@ -32,6 +74,16 @@ int	main(int argc, char **argv)
 	printf("camera c : "); vprint(c_ptr->coordinates);
 	printf("camera n : "); vprint(c_ptr->normal_vector);
 	printf("camera fov : %d\n", c_ptr->fov);
+
+	// light 테스트
+	print_light(&parsed_struct);
+
+	// ksn cd 테스트
+	if (parsed_struct.object_pointer->cone != NULL)
+	{
+		print_ksn("cone", parsed_struct.object_pointer->cone->ksn);
+		print_cd("cone", parsed_struct.object_pointer->cone->cd);
+	}
 
 	// in src/main.c
 	t_vmlx		vmlx;
