@@ -25,9 +25,12 @@ t_cylinder_p	*create_cylinder_struct(t_parse *parsed_struct)
 
 void	assign_ksn(t_parse *parsed_struct, double *ksn_pointer, char *ksn_value)
 {
-	if (ksn_value < 0)
+	double	tem_double;
+
+	tem_double = ft_atof(ksn_value);
+	if (tem_double < 0)
 		parse_exit(parsed_struct);
-	*ksn_pointer = ft_atof(ksn_value);
+	*ksn_pointer = tem_double;
 }
 
 void	assign_cd(t_parse *parsed_struct, int *cd, char *str)
