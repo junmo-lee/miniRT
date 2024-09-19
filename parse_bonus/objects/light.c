@@ -1,4 +1,4 @@
-#include "../../include/parse.h"
+#include "../../include/parse_bonus.h"
 
 t_light_p	*create_light_struct(t_parse *parsed_struct)
 {

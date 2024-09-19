@@ -1,4 +1,4 @@
-#include "../../include/parse.h"
+#include "../../include/parse_bonus.h"
 
 t_cylinder_p	*create_cylinder_struct(t_parse *parsed_struct)
 {
@@ -18,7 +18,29 @@ t_cylinder_p	*create_cylinder_struct(t_parse *parsed_struct)
 	cylinder_struct->colors.x = 0;
 	cylinder_struct->colors.y = 0;
 	cylinder_struct->colors.z = 0;
+	cylinder_struct->ksn = 0;
+	cylinder_struct->cd = 0;
 	return (cylinder_struct);
+}
+
+void	assign_ksn(t_parse *parsed_struct, double *ksn_pointer, char *ksn_value)
+{
+	double	tem_double;
+
+	tem_double = ft_atof(ksn_value);
+	if (tem_double < 0)
+		parse_exit(parsed_struct);
+	*ksn_pointer = tem_double;
+}
+
+void	assign_cd(t_parse *parsed_struct, int *cd, char *str)
+{
+	int	tem_int;
+
+	tem_int = ft_atof(str);
+	if (tem_int != 0 && tem_int != 1)
+		parse_exit(parsed_struct);
+	*cd = tem_int;
 }
 
 void	parse_cylinder(t_parse *parsed_struct, char **strings)
@@ -37,6 +59,8 @@ void	parse_cylinder(t_parse *parsed_struct, char **strings)
 	cylinder->diameter = ft_atof(strings[3]);
 	cylinder->height = ft_atof(strings[4]);
 	assign_xyz_from_token(parsed_struct, &cylinder->colors, strings[5], COLOR);
+	assign_ksn(parsed_struct, &cylinder->ksn, strings[6]);
+	assign_cd(parsed_struct, &cylinder->cd, strings[7]);
 	object_struct = create_object_struct(parsed_struct);
 	object_struct->identifier = CY;
 	object_struct->cylinder = cylinder;
