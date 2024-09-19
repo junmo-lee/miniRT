@@ -104,9 +104,10 @@ typedef struct s_camera_p
 
 typedef struct s_light_p
 {
-	t_vec3	coordinates;
-	double	brightness;
-	t_vec3	colors;
+	t_vec3				coordinates;
+	double				brightness;
+	t_vec3				colors;
+	struct s_light_p	*next_light;
 }	t_light_p;
 
 typedef struct s_sphere_p

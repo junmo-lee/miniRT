@@ -11,6 +11,33 @@
 // 	system("leaks debug.out");
 // }
 
+void	print_coordinate(t_vec3 xyz)
+{
+	printf("coordinate : x = %f, y = %f, z = %f\n", xyz.x, xyz.y, xyz.z);
+}
+
+void	print_color(t_vec3 xyz)
+{
+	printf("colors : x = %f, y = %f, z = %f\n", xyz.x, xyz.y, xyz.z);
+}
+
+void	print_light(t_parse *parsed_struct)
+{
+	t_light_p	*current_node;
+
+	current_node = parsed_struct->light_pointer;
+	printf("\n\n\n\n linked_light test\n");
+	while (current_node != NULL)
+	{
+		printf("brightness : %f\n", current_node->brightness);
+		print_coordinate(current_node->coordinates);
+		print_color(current_node->colors);
+		printf("\n");
+		current_node = current_node->next_light;
+	}
+	printf("\n\n\n\n");
+}
+
 int	main(int argc, char **argv)
 {
 	t_parse parsed_struct; // malloc을 최소화 하려함
@@ -26,6 +53,7 @@ int	main(int argc, char **argv)
 		parse(&parsed_struct, argv[1]);
 	}
 
+	print_light(&parsed_struct);
 	// in src/main.c
 	t_vmlx		vmlx;
 

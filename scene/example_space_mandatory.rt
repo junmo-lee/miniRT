@@ -6,6 +6,10 @@
 
 # light   |  coordinate  | brightness ratio  | colors
     L        -40,0,30          0.7              255,255,255
+     L        50,3,4             0.5             40,70,180
+    L        50,3,4             0.5             40,70,180
+    L        50,3,4             0.5             40,70,180
+    L        50,3,4             0.5             40,70,180
 
 # plane   |  coordinate  | normal vector   | colors 
     pl        0,0,0          0,1,0              255,0,225  

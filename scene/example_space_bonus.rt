@@ -1,0 +1,28 @@
+# ambient | lighting ratio | colors
+    A          0.2            255,255,255  
+
+# camera  |  coordinate  | normal vector  |  FOV
+    C        -50,0,20          0,0,1         70
+
+# light   |  coordinate  | brightness ratio  | colors
+    L        -40,0,30          0.7              255,255,255
+    L        50,3,4             0.5             40,70,180
+    L        50,3,4             0.5             40,70,180
+    L        50,3,4             0.5             40,70,180
+    L        50,3,4             0.5             40,70,180
+
+# plane   |  coordinate  | normal vector   | colors             |  ksn  |  cd   
+    pl        0,0,0          0,1,0              255,0,225          64       1
+
+# sphere  |  coordinate  |  diameter       |  colors            |  ksn  |  cd 
+    sp       0,0,20            20               255,0,0             54     0
+
+# cylinder |  coordinate |  normal vector  |  diameter  |  height  | colors         |  ksn  |  cd 
+    cy       50.0,0.0,20.6       0,0,1.0        14.2       21.42      10,0,255         43      1   
+
+# cone |  coordinate  |  normal vector  |  diameter  |  height  | colors            |  ksn  |  cd      
+    co    50.0,0.0,20.6   0,0,1.0           14.2         21.42       10,0,255           24      0    
+
+# dummy
+ B 0.2 255,255,255
+ 
