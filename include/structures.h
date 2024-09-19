@@ -50,8 +50,10 @@ typedef enum e_token_type
 # define DEFALUT_KSN 64 // shininess value, 물체의 반짝거리는 정도
 # define KS 0.5 // [0,1] specular 강도, specular = spec ^ ksn
 
-# define CHECKER_WIDTH 0.5
-# define CHECKER_HEIGHT 0.5
+# define PLAIN_CHECKER_WIDTH 0.5
+# define PLAIN_CHECKER_HEIGHT 0.5
+
+# define CHECKER_TIMES 10
 
 # define RGB_T 0
 # define RGB_MAX 255.99

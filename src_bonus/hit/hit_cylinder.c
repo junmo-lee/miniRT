@@ -2,6 +2,24 @@
 #include "utils.h"
 #include "trace.h"
 
+t_color3	cy_get_albedo(t_cylinder *cy, t_object *cy_obj)
+{
+	t_vec3	proj;
+	double	u;
+	double	v;
+
+	if (cy_obj->cd == 0)
+		return (cy_obj->albedo);
+	proj = vminus(cy->pc, vscalar(cy->n, vdot(cy->pc, cy->n)));
+	u = 0.5 + atan2(proj.z, proj.x) / (2.0 * M_PI);
+	v = cy->pc_doc_hhat / cy->height;
+	if ((int)(floor(u * CHECKER_TIMES) \
+		+ floor(v * CHECKER_TIMES)) % 2 == 0)
+		return (color3(0.0, 0.0, 0.0));
+	else
+		return (color3(1.0, 1.0, 1.0));
+}
+
 t_bool	has_cylinder_root(t_eql *eql, t_ray *ray, t_cylinder *cy)
 {
 	const t_vec3	w = vminus(ray->orig, cy->center);
@@ -49,6 +67,6 @@ t_bool	hit_cylinder(t_object *cy_obj, t_ray *ray, t_hit_record *rec)
 			return (FALSE);
 	}
 	set_face_normal(ray, rec);
-	rec->albedo = cy_obj->albedo;
+	rec->albedo = cy_get_albedo(cy, cy_obj);
 	return (TRUE);
 }

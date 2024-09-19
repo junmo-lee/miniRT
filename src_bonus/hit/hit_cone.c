@@ -2,6 +2,23 @@
 #include "utils.h"
 #include "trace.h"
 
+t_color3	co_get_albedo(t_cone *co, t_hit_record *rec,t_object *co_obj)
+{
+	double	u;
+	double	v;
+
+	if (co_obj->cd == 0)
+		return (co_obj->albedo);
+	v = co->ph_doc_hhat / co->height;
+	u = 0.5 + atan2(rec->normal.z, rec->normal.x) / (2.0 * M_PI);
+	if ((int)(floor(u * CHECKER_TIMES) \
+		+ floor(v * CHECKER_TIMES)) % 2 == 0)
+		return (color3(0.0, 0.0, 0.0));
+	else
+		return (color3(1.0, 1.0, 1.0));
+}
+
+
 t_bool	has_cone_root(t_eql *eql, t_ray *ray, t_cone *co)
 {
 	const t_vec3	w = vminus(ray->orig, co->pointh);
@@ -48,6 +65,6 @@ t_bool	hit_cone(t_object *co_obj, t_ray *ray, t_hit_record *rec)
 			return (FALSE);
 	}
 	set_face_normal(ray, rec);
-	rec->albedo = co_obj->albedo;
+	rec->albedo = co_get_albedo(co, rec, co_obj);
 	return (TRUE);
 }

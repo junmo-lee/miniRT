@@ -2,6 +2,24 @@
 #include "utils.h"
 #include "trace.h"
 
+t_color3	sp_get_albedo(t_sphere *sp, t_hit_record *rec, t_object *sp_obj)
+{
+	t_vec3	pos;
+	double	u;
+	double	v;
+
+	if (sp_obj->cd == 0)
+		return (sp_obj->albedo);
+	pos = vunit(vminus(rec->p, sp->center));
+	u = 0.5 + atan2(pos.z, pos.x) / (2.0 * M_PI);
+	v = 0.5 - asin(pos.y) / (M_PI);
+	if ((int)(floor(u * CHECKER_TIMES) \
+		+ floor(v * CHECKER_TIMES)) % 2 == 0)
+		return (color3(0.0, 0.0, 0.0));
+	else
+		return (color3(1.0, 1.0, 1.0));
+}
+
 t_bool	has_sphere_root(t_eql *eql, t_vec3 dir, t_vec3 oc, double r)
 {
 	eql->a = vdot(dir, dir);
@@ -38,6 +56,6 @@ t_bool	hit_sphere(t_object *sp_obj, t_ray *ray, t_hit_record *rec)
 	rec->p = ray_at(ray, rec->t);
 	rec->normal = vdivide(vminus(rec->p, sp->center), sp->radius);
 	set_face_normal(ray, rec);
-	rec->albedo = sp_obj->albedo;
+	rec->albedo = sp_get_albedo(sp, rec, sp_obj);
 	return (TRUE);
 }

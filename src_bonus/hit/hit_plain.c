@@ -5,16 +5,16 @@
 t_color3	pl_get_albedo(t_plain *pl, t_hit_record *rec, t_object *pl_obj)
 {
 	t_vec3	local_p;
-	double	pointu;
-	double	pointv;
+	double	u;
+	double	v;
 
 	if (pl_obj->cd == 0)
 		return (pl_obj->albedo);
 	local_p = vminus(rec->p, pl->p);
-	pointu = vdot(local_p, pl->vecu);
-	pointv = vdot(local_p, pl->vecv);
-	if ((int)(floor(pointu * CHECKER_WIDTH) \
-		+ floor(pointv * CHECKER_HEIGHT)) % 2 == 0)
+	u = vdot(local_p, pl->vecu);
+	v = vdot(local_p, pl->vecv);
+	if ((int)(floor(u * PLAIN_CHECKER_WIDTH) \
+		+ floor(v * PLAIN_CHECKER_HEIGHT)) % 2 == 0)
 		return (color3(0.0, 0.0, 0.0));
 	else
 		return (color3(1.0, 1.0, 1.0));
