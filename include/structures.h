@@ -50,6 +50,9 @@ typedef enum e_token_type
 # define DEFALUT_KSN 64 // shininess value, 물체의 반짝거리는 정도
 # define KS 0.5 // [0,1] specular 강도, specular = spec ^ ksn
 
+# define CHECKER_WIDTH 0.5
+# define CHECKER_HEIGHT 0.5
+
 # define RGB_T 0
 # define RGB_MAX 255.99
 
@@ -218,6 +221,7 @@ typedef struct s_object
 	t_object_type	type;
 	void			*element;
 	t_color3		albedo;
+	int				cd;
 	void			*next;
 }	t_object;
 
@@ -232,6 +236,9 @@ typedef struct s_plain
 {
 	t_point3	p;
 	t_vec3		n;
+	// bouns checkerboard
+	t_vec3		vecu;
+	t_vec3		vecv;
 }	t_plain;
 
 /*

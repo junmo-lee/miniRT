@@ -14,5 +14,5 @@ t_vec3	vmin(t_vec3 vec1, t_vec3 vec2)
 
 t_vec3	reflect(t_vec3 v, t_vec3 n)
 {
-	return (vminus(v, vscalar(n, vdot(v, n) * 2)));
+	return (vminus(v, vscalar(n, vdot(v, n) * 2.0)));
 }

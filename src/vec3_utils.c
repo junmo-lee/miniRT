@@ -5,12 +5,6 @@ void	vprint(t_vec3 vec)
 	printf("%.4lf %.4lf %.4lf\n", vec.x, vec.y, vec.z);
 }
 
-// 벡터 길이(2-norm)
-double	vlength(t_vec3 vec)
-{
-	return (sqrt(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z));
-}
-
 // vec == vec2, vdot = length^2
 double	vdot(t_vec3 vec, t_vec3 vec2)
 {
