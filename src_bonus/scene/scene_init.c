@@ -4,6 +4,8 @@
 #include "draw.h"
 #include "parse.h"
 
+void	add_cone(t_object *world, t_object_p *o_ptr);
+
 t_color3	get_ambient(t_ambient_p *a_ptr)
 {
 	printf("ambient color : ");vprint(a_ptr->colors);

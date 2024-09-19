@@ -1,4 +1,4 @@
-#include "../include/parse_bonus.h"
+#include "parse_bonus.h"
 
 void	*init_parse_struct(t_parse *parse_struct)
 {

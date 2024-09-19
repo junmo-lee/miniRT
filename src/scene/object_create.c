@@ -2,20 +2,6 @@
 #include "scene.h"
 #include "utils.h"
 
-t_object	*object(t_object_type type, void *element, t_color3 albedo)
-{
-	t_object	*new;
-
-	new = (t_object *)malloc(sizeof(t_object));
-	if (new == NULL)
-		return (NULL);
-	new->type = type;
-	new->element = element;
-	new->albedo = albedo;
-	new->next = NULL;
-	return (new);
-}
-
 t_sphere	*sphere(t_point3 center, double radius)
 {
 	t_sphere	*sp;

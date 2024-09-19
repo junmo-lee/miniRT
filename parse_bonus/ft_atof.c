@@ -1,4 +1,4 @@
-#include "../include/parse_bonus.h"
+#include "parse_bonus.h"
 
 static void	ft_skip_whitespace(const char *str, int *index)
 {

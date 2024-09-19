@@ -44,6 +44,21 @@
 				"cwd": "${workspaceFolder}"
 			},
             "dependsOn": ["make fclean"]
+        },
+        {
+            "label": "Build Debug Bonus",
+            "type": "shell",
+            "command": "make",
+			"args": ["-j4", "debug_bonus", "DEBUG=1"],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": "$gcc",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+            "dependsOn": ["make fclean"]
         }
     ]
 }

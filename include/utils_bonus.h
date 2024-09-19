@@ -1,5 +1,5 @@
-#ifndef UTILS_H
-# define UTILS_H
+#ifndef UTILS_BONUS_H
+# define UTILS_BONUS_H
 
 # include <math.h>
 # include <stdlib.h>
@@ -28,7 +28,7 @@ double			vangle(t_vec3 vec1, t_vec3 vec2);
 void			vprint(t_vec3 vec);
 
 // 오브젝트 유틸리티
-void			oadd(t_object **list, t_object *new);
+void			oadd(t_object **list, t_object *new_obj);
 t_object		*olast(t_object *list);
 
 // 수학 관련 추가

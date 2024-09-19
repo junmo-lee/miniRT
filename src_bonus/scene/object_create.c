@@ -2,20 +2,6 @@
 #include "scene.h"
 #include "utils.h"
 
-t_object	*object(t_object_type type, void *element, t_color3 albedo)
-{
-	t_object	*new;
-
-	new = (t_object *)malloc(sizeof(t_object));
-	if (new == NULL)
-		return (NULL);
-	new->type = type;
-	new->element = element;
-	new->albedo = albedo;
-	new->next = NULL;
-	return (new);
-}
-
 t_sphere	*sphere(t_point3 center, double radius)
 {
 	t_sphere	*sp;
@@ -73,4 +59,21 @@ t_color3 light_color, double bright_ratio)
 	light->light_color = light_color;
 	light->bright_ratio = bright_ratio * LUMEN;
 	return (light);
+}
+
+t_cone	*cone(t_point3 center, t_vec3 n, double radius, double height)
+{
+	t_cone	*co;
+
+	co = (t_cone *)malloc(sizeof(t_cone));
+	if (co == NULL)
+		return (NULL);
+	co->center = center;
+	co->n = vunit(n);
+	co->radius = radius;
+	co->height = height;
+	co->h = vscalar(co->n, -height);
+	co->pointh = vplus(co->center, co->h);
+	co->m = pow(co->radius / co->height, 2.0);
+	return (co);
 }

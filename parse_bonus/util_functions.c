@@ -1,4 +1,4 @@
-#include "../include/parse_bonus.h"
+#include "parse_bonus.h"
 
 void	free_object_list(t_object_p *object_struct)
 {

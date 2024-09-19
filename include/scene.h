@@ -32,6 +32,5 @@ t_object	*get_world(t_object_p* o_ptr);
 void	add_sphere(t_object *world, t_object_p* o_ptr);
 void	add_plain(t_object *world, t_object_p* o_ptr);
 void	add_cylinder(t_object *world, t_object_p* o_ptr);
-void	add_cone(t_object *world, t_object_p* o_ptr);
 
 #endif

@@ -39,18 +39,3 @@ void	add_cylinder(t_object *world, t_object_p *o_ptr)
 				o_ptr->cylinder->diameter / 2.0, o_ptr->cylinder->height), \
 					vdivide(o_ptr->cylinder->colors, RGB_MAX)));
 }
-
-void	add_cone(t_object *world, t_object_p *o_ptr)
-{
-	printf("CO : \n");
-	printf("pos : "); vprint(o_ptr->cone->coordinates);
-	printf("n : "); vprint(o_ptr->cone->normal_vector);
-	printf("r : %.4lf \n", o_ptr->cone->diameter / 2.0);
-	printf("h : %.4lf \n", o_ptr->cone->height);
-	printf("color : "); vprint(o_ptr->cone->colors);
-	oadd(&world, object(CO, \
-		cone(o_ptr->cone->coordinates, \
-			o_ptr->cone->normal_vector, \
-				o_ptr->cone->diameter / 2.0, o_ptr->cone->height), \
-					vdivide(o_ptr->cone->colors, RGB_MAX)));
-}

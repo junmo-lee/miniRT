@@ -8,7 +8,7 @@
 		  "id": "sceneFile",
 		  "type": "promptString",
 		  "description": "Enter the scene file path",
-		  "default": "scene/example_space.rt"
+		  "default": "scene/2sp.rt"
 		}
 	  ],
 	"configurations": [
@@ -19,6 +19,15 @@
 			"program": "${workspaceFolder}/debug.out",
 			"cwd": "${workspaceFolder}",
 			"preLaunchTask": "Build Debug",
+			"args": ["${input:sceneFile}"]
+		},
+		{
+			"type": "lldb",
+			"request": "launch",
+			"name": "Debug Bonus",
+			"program": "${workspaceFolder}/debug_bonus.out",
+			"cwd": "${workspaceFolder}",
+			"preLaunchTask": "Build Debug Bonus",
 			"args": ["${input:sceneFile}"]
 		}
 	]

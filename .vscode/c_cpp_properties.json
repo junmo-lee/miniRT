@@ -5,7 +5,10 @@
             "includePath": [
                 "${workspaceFolder}/mlx",
                 "${workspaceFolder}/libft",
-                "${workspaceFolder}/include"
+                "${workspaceFolder}/GNL",
+                "${workspaceFolder}/include",
+                "${workspaceFolder}/include_bonus"
+
             ],
             "defines": [],
             "macFrameworkPath": [

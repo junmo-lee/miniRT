@@ -47,8 +47,6 @@ t_object	*get_world(t_object_p *o_ptr)
 				add_plain(world, o_ptr);
 			else if (o_ptr->identifier == CY)
 				add_cylinder(world, o_ptr);
-			else if (o_ptr->identifier == CO)
-				add_cone(world, o_ptr);
 		}
 		o_ptr = o_ptr->next;
 	}

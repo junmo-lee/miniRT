@@ -1,4 +1,4 @@
-#include "../include/parse_bonus.h"
+#include "parse_bonus.h"
 
 void	assign_xyz(t_parse *parsed_struct, \
 t_vec3 *coordinate, char **xyz_tokens)

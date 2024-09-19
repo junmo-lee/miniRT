@@ -1,4 +1,4 @@
-#include "../include/parse_bonus.h"
+#include "parse_bonus.h"
 
 void	count_tokens_len(t_parse *parsed_struct, char **strings, int num)
 {
