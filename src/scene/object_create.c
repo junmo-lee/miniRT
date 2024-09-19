@@ -24,11 +24,6 @@ t_plain	*plain(t_point3 p, t_vec3 n)
 		return (NULL);
 	pl->p = p;
 	pl->n = vunit(n);
-	pl->vecu = vcross(pl->n, vec3(0, 1, 0));
-	if (check_eql_double(vlength(pl->vecu), 0))
-		pl->vecu = vcross(pl->n, vec3(1, 0, 0));
-	pl->vecu = vunit(pl->vecu);
-	pl->vecv = vunit(vcross(pl->n, pl->vecu));
 	return (pl);
 }
 

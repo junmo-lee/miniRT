@@ -245,7 +245,6 @@ typedef struct s_plain
 {
 	t_point3	p;
 	t_vec3		n;
-	// bouns checkerboard
 	t_vec3		vecu;
 	t_vec3		vecv;
 }	t_plain;

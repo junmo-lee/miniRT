@@ -4,6 +4,8 @@
 #include "draw.h"
 #include "parse.h"
 
+// 헤더 분리할때 따로 넣기
+t_object	*object(t_object_type type, void *element, t_attribute attrib);
 void	add_cone(t_object *world, t_object_p *o_ptr);
 
 t_color3	get_ambient(t_ambient_p *a_ptr)
@@ -25,20 +27,25 @@ void	get_camera(t_scene *scene, t_camera_p *c_ptr)
 
 t_object	*get_light(t_light_p *l_ptr)
 {
+	t_attribute	attrib;
+
+	ft_memset(&attrib, 0, sizeof(t_attribute));
 	printf("light pos : "); vprint(l_ptr->coordinates);
 	printf("light c : "); vprint(l_ptr->colors);
 	printf("light b : %.4lf\n", l_ptr->brightness);
 	return (object(LIGHT_POINT, \
 		light_point(l_ptr->coordinates, \
 			vdivide(l_ptr->colors, RGB_MAX), l_ptr->brightness), \
-				color3(0, 0, 0)));
+				attrib));
 }
 
 t_object	*get_world(t_object_p *o_ptr)
 {
+	t_attribute	attrib;
 	t_object	*world;
 
-	world = object(NONE, NULL, color3(0, 0, 0));
+	ft_memset(&attrib, 0, sizeof(t_attribute));
+	world = object(NONE, NULL, attrib);
 	while (o_ptr != NULL)
 	{
 		if (o_ptr->identifier != NONE)

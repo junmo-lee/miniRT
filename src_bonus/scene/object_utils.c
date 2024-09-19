@@ -1,6 +1,6 @@
 #include "utils.h"
 
-t_object	*object(t_object_type type, void *element, t_color3 albedo)
+t_object	*object(t_object_type type, void *element, t_attribute attrib)
 {
 	t_object	*new;
 
@@ -9,7 +9,9 @@ t_object	*object(t_object_type type, void *element, t_color3 albedo)
 		return (NULL);
 	new->type = type;
 	new->element = element;
-	new->albedo = albedo;
+	new->albedo = attrib.albedo;
+	new->cd = attrib.cd;
+	new->ksn = attrib.ksn;
 	new->next = NULL;
 	return (new);
 }
