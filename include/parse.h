@@ -47,7 +47,8 @@ t_object_p *object_struct);
 void		clean_parsed_struct(t_parse *parsed_struct);
 t_object_p	*create_object_struct(t_parse *parsed_struct);
 void		free_light_list(t_light_p *light_struct);
-void		validate_tokens_cone_cylinder(t_parse *parsed_struct, char **strings);
+void		validate_tokens_cone_cylinder(t_parse *parsed_struct, \
+char **strings);
 
 // ft_atof.c
 double		ft_atof(const char *str);

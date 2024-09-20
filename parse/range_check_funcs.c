@@ -36,5 +36,6 @@ void	check_normal_vector_range(t_parse *parsed_struct, char **splited_colors)
 		parse_exit(parsed_struct, "Normal vector is out of range");
 	if (ft_atof(splited_colors[0]) == 0 && ft_atof(splited_colors[1]) == 0 \
 	&& ft_atof(splited_colors[2]) == 0)
-		parse_exit(parsed_struct, "All components of the normal vector are zero");
+		parse_exit(parsed_struct, \
+			"All components of the normal vector are zero");
 }

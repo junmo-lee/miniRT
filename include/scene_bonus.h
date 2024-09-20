@@ -5,7 +5,6 @@
 # include "utils_bonus.h"
 # include "mlx.h"
 
-
 t_object	*object(t_object_type type, void *element, t_attribute attrib);
 t_canvas	canvas(int width, int height, double h_fov);
 t_camera	camera(t_canvas *canvas, t_point3 orig, t_point3 camera_direction);
