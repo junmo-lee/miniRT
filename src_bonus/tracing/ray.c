@@ -31,7 +31,7 @@ t_ray	ray_primary(t_camera *cam, double u, double v)
 
 t_color3	ray_color(t_scene *scene)
 {
-	double	t;
+	// double	t;
 
 	scene->rec.tmin = EPSILON;
 	scene->rec.tmax = INFINITY;
@@ -39,8 +39,9 @@ t_color3	ray_color(t_scene *scene)
 		return (phong_lighting(scene));
 	else
 	{
-		t = 0.5 * (scene->ray.dir.y + 1.0);
-		return (vplus(vscalar(color3(1, 1, 1), 1.0 - t), \
-			vscalar(color3(0.5, 0.7, 1.0), t)));
+		return (color3(0, 0, 0));
+		// t = 0.5 * (scene->ray.dir.y + 1.0);
+		// return (vplus(vscalar(color3(1, 1, 1), 1.0 - t), \
+		// 	vscalar(color3(0.5, 0.7, 1.0), t)));
 	}
 }

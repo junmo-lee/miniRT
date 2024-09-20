@@ -9,6 +9,8 @@ t_object	*object(t_object_type type, void *element, t_color3 albedo);
 
 t_color3	get_ambient(t_ambient_p *a_ptr)
 {
+	if (a_ptr == NULL)
+		return (color3(0, 0, 0));
 	printf("ambient color : ");vprint(a_ptr->colors);
 	printf("ambient ratio : %.4lf\n", a_ptr->ratio);
 	return (vscalar(vdivide(a_ptr->colors, RGB_MAX), a_ptr->ratio));

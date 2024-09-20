@@ -10,6 +10,8 @@ void	add_cone(t_object *world, t_object_p *o_ptr);
 
 t_color3	get_ambient(t_ambient_p *a_ptr)
 {
+	if (a_ptr == NULL)
+		return (color3(0, 0, 0));
 	printf("ambient color : ");vprint(a_ptr->colors);
 	printf("ambient ratio : %.4lf\n", a_ptr->ratio);
 	return (vscalar(vdivide(a_ptr->colors, RGB_MAX), a_ptr->ratio));
@@ -28,15 +30,22 @@ void	get_camera(t_scene *scene, t_camera_p *c_ptr)
 t_object	*get_light(t_light_p *l_ptr)
 {
 	t_attribute	attrib;
+	t_object	*node;
 
 	ft_memset(&attrib, 0, sizeof(t_attribute));
-	printf("light pos : "); vprint(l_ptr->coordinates);
-	printf("light c : "); vprint(l_ptr->colors);
-	printf("light b : %.4lf\n", l_ptr->brightness);
-	return (object(LIGHT_POINT, \
-		light_point(l_ptr->coordinates, \
-			vdivide(l_ptr->colors, RGB_MAX), l_ptr->brightness), \
-				attrib));
+	node = object(NONE, NULL, attrib);
+	while (l_ptr != NULL)
+	{	
+		printf("light pos : "); vprint(l_ptr->coordinates);
+		printf("light c : "); vprint(l_ptr->colors);
+		printf("light b : %.4lf\n", l_ptr->brightness);
+		oadd(&node, object(LIGHT_POINT, \
+			light_point(l_ptr->coordinates, \
+				vdivide(l_ptr->colors, RGB_MAX), l_ptr->brightness), \
+					attrib));
+		l_ptr = l_ptr->next_light;
+	}
+	return (node);
 }
 
 t_object	*get_world(t_object_p *o_ptr)

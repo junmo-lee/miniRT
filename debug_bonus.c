@@ -6,10 +6,10 @@
 
 # include <time.h>
 
-// void	leaks_check(void)
-// {
-// 	system("leaks debug.out");
-// }
+void	leaks_check(void)
+{
+	system("leaks debug_bonus.out");
+}
 
 void	print_coordinate(t_vec3 xyz)
 {
@@ -42,7 +42,7 @@ int	main(int argc, char **argv)
 {
 	t_parse parsed_struct; // malloc을 최소화 하려함
 
-	// atexit(leaks_check);
+	atexit(leaks_check);
 	if (argc != 2)
 	{
 		printf("argument error\n");
@@ -71,13 +71,3 @@ int	main(int argc, char **argv)
 	mlx_destroy_window(vmlx.mlx, vmlx.win);
 	return (0);
 }
-
-
-// int main(void)
-// {
-// 	t_vec3 a = vec3(1.0, 2.0, 1.0);
-// 	t_vec3 b = vec3(1.0, -2.0, 1.0);
-
-// 	t_vec3 c = vplus(a, b);
-// 	(void)c;
-// }

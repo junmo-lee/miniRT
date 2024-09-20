@@ -46,7 +46,7 @@ typedef enum e_token_type
 }	t_token_type;
 
 # define EPSILON 1e-6 // 0.000001
-# define LUMEN 3
+# define LUMEN 1
 # define DEFALUT_KSN 64 // shininess value, 물체의 반짝거리는 정도
 # define KS 0.5 // [0,1] specular 강도, specular = spec ^ ksn
 
