@@ -46,12 +46,14 @@ typedef enum e_token_type
 }	t_token_type;
 
 # define EPSILON 1e-6 // 0.000001
-# define LUMEN 3
+# define LUMEN 1
 # define DEFALUT_KSN 64 // shininess value, 물체의 반짝거리는 정도
 # define KS 0.5 // [0,1] specular 강도, specular = spec ^ ksn
 
-# define CHECKER_WIDTH 0.5
-# define CHECKER_HEIGHT 0.5
+# define PLAIN_CHECKER_WIDTH 0.5
+# define PLAIN_CHECKER_HEIGHT 0.5
+
+# define CHECKER_TIMES 10
 
 # define RGB_T 0
 # define RGB_MAX 255.99
@@ -118,6 +120,7 @@ typedef struct s_sphere_p
 	t_vec3	coordinates;
 	double	diameter;
 	t_vec3	colors;
+	// bonus
 	double	ksn;
 	int		cd;
 }	t_sphere_p;
@@ -127,6 +130,7 @@ typedef struct s_plane_p
 	t_vec3	coordinates;
 	t_vec3	normal_vector;
 	t_vec3	colors;
+	// bonus
 	double	ksn;
 	int		cd;
 }	t_plane_p;
@@ -138,6 +142,7 @@ typedef struct s_cylinder_p
 	double	diameter;
 	double	height;
 	t_vec3	colors;
+	// bonus
 	double	ksn;
 	int		cd;
 }	t_cylinder_p;
@@ -149,6 +154,7 @@ typedef struct s_cone_p
 	double	diameter;
 	double	height;
 	t_vec3	colors;
+	// bonus
 	double	ksn;
 	int		cd;
 }	t_cone_p;
@@ -159,6 +165,7 @@ typedef struct s_object_p
 	t_sphere_p			*sphere;
 	t_plane_p			*plane;
 	t_cylinder_p		*cylinder;
+	// bonus
 	t_cone_p			*cone;
 	struct s_object_p	*next;
 }	t_object_p;
@@ -230,6 +237,7 @@ typedef struct s_object
 	t_object_type	type;
 	void			*element;
 	t_color3		albedo;
+	double			ksn;
 	int				cd;
 	void			*next;
 }	t_object;
@@ -245,6 +253,7 @@ typedef struct s_plain
 {
 	t_point3	p;
 	t_vec3		n;
+	// bouns checkerboard
 	t_vec3		vecu;
 	t_vec3		vecv;
 }	t_plain;
@@ -286,7 +295,6 @@ typedef struct s_light
 	t_point3	origin;
 	t_color3	light_color;
 	double		bright_ratio;
-	struct	s_light_p	*next_light;
 }	t_light;
 
 typedef struct s_hit_record
@@ -339,5 +347,13 @@ typedef struct s_MT19937
 	unsigned long	mt[N];
 	int				mti;
 }	t_MT19937;
+
+// bonus 용
+typedef struct s_attribute
+{
+	t_color3	albedo;
+	double		ksn;
+	int			cd;
+}	t_attribute;
 
 #endif

@@ -1,8 +1,8 @@
 #ifndef TRACE_BONUS_H
 # define TRACE_BONUS_H
 
-# include "structures.h"
-# include "utils.h"
+# include "structures_bonus.h"
+# include "utils_bonus.h"
 
 t_ray		ray(t_point3 orig, t_vec3 dir);
 t_point3	ray_at(t_ray *ray, double t);

@@ -1,8 +1,8 @@
-#include "structures.h"
-#include "trace.h"
-#include "scene.h"
-#include "draw.h"
-#include "parse.h"
+#include "structures_bonus.h"
+#include "trace_bonus.h"
+#include "scene_bonus.h"
+#include "draw_bonus.h"
+#include "parse_bonus.h"
 
 // 헤더 분리할때 따로 넣기
 t_object	*object(t_object_type type, void *element, t_attribute attrib);

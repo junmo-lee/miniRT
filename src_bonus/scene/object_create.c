@@ -1,6 +1,6 @@
-#include "structures.h"
-#include "scene.h"
-#include "utils.h"
+#include "structures_bonus.h"
+#include "scene_bonus.h"
+#include "utils_bonus.h"
 
 t_sphere	*sphere(t_point3 center, double radius)
 {

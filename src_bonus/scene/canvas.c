@@ -1,4 +1,4 @@
-#include "scene.h"
+#include "scene_bonus.h"
 
 t_canvas	canvas(int width, int height, double h_fov)
 {

@@ -1,8 +1,8 @@
-#include "structures.h"
-#include "trace.h"
-#include "scene.h"
-#include "draw.h"
-#include "parse.h"
+#include "structures_bonus.h"
+#include "trace_bonus.h"
+#include "scene_bonus.h"
+#include "draw_bonus.h"
+#include "parse_bonus.h"
 
 int	main(int argc, char **argv)
 {

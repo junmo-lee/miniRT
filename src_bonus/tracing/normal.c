@@ -1,4 +1,4 @@
-#include "trace.h"
+#include "trace_bonus.h"
 
 void	set_face_normal(t_ray *r, t_hit_record *rec)
 {

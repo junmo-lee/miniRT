@@ -1,4 +1,4 @@
-#include "scene.h"
+#include "scene_bonus.h"
 
 // 두 벡터 사이의 길이(Rad), vec1 부터 vec2 까지
 double	vangle(t_vec3 vec1, t_vec3 vec2)

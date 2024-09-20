@@ -1,7 +1,7 @@
-#include "structures.h"
-#include "trace.h"
-#include "scene.h"
-#include "draw.h"
+#include "structures_bonus.h"
+#include "trace_bonus.h"
+#include "scene_bonus.h"
+#include "draw_bonus.h"
 
 int	error_exit(t_vmlx *vmlx)
 {

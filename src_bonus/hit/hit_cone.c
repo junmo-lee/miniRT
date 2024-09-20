@@ -1,6 +1,6 @@
-#include "structures.h"
-#include "utils.h"
-#include "trace.h"
+#include "structures_bonus.h"
+#include "utils_bonus.h"
+#include "trace_bonus.h"
 
 t_color3	co_get_albedo(t_cone *co, t_hit_record *rec,t_object *co_obj)
 {

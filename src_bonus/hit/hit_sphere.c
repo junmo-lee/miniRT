@@ -1,6 +1,6 @@
-#include "structures.h"
-#include "utils.h"
-#include "trace.h"
+#include "structures_bonus.h"
+#include "utils_bonus.h"
+#include "trace_bonus.h"
 
 t_color3	sp_get_albedo(t_sphere *sp, t_hit_record *rec, t_object *sp_obj)
 {

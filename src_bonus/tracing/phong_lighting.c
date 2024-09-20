@@ -1,4 +1,4 @@
-#include "trace.h"
+#include "trace_bonus.h"
 
 t_color3	phong_lighting(t_scene *scene)
 {

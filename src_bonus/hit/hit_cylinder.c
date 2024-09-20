@@ -1,6 +1,6 @@
-#include "structures.h"
-#include "utils.h"
-#include "trace.h"
+#include "structures_bonus.h"
+#include "utils_bonus.h"
+#include "trace_bonus.h"
 
 t_color3	cy_get_albedo(t_cylinder *cy, t_object *cy_obj)
 {

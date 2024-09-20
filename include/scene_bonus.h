@@ -1,8 +1,8 @@
 #ifndef SCENE_BONUS_H
 # define SCENE_BONUS_H
 
-# include "structures.h"
-# include "utils.h"
+# include "structures_bonus.h"
+# include "utils_bonus.h"
 # include "mlx.h"
 
 
@@ -12,7 +12,7 @@ t_sphere	*sphere(t_point3 center, double radius);
 t_plain		*plain(t_point3 p, t_vec3 n);
 t_cone		*cylinder(t_point3 center, t_vec3 n, double radius, double height);
 
-t_object	*object(t_object_type type, void *element, t_color3 albedo);
+t_object	*object(t_object_type type, void *element, t_attribute attrib);
 t_light		*light_point(t_point3 light_origin, \
 t_color3 light_color, double bright_ratio);
 

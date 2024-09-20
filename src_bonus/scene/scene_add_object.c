@@ -1,10 +1,7 @@
-#include "structures.h"
-#include "trace.h"
-#include "scene.h"
-#include "draw.h"
-
-// 헤더 분리할때 따로 넣기
-t_object	*object(t_object_type type, void *element, t_attribute attrib);
+#include "structures_bonus.h"
+#include "trace_bonus.h"
+#include "scene_bonus.h"
+#include "draw_bonus.h"
 
 void	add_sphere(t_object *world, t_object_p *o_ptr)
 {

@@ -1,4 +1,4 @@
-#include "trace.h"
+#include "trace_bonus.h"
 
 //ray 생성자(정규화 된 ray)
 t_ray	ray(t_point3 orig, t_vec3 dir)

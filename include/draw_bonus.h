@@ -2,7 +2,7 @@
 # define DRAW_BONUS_H
 
 # include <stdio.h>
-# include "structures.h"
+# include "structures_bonus.h"
 
 unsigned int	color_to_int(t_color3 pixel_color);
 int				draw_img(t_vmlx *mlx);

@@ -6,7 +6,7 @@
 /*   By: junmlee <junmlee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 20:28:03 by junmlee           #+#    #+#             */
-/*   Updated: 2024/09/11 02:41:35 by junmlee          ###   ########.fr       */
+/*   Updated: 2024/09/20 16:28:36 by junmlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@
 // http://www.math.sci.hiroshima-u.ac.jp/m-mat/MT/MT2002/CODES/mt19937ar.c
 // Converting to norminette v4 compliance by junmlee
 
-#include "structures.h"
+#include "structures_bonus.h"
 
 /* initializes mt[N] with a seed */
 void	init_genrand(t_MT19937 *state, unsigned long s)
