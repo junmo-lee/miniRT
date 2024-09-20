@@ -19,7 +19,7 @@ void	get_camera(t_scene *scene, t_camera_p *c_ptr)
 	printf("camera n : "); vprint(c_ptr->normal_vector);
 	printf("camera fov : %d\n", c_ptr->fov);
 	scene->canvas = canvas(R_WIDTH, R_HIGHT, c_ptr->fov);
-	scene->camera = camera(&scene->canvas, c_ptr->coordinates,\
+	scene->camera = camera(&scene->canvas, c_ptr->coordinates, \
 		vunit(c_ptr->normal_vector));
 }
 

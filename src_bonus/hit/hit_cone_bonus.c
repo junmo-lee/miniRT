@@ -18,7 +18,6 @@ t_color3	co_get_albedo(t_cone *co, t_hit_record *rec,t_object *co_obj)
 		return (color3(1.0, 1.0, 1.0));
 }
 
-
 t_bool	has_cone_root(t_eql *eql, t_ray *ray, t_cone *co)
 {
 	const t_vec3	w = vminus(ray->orig, co->pointh);
