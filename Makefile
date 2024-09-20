@@ -71,7 +71,6 @@ $(DEBUG_NAME_B): $(LIBFT) $(DEBUG_B_O)
 clean :
 	rm -rf $(OBJS) $(OBJS_B)
 	rm -rf $(DEBUG_O) $(DEBUG_B_O)
-# rm -rf $(DEBUG_O)
 # $(MAKE) -C $(LIBFT_DIR) clean
 
 fclean :
