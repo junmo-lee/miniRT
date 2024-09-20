@@ -1,12 +1,12 @@
 #include "../../include/parse_bonus.h"
 
-t_camera_p	*create_camera_struct(t_parse *parsed_strcut)
+t_camera_p	*create_camera_struct(t_parse *parsed_struct)
 {
 	t_camera_p	*camera_struct;
 
 	camera_struct = (t_camera_p *)malloc(sizeof(t_camera_p));
 	if (!camera_struct)
-		parse_exit(parsed_strcut);
+		parse_exit(parsed_struct, "Malloc error");
 	camera_struct->coordinates.x = 0;
 	camera_struct->coordinates.y = 0;
 	camera_struct->coordinates.z = 0;
@@ -22,7 +22,7 @@ void	parse_camera(t_parse *parsed_struct, char **strings)
 	t_camera_p	*camera;
 
 	if (parsed_struct == NULL || parsed_struct->camera_pointer != NULL)
-		parse_exit(parsed_struct);
+		parse_exit(parsed_struct, "parsed_struct is NULL");
 	count_tokens_len(parsed_struct, strings, 4);
 	validate_coordinate(parsed_struct, strings[1], 3);
 	validate_coordinate(parsed_struct, strings[2], 3);

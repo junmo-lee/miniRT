@@ -57,7 +57,7 @@ t_object_p	*create_object_struct(t_parse *parsed_struct)
 
 	object_struct = (t_object_p *)malloc(sizeof(t_object_p));
 	if (!object_struct)
-		parse_exit(parsed_struct);
+		parse_exit(parsed_struct, "Malloc error");
 	object_struct->identifier = NONE;
 	object_struct->cylinder = NULL;
 	object_struct->plane = NULL;
@@ -72,7 +72,7 @@ void	append_object_struct(t_parse *parsed_struct, t_object_p *object_struct)
 	t_object_p	*current_node;
 
 	if (parsed_struct == NULL || object_struct == NULL)
-		parse_exit(parsed_struct);
+		parse_exit(parsed_struct, "parsed_struct or object_struct is NULL");
 	if (parsed_struct->object_pointer == NULL)
 		parsed_struct->object_pointer = object_struct;
 	else

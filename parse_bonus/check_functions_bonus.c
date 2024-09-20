@@ -10,7 +10,7 @@ void	count_tokens_len(t_parse *parsed_struct, char **strings, int num)
 	if (ft_strncmp(strings[index - 1], "\n", 2) == 0)
 		index --;
 	if (num != index)
-		parse_exit(parsed_struct);
+		parse_exit(parsed_struct, "Incorrect number of arguments provided");
 }
 
 void	validate_coordinate(t_parse *parsed_struct, char *str, int num)
@@ -18,7 +18,7 @@ void	validate_coordinate(t_parse *parsed_struct, char *str, int num)
 	char	**xyz_tokens;
 
 	if (str == NULL)
-		parse_exit(parsed_struct);
+		parse_exit(parsed_struct, "Invalid coordinates");
 	xyz_tokens = ft_split(str, ',');
 	count_tokens_len(parsed_struct, xyz_tokens, num);
 	free_tokens(xyz_tokens);

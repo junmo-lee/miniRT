@@ -6,7 +6,7 @@ t_light_p	*create_light_struct(t_parse *parsed_struct)
 
 	light_struct = (t_light_p *)malloc(sizeof(t_light_p));
 	if (!light_struct)
-		parse_exit(parsed_struct);
+		parse_exit(parsed_struct, "Malloc error");
 	light_struct->coordinates.x = 0;
 	light_struct->coordinates.y = 0;
 	light_struct->coordinates.z = 0;
@@ -23,7 +23,7 @@ void	append_light_struct(t_parse *parsed_struct, t_light_p *new_node)
 	t_light_p	*current_node;
 
 	if (parsed_struct == NULL || new_node == NULL)
-		parse_exit(parsed_struct);
+		parse_exit(parsed_struct, "parsed_struct is NULL");
 	if (parsed_struct->light_pointer == NULL)
 		parsed_struct->light_pointer = new_node;
 	else
@@ -54,7 +54,7 @@ void	parse_light(t_parse *parsed_struct, char **strings)
 	t_light_p	*light;
 
 	if (parsed_struct == NULL)
-		parse_exit(parsed_struct);
+		parse_exit(parsed_struct, "parsed_struct is NULL");
 	count_tokens_len(parsed_struct, strings, 4);
 	validate_coordinate(parsed_struct, strings[1], 3);
 	validate_coordinate(parsed_struct, strings[2], 1);

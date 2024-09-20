@@ -6,7 +6,7 @@ t_ambient_p	*create_ambient_struct(t_parse *parsed_struct)
 
 	ambient_struct = (t_ambient_p *)malloc(sizeof(t_ambient_p));
 	if (!ambient_struct)
-		parse_exit(parsed_struct);
+		parse_exit(parsed_struct, "Malloc error");
 	ambient_struct->colors.x = 0;
 	ambient_struct->colors.y = 0;
 	ambient_struct->colors.z = 0;
@@ -19,7 +19,7 @@ void	parse_ambient(t_parse *parsed_struct, char **tokens)
 	t_ambient_p	*ambient;
 
 	if (parsed_struct == NULL || parsed_struct->ambient_pointer != NULL)
-		parse_exit(parsed_struct);
+		parse_exit(parsed_struct, "parsed_struct is NULL");
 	count_tokens_len(parsed_struct, tokens, 3);
 	validate_coordinate(parsed_struct, tokens[1], 1);
 	validate_coordinate(parsed_struct, tokens[2], 3);

@@ -6,7 +6,7 @@ t_cylinder_p	*create_cylinder_struct(t_parse *parsed_struct)
 
 	cylinder_struct = (t_cylinder_p *)malloc(sizeof(t_cylinder_p));
 	if (!cylinder_struct)
-		parse_exit(parsed_struct);
+		parse_exit(parsed_struct, "Malloc error");
 	cylinder_struct->coordinates.x = 0;
 	cylinder_struct->coordinates.y = 0;
 	cylinder_struct->coordinates.z = 0;
@@ -27,7 +27,7 @@ void	parse_cylinder(t_parse *parsed_struct, char **strings)
 	t_object_p		*object_struct;
 
 	if (parsed_struct == NULL)
-		parse_exit(parsed_struct);
+		parse_exit(parsed_struct, "parsed_struct is NULL");
 	validate_tokens_cone_cylinder(parsed_struct, strings);
 	cylinder = create_cylinder_struct(parsed_struct);
 	assign_xyz_from_token(parsed_struct, \

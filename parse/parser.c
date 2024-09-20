@@ -28,8 +28,6 @@ int	classify_identifier(t_parse *parsed_struct, char **strings)
 			parse_sphere(parsed_struct, strings);
 		else if (ft_strncmp(strings[index], "cy", 3) == 0)
 			parse_cylinder(parsed_struct, strings);
-		else if (ft_strncmp(strings[index], "co", 3) == 0)
-			parse_cone(parsed_struct, strings);
 		index ++;
 	}
 	return (0);
@@ -45,7 +43,7 @@ void	parse(t_parse *parsed_struct, char *file_location)
 	init_parse_struct(parsed_struct);
 	fd = open(file_location, O_RDONLY);
 	if (fd == -1)
-		parse_exit(parsed_struct);
+		parse_exit(parsed_struct, "Unable to open file");
 	while (1)
 	{
 		buf = get_next_line(fd);
@@ -61,5 +59,16 @@ void	parse(t_parse *parsed_struct, char *file_location)
 		classify_identifier(parsed_struct, tokens);
 		free_tokens(tokens);
 		free(buf);
+	}
+}
+
+void	check_camera_light_madatory(t_parse *parsed_struct)
+{
+	if (parsed_struct->camera_pointer == NULL)
+		parse_exit(parsed_struct, "Missing camera argument");
+	if (parsed_struct->light_pointer != NULL)
+	{
+		if (parsed_struct->light_pointer->next_light != NULL)
+			parse_exit(parsed_struct, "Multiple lights detected");
 	}
 }

@@ -15,7 +15,10 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	else
+	{
 		parse(&parsed_struct, argv[1]);
+		check_camera_light_bonus(&parsed_struct);
+	}
 	vmlx.scene = parse_to_scene(&parsed_struct);
 	make_window(&vmlx);
 	draw_img(&vmlx);

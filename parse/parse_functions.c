@@ -4,16 +4,17 @@ void	assign_xyz(t_parse *parsed_struct, \
 t_vec3 *coordinate, char **xyz_tokens)
 {
 	if (xyz_tokens == NULL)
-		parse_exit(parsed_struct);
+		parse_exit(parsed_struct, "Coordinate argument cannot be NULL");
 	coordinate->x = ft_atof(xyz_tokens[0]);
 	coordinate->y = ft_atof(xyz_tokens[1]);
 	coordinate->z = ft_atof(xyz_tokens[2]);
 }
 
-void	parse_exit(t_parse *parsed_struct)
+void	parse_exit(t_parse *parsed_struct, char *err_mss)
 {
 	clean_parsed_struct(parsed_struct);
-	printf("parse_exit\n");
+	printf("Error\n");
+	printf("%s\n", err_mss);
 	exit(1);
 }
 

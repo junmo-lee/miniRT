@@ -6,7 +6,7 @@ t_sphere_p	*create_sphere_struct(t_parse *parsed_struct)
 
 	sphere_object = (t_sphere_p *)malloc(sizeof(t_sphere_p));
 	if (!sphere_object)
-		parse_exit(parsed_struct);
+		parse_exit(parsed_struct, "Malloc error");
 	sphere_object->coordinates.x = 0;
 	sphere_object->coordinates.y = 0;
 	sphere_object->coordinates.z = 0;
@@ -31,7 +31,7 @@ void	parse_sphere(t_parse *parsed_struct, char **strings)
 	t_object_p	*object_struct;
 
 	if (parsed_struct == NULL)
-		parse_exit(parsed_struct);
+		parse_exit(parsed_struct, "parsed_struct is NULL");
 	validate_tokens_for_sphere(parsed_struct, strings);
 	sphere = create_sphere_struct(parsed_struct);
 	assign_xyz_from_token(parsed_struct, \

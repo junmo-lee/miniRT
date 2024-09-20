@@ -20,8 +20,8 @@ CFLAGS 	= -Wall -Wextra -Werror -O3
 INC		= -I $(LIBFT_DIR) -I $(MLX_DIR) -I $(GNL_DIR) -I $(INC_DIR)
 
 ifdef DEBUG
-	CFLAGS += 
-#-g3 -fsanitize=address 
+	CFLAGS += -g3
+# -fsanitize=address 
 endif
 
 SRCS	:= \

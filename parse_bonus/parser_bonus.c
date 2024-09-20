@@ -45,7 +45,7 @@ void	parse(t_parse *parsed_struct, char *file_location)
 	init_parse_struct(parsed_struct);
 	fd = open(file_location, O_RDONLY);
 	if (fd == -1)
-		parse_exit(parsed_struct);
+		parse_exit(parsed_struct, "Unable to open file");
 	while (1)
 	{
 		buf = get_next_line(fd);
@@ -62,4 +62,10 @@ void	parse(t_parse *parsed_struct, char *file_location)
 		free_tokens(tokens);
 		free(buf);
 	}
+}
+
+void	check_camera_light_bonus(t_parse *parsed_struct)
+{
+	if (parsed_struct->camera_pointer == NULL)
+		parse_exit(parsed_struct, "Missing camera argument");
 }

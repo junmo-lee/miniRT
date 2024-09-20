@@ -6,7 +6,7 @@ t_cone_p	*create_cone_struct(t_parse *parsed_struct)
 
 	cone_struct = (t_cone_p *)malloc(sizeof(t_cone_p));
 	if (!cone_struct)
-		parse_exit(parsed_struct);
+		parse_exit(parsed_struct, "Malloc error");
 	cone_struct->coordinates.x = 0;
 	cone_struct->coordinates.y = 0;
 	cone_struct->coordinates.z = 0;
@@ -41,7 +41,7 @@ void	parse_cone(t_parse *parsed_struct, char **strings)
 	t_object_p		*object_struct;
 
 	if (parsed_struct == NULL)
-		parse_exit(parsed_struct);
+		parse_exit(parsed_struct, "parsed_struct is NULL");
 	validate_tokens_cone_cylinder(parsed_struct, strings);
 	cone = create_cone_struct(parsed_struct);
 	assign_xyz_from_token(parsed_struct, \
