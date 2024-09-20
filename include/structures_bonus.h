@@ -120,7 +120,6 @@ typedef struct s_sphere_p
 	t_vec3	coordinates;
 	double	diameter;
 	t_vec3	colors;
-	// bonus
 	double	ksn;
 	int		cd;
 }	t_sphere_p;
@@ -130,7 +129,6 @@ typedef struct s_plane_p
 	t_vec3	coordinates;
 	t_vec3	normal_vector;
 	t_vec3	colors;
-	// bonus
 	double	ksn;
 	int		cd;
 }	t_plane_p;
@@ -142,7 +140,6 @@ typedef struct s_cylinder_p
 	double	diameter;
 	double	height;
 	t_vec3	colors;
-	// bonus
 	double	ksn;
 	int		cd;
 }	t_cylinder_p;
@@ -154,7 +151,6 @@ typedef struct s_cone_p
 	double	diameter;
 	double	height;
 	t_vec3	colors;
-	// bonus
 	double	ksn;
 	int		cd;
 }	t_cone_p;
@@ -165,7 +161,6 @@ typedef struct s_object_p
 	t_sphere_p			*sphere;
 	t_plane_p			*plane;
 	t_cylinder_p		*cylinder;
-	// bonus
 	t_cone_p			*cone;
 	struct s_object_p	*next;
 }	t_object_p;
@@ -190,18 +185,6 @@ typedef struct s_ray
 	t_vec3		dir;
 }	t_ray;
 
-/*
-	t_point3    orig;  // 카메라 원점(위치)
-	t_vec3		camera_direction; // 카메라 방향(벡터)
-	double      viewport_w; // 뷰포트 가로길이
-	double      viewport_h; // 뷰포트 세로길이
-	t_vec3		dx; // 수평(x) 단위벡터 horizontal / viewport_w
-	t_vec3		dy; // 수직(y) 단위벡터 vertical / viewport_h
-	t_vec3      horizontal; // 수평길이 벡터
-	t_vec3      vertical; // 수직길이 벡터
-	double      focal_len; // focal length
-	t_point3    left_bottom; // 왼쪽 아래 코너점
-*/
 typedef struct s_camera
 {
 	t_point3	orig;
@@ -216,13 +199,6 @@ typedef struct s_camera
 	t_point3	left_bottom;
 }	t_camera;
 
-/*
-	int     width; canvas width
-	int     height; canvas height;
-	double  aspect_ratio; 종횡비 (w / h)
-	double	h_fov; horizontal fov(radian), input 값(고정)
-	double	v_fov; vertical fov(radian), 
-*/
 typedef struct s_canvas
 {
 	int		width;
@@ -253,18 +229,10 @@ typedef struct s_plain
 {
 	t_point3	p;
 	t_vec3		n;
-	// bouns checkerboard
 	t_vec3		vecu;
 	t_vec3		vecv;
 }	t_plain;
 
-/*
-cy  50.0,0.0,20.6  0.0,0.0,1.0  10,0,255  14.2  21.42
-- x,y,z 좌표 : **50.0, 0.0, 20.6**
-- 정규화된 삼차원 방향 벡터. 각 x, y, z 축 마다 [-1, 1] 의 범위를 가짐 : **0.0, 0.0, 1.0**
-- 원기둥의 직경 : **14.2**
-- 원기둥의 높이 : **21.42**
-- R,G,B 색 범위 [0, 255] : **10, 0, 255***/
 typedef struct s_cylinder
 {
 	t_point3	center;
@@ -275,8 +243,6 @@ typedef struct s_cylinder
 	t_vec3		pc;
 	double		pc_doc_hhat;
 }	t_cylinder;
-
-// bonus part
 typedef struct s_cone
 {
 	t_point3	center;
@@ -347,8 +313,6 @@ typedef struct s_MT19937
 	unsigned long	mt[N];
 	int				mti;
 }	t_MT19937;
-
-// bonus 용
 typedef struct s_attribute
 {
 	t_color3	albedo;

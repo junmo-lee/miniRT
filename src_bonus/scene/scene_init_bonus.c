@@ -4,10 +4,6 @@
 #include "draw_bonus.h"
 #include "parse_bonus.h"
 
-// 헤더 분리할때 따로 넣기
-t_object	*object(t_object_type type, void *element, t_attribute attrib);
-void	add_cone(t_object *world, t_object_p *o_ptr);
-
 t_color3	get_ambient(t_ambient_p *a_ptr)
 {
 	if (a_ptr == NULL)

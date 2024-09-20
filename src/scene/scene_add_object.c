@@ -3,9 +3,6 @@
 #include "scene.h"
 #include "draw.h"
 
-// 헤더 분리할때 따로 넣기
-t_object	*object(t_object_type type, void *element, t_color3 albedo);
-
 void	add_sphere(t_object *world, t_object_p *o_ptr)
 {
 	printf("SP : \n");

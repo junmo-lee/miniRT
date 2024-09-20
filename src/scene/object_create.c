@@ -27,11 +27,11 @@ t_plain	*plain(t_point3 p, t_vec3 n)
 	return (pl);
 }
 
-t_cone	*cylinder(t_point3 center, t_vec3 n, double radius, double height)
+t_cylinder	*cylinder(t_point3 center, t_vec3 n, double radius, double height)
 {
-	t_cone	*cy;
+	t_cylinder	*cy;
 
-	cy = (t_cone *)malloc(sizeof(t_cone));
+	cy = (t_cylinder *)malloc(sizeof(t_cylinder));
 	if (cy == NULL)
 		return (NULL);
 	cy->center = center;

@@ -23,8 +23,6 @@ t_color3	point_light_get(t_scene *scene, t_light *light)
 	t_color3	diffuse;
 	t_vec3		light_dir;
 	t_ray		light_ray;
-	t_color3	specular;
-	t_vec3		view_dir;
 
 	light_dir = vminus(light->origin, scene->rec.p);
 	light_ray = ray(vplus(scene->rec.p, \
@@ -34,11 +32,7 @@ t_color3	point_light_get(t_scene *scene, t_light *light)
 	light_dir = vunit(light_dir);
 	diffuse = vscalar(light->light_color, \
 		fmax(vdot(scene->rec.normal, light_dir), 0.0));
-	view_dir = vunit(vscalar(scene->ray.dir, -1));
-	specular = vscalar(vscalar(light->light_color, KS), \
-		pow(fmax(vdot(view_dir, reflect(vscalar(light_dir, -1), \
-			scene->rec.normal)), 0.0), DEFALUT_KSN));
-	return (vscalar(vplus(diffuse, specular), light->bright_ratio));
+	return (vscalar(diffuse, light->bright_ratio));
 }
 
 t_bool	in_shadow(t_object *objs, t_ray light_ray, double light_len)
