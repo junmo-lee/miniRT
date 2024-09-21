@@ -22,7 +22,7 @@ void	parse_camera(t_parse *parsed_struct, char **strings)
 	t_camera_p	*camera;
 
 	if (parsed_struct == NULL || parsed_struct->camera_pointer != NULL)
-		parse_exit(parsed_struct, "parsed_struct is NULL");
+		parse_exit(parsed_struct, "Multiple camera detected");
 	count_tokens_len(parsed_struct, strings, 4);
 	validate_coordinate(parsed_struct, strings[1], 3);
 	validate_coordinate(parsed_struct, strings[2], 3);

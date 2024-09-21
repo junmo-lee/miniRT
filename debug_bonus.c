@@ -51,6 +51,7 @@ int	main(int argc, char **argv)
 	else
 	{
 		parse(&parsed_struct, argv[1]);
+		check_camera_light_bonus(&parsed_struct);
 	}
 
 	print_light(&parsed_struct);

@@ -19,7 +19,7 @@ void	parse_ambient(t_parse *parsed_struct, char **tokens)
 	t_ambient_p	*ambient;
 
 	if (parsed_struct == NULL || parsed_struct->ambient_pointer != NULL)
-		parse_exit(parsed_struct, "parsed_struct is NULL");
+		parse_exit(parsed_struct, "Multiple ambient detected");
 	count_tokens_len(parsed_struct, tokens, 3);
 	validate_coordinate(parsed_struct, tokens[1], 1);
 	validate_coordinate(parsed_struct, tokens[2], 3);
