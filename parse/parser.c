@@ -64,8 +64,12 @@ void	parse(t_parse *parsed_struct, char *file_location)
 
 void	check_camera_light_madatory(t_parse *parsed_struct)
 {
+	if (parsed_struct->ambient_pointer == NULL)
+		parse_exit(parsed_struct, "Missing ambient argument");
 	if (parsed_struct->camera_pointer == NULL)
 		parse_exit(parsed_struct, "Missing camera argument");
+	if (parsed_struct->light_pointer == NULL)
+		parse_exit(parsed_struct, "Missing light argument");
 	if (parsed_struct->light_pointer != NULL)
 	{
 		if (parsed_struct->light_pointer->next_light != NULL)
