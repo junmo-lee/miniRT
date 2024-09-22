@@ -18,6 +18,13 @@ void	parse_exit(t_parse *parsed_struct, char *err_mss)
 	exit(1);
 }
 
+void	incorrect_name_exit(void)
+{
+	printf("Error\n");
+	printf("Invalid file name\n");
+	exit(1);
+}
+
 void	assign_xyz_from_token(t_parse *parsed_struct, \
 t_vec3 *coordinate, char *str, int type)
 {

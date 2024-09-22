@@ -10,6 +10,7 @@
 // parser.c
 void		parse(t_parse *parsed_struct, char *file_location);
 void		check_camera_light_madatory(t_parse *parsed_struct);
+void		check_file_name(char *file_name);
 
 // check_functions.c
 void		count_tokens_len(t_parse *parsed_struct, char **strings, int num);
@@ -39,6 +40,7 @@ t_vec3 *coordinate, char **splited_colors);
 void		assign_xyz_from_token(t_parse *parsed_struct, \
 t_vec3 *coordinate, char *str, int type);
 void		parse_exit(t_parse *parsed_struct, char *err_mss);
+void		incorrect_name_exit(void);
 
 // util_functions.c
 void		free_tokens(char **strings);

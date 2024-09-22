@@ -76,3 +76,17 @@ void	check_camera_light_madatory(t_parse *parsed_struct)
 			parse_exit(parsed_struct, "Multiple lights detected");
 	}
 }
+
+void	check_file_name(char *file_name)
+{
+	int	len;
+
+	len = ft_strlen(file_name);
+	if (len <= 3)
+		incorrect_name_exit();
+	if (file_name[len - 4] == '/')
+		incorrect_name_exit();
+	if (file_name[len - 3] != '.' || file_name[len - 2] != 'r' \
+	|| file_name[len - 1] != 't')
+		incorrect_name_exit();
+}

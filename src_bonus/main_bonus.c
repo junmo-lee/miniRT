@@ -16,6 +16,7 @@ int	main(int argc, char **argv)
 	}
 	else
 	{
+		check_file_name(argv[1]);
 		parse(&parsed_struct, argv[1]);
 		check_camera_light_bonus(&parsed_struct);
 	}
