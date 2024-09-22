@@ -11,7 +11,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		printf("argument error\n");
+		printf("Error\nArgument error\n");
 		return (0);
 	}
 	else
